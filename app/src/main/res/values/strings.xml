@@ -10,7 +10,7 @@
     <string name="signup_senha">Senha</string>
     <string name="signup_rep_senha">Repita a senha</string>
     <string name="signup_botao_cadastrar">Cadastrar</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="usuario_bemvindo_login">Bem-vindo usuário</string>
+    <string name="title_activity_main">MakerPrice</string>
+    <string name="usuario_bemvindo_login">Bem-vindo usuári(a,o)</string>
     <string name="empty_text" />
 </resources>

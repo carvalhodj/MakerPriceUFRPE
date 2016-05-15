@@ -28,10 +28,11 @@ public class LoginActivity extends AppCompatActivity {
             String usuarioSenhaString = usuarioSenha.getText().toString();
 
             String senha = helper.searchPass(usuarioEmailString);
+            String usuarioNome = helper.nomeUsuario(usuarioEmailString);
 
             if (usuarioSenhaString.equals(senha)){
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("Usuário", usuarioEmailString);
+                intent.putExtra("Usuário", usuarioNome);
                 startActivity(intent);
             } else {
                 Toast temp = Toast.makeText(LoginActivity.this, "Usuário e/ou senha não coincidem!", Toast.LENGTH_SHORT);

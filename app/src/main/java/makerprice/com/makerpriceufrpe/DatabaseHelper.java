@@ -79,7 +79,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
             while(cursor.moveToNext());
         }
-
         return passUsuario;
+    }
+
+    public String nomeUsuario(String email){
+        db = this.getReadableDatabase();
+
+        String query = "SELECT "+COLUMN_EMAIL+", "+COLUMN_NAME+" FROM "+TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        String nomeUsuario, emailUsuario;
+        nomeUsuario = "";
+        if (cursor.moveToFirst()){
+            do{
+                emailUsuario = cursor.getString(0);
+
+                if(emailUsuario.equals(email)){
+                    nomeUsuario = cursor.getString(1);
+                    break;
+                }
+            }
+            while(cursor.moveToNext());
+        }
+        return nomeUsuario;
     }
 }

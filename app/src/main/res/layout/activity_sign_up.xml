@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="makerprice.com.makerpriceufrpe.SignUpActivity">
+
+    <EditText
+        android:id="@+id/campoNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signup_nome"
+        android:inputType="textPersonName"
+        android:layout_marginTop="24dp"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:layout_alignParentLeft="true"/>
+
+    <EditText
+        android:id="@+id/campoEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signup_email"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="24dp"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/campoNome" />
+
+    <EditText
+        android:id="@+id/campoSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signup_senha"
+        android:inputType="textPassword"
+        android:layout_marginTop="24dp"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/campoEmail" />
+
+    <EditText
+        android:id="@+id/campoRepSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signup_rep_senha"
+        android:inputType="textPassword"
+        android:layout_marginTop="24dp"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/campoSenha"/>
+
+    <Button
+        android:id="@+id/botaoSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/signup_botao_cadastrar"
+        android:textSize="16sp"
+        android:layout_marginTop="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/campoRepSenha"
+        android:onClick="onSignUpClick"/>
+
+</RelativeLayout>

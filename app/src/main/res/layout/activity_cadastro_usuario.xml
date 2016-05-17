@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="makerprice.com.makerpriceufrpe.SignUpActivity">
+    tools:context="makerprice.com.makerpriceufrpe.CadastroUsuarioActivity">
 
     <EditText
         android:id="@+id/campoNome"
@@ -18,7 +18,7 @@
         android:layout_marginTop="24dp"
         android:maxLines="1"
         android:textSize="16sp"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentStart="true"/>
 
     <EditText
         android:id="@+id/campoEmail"
@@ -29,7 +29,7 @@
         android:layout_marginTop="24dp"
         android:maxLines="1"
         android:textSize="16sp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/campoNome" />
 
     <EditText
@@ -41,11 +41,11 @@
         android:layout_marginTop="24dp"
         android:maxLines="1"
         android:textSize="16sp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@id/campoEmail" />
 
     <EditText
-        android:id="@+id/campoRepSenha"
+        android:id="@+id/campoRepeteSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/signup_rep_senha"
@@ -53,18 +53,18 @@
         android:layout_marginTop="24dp"
         android:maxLines="1"
         android:textSize="16sp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@id/campoSenha"/>
 
     <Button
-        android:id="@+id/botaoSignUp"
+        android:id="@+id/botaoRealizarCadastroUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/signup_botao_cadastrar"
         android:textSize="16sp"
         android:layout_marginTop="48dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/campoRepSenha"
-        android:onClick="onSignUpClick"/>
+        android:layout_below="@id/campoRepeteSenha"
+        android:onClick="cadastrar"/>
 
 </RelativeLayout>

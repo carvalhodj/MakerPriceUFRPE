@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.26" />
+        android:contentDescription="@string/descricao_imagem_tela_inicial"/>
 
     <EditText
         android:id="@+id/sign_in_usuario"
@@ -54,7 +54,7 @@
         android:onClick="onButtonClick"/>
 
     <TextView
-        android:id="@+id/linkSignUp"
+        android:id="@+id/linkCadastrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/linkSignIn"

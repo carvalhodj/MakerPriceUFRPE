@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
-
     DatabaseHelper helper = new DatabaseHelper(this);
 
     @Override
@@ -20,14 +19,13 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onButtonClick(View v){
 
-        //v.getId() verifica o id do item pressionado
         if (v.getId() == R.id.botaoSignIn){
             EditText usuarioEmail = (EditText) findViewById(R.id.sign_in_usuario);
             EditText usuarioSenha = (EditText) findViewById(R.id.sign_in_senha);
             String usuarioEmailString = usuarioEmail.getText().toString();
             String usuarioSenhaString = usuarioSenha.getText().toString();
 
-            String senha = helper.searchPass(usuarioEmailString);
+            String senha = helper.procurarSenha(usuarioEmailString);
             String usuarioNome = helper.nomeUsuario(usuarioEmailString);
 
             if (usuarioSenhaString.equals(senha)){
@@ -40,8 +38,8 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         }
-        else if (v.getId() == R.id.linkSignUp) {
-            Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+        else if (v.getId() == R.id.linkCadastrar) {
+            Intent intent = new Intent(getApplicationContext(), CadastroUsuarioActivity.class);
             startActivity(intent);
         }
     }

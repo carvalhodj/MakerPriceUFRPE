@@ -1,9 +1,9 @@
 package makerprice.com.makerpriceufrpe;
 
 /**
- * Created by d3jota on 15/05/16.
+ *
  */
-public class Contact {
+public class Usuario {
     String name, email, pass;
 
     public void setName(String name){

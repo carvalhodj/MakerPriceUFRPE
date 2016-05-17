@@ -7,21 +7,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class SignUpActivity extends AppCompatActivity {
+public class CadastroUsuarioActivity extends AppCompatActivity {
     DatabaseHelper helper = new DatabaseHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_cadastro_usuario);
     }
 
-    public void onSignUpClick(View v){
-        if (v.getId() == R.id.botaoSignUp){
+    public void cadastrar(View v){
+        if (v.getId() == R.id.botaoRealizarCadastroUsuario){
             EditText nome = (EditText)findViewById(R.id.campoNome);
             EditText email = (EditText)findViewById(R.id.campoEmail);
             EditText pass = (EditText)findViewById(R.id.campoSenha);
-            EditText repPass = (EditText)findViewById(R.id.campoRepSenha);
+            EditText repPass = (EditText)findViewById(R.id.campoRepeteSenha);
 
             String nomeString = nome.getText().toString();
             String emailString = email.getText().toString();
@@ -29,12 +29,12 @@ public class SignUpActivity extends AppCompatActivity {
             String repPassString = repPass.getText().toString();
 
             if (!passString.equals(repPassString)){
-                Toast ErrorPass = Toast.makeText(SignUpActivity.this, "Senhas não coincidem!", Toast.LENGTH_SHORT);
+                Toast ErrorPass = Toast.makeText(CadastroUsuarioActivity.this, "Senhas não coincidem!", Toast.LENGTH_SHORT);
                 ErrorPass.show();
             }
 
             else {
-                Contact c = new Contact();
+                Usuario c = new Usuario();
                 c.setName(nomeString);
                 c.setEmail(emailString);
                 c.setPass(passString);

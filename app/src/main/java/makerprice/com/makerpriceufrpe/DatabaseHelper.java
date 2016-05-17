@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by d3jota on 15/05/16.
+ *
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -44,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public void inserirUsuario(Contact c) {
+    public void inserirUsuario(Usuario usuario) {
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -53,15 +53,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int count = cursor.getCount();
 
         values.put(COLUMN_ID, count);
-        values.put(COLUMN_NAME, c.getName());
-        values.put(COLUMN_EMAIL, c.getEmail());
-        values.put(COLUMN_PASS, c.getPass());
+        values.put(COLUMN_NAME, usuario.getName());
+        values.put(COLUMN_EMAIL, usuario.getEmail());
+        values.put(COLUMN_PASS, usuario.getPass());
 
         db.insert(TABLE_NAME, null, values);
         db.close();
+        cursor.close();
     }
 
-    public String searchPass(String usuario) {
+    public String procurarSenha(String usuario) {
         db = this.getReadableDatabase();
 
         String query = "SELECT "+COLUMN_EMAIL+", "+COLUMN_PASS+" FROM "+TABLE_NAME;
@@ -79,6 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
             while(cursor.moveToNext());
         }
+        cursor.close();
         return passUsuario;
     }
 
@@ -100,6 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
             while(cursor.moveToNext());
         }
+        cursor.close();
         return nomeUsuario;
     }
 }

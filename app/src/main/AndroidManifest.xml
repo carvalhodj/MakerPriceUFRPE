@@ -22,7 +22,7 @@
         <activity
             android:name=".CadastroUsuarioActivity"
             android:label="@string/title_activity_cadastro_usuario"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

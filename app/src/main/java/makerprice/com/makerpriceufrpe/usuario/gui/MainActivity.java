@@ -1,4 +1,4 @@
-package makerprice.com.makerpriceufrpe.gui;
+package makerprice.com.makerpriceufrpe.usuario.gui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

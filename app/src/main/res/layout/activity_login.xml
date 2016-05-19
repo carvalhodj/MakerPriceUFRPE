@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/backgroundGray"
-    tools:context=".gui.LoginActivity" >
+    tools:context=".usuario.gui.LoginActivity" >
 
     <ImageView
         android:id="@+id/signInLogo"

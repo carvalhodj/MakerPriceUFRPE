@@ -1,4 +1,4 @@
-package makerprice.com.makerpriceufrpe.usuario.negocio;
+package makerprice.com.makerpriceufrpe.infra;
 
 import java.util.Date;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;

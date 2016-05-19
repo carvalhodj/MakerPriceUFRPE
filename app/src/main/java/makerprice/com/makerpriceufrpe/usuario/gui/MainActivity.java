@@ -6,10 +6,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 
 import makerprice.com.makerpriceufrpe.R;
-import makerprice.com.makerpriceufrpe.usuario.negocio.Sessao;
+import makerprice.com.makerpriceufrpe.infra.Sessao;
 
 public class MainActivity extends AppCompatActivity {
     Sessao usuarioSessao = Sessao.getInstancia();
@@ -18,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*String nomeUsuario = getIntent().getStringExtra("Usuário");
         TextView tv = (TextView) findViewById(R.id.TVusuario);
-        tv.setText(nomeUsuario);*/
+        String nomeUsuario = usuarioSessao.getUsuario().getName();
+        tv.setText(nomeUsuario);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

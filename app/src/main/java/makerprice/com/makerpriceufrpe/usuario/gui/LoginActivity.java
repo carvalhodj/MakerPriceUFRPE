@@ -12,9 +12,10 @@ import android.widget.Toast;
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.usuario.dao.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
 public class LoginActivity extends AppCompatActivity {
-    DatabaseHelper helper = new DatabaseHelper(this);
+    UsuarioService usuarioService = new UsuarioService(this);
     GuiUtil guiUtil = GuiUtil.getGuiUtil();
 
     @Override
@@ -34,28 +35,30 @@ public class LoginActivity extends AppCompatActivity {
             if (usuarioEmailString.length() == 0){
                 usuarioEmail.requestFocus();
                 usuarioEmail.setError(getString(R.string.error_login_email_vazio));
+                return;
             }
 
             if (usuarioSenhaString.length() == 0){
                 usuarioSenha.requestFocus();
                 usuarioSenha.setError(getString(R.string.error_login_senha_vazia));
+                return;
             }
 
             else {
-                try {
-                    String senha = helper.procurarSenha(usuarioEmailString);
+                /*try {
+                    //String senha = helper.procurarSenha(usuarioEmailString);
                     //String usuarioNome = helper.nomeUsuario(usuarioEmailString);
 
-                    if (usuarioSenhaString.equals(senha)) {
+                    //if (usuarioSenhaString.equals(senha)) {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         //intent.putExtra("Usuário", usuarioNome);
                         startActivity(intent);
                     } else {
                         guiUtil.toastLong(getApplicationContext(), "Usuário e/ou senha não coincidem!");
                     }
-                } catch (Exception excessao) {
+                //} catch (Exception excessao) {
                     //Log.ERROR(Message);
-                }
+                }*/
             }
 
         }

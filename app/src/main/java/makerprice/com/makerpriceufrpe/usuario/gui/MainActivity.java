@@ -1,4 +1,4 @@
-package makerprice.com.makerpriceufrpe;
+package makerprice.com.makerpriceufrpe.usuario.gui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,15 +8,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.usuario.negocio.Sessao;
+
 public class MainActivity extends AppCompatActivity {
+    Sessao usuarioSessao = Sessao.getInstancia();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String nomeUsuario = getIntent().getStringExtra("Usuário");
+        /*String nomeUsuario = getIntent().getStringExtra("Usuário");
         TextView tv = (TextView) findViewById(R.id.TVusuario);
-        tv.setText(nomeUsuario);
+        tv.setText(nomeUsuario);*/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

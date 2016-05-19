@@ -1,4 +1,4 @@
-package makerprice.com.makerpriceufrpe;
+package makerprice.com.makerpriceufrpe.usuario.dominio;
 
 /**
  *

@@ -1,10 +1,12 @@
-package makerprice.com.makerpriceufrpe;
+package makerprice.com.makerpriceufrpe.usuario.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
 /**
  *
@@ -13,8 +15,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "contact.db";
-    private static final String TABLE_NAME = "contacts";
+    public static final String DATABASE_NAME = "makerprice.db";
+
+    private static final String TABLE_NAME = "usuario";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_EMAIL = "email";
@@ -22,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     SQLiteDatabase db;
 
-    private static final String TABLE_CREATE = "CREATE TABLE "+TABLE_NAME+"("+COLUMN_ID+" INTEGER PRIMARY KEY NOT NULL , " +
+    private static final String TABLE_USUARIO_CREATE = "CREATE TABLE "+TABLE_NAME+"("+COLUMN_ID+" INTEGER PRIMARY KEY NOT NULL , " +
             COLUMN_NAME+" TEXT NOT NULL , "+
             COLUMN_EMAIL+" TEXT NOT NULL , "+
             COLUMN_PASS+" TEXT NOT NULL"+")";
@@ -33,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_CREATE);
+        db.execSQL(TABLE_USUARIO_CREATE);
         this.db = db;
     }
 
@@ -84,7 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return passUsuario;
     }
 
-    public String nomeUsuario(String email){
+    /*public String nomeUsuario(String email){
         db = this.getReadableDatabase();
 
         String query = "SELECT "+COLUMN_EMAIL+", "+COLUMN_NAME+" FROM "+TABLE_NAME;
@@ -104,5 +107,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return nomeUsuario;
-    }
+    }*/
 }

@@ -27,16 +27,29 @@ public class LoginActivity extends AppCompatActivity {
             String usuarioEmailString = usuarioEmail.getText().toString();
             String usuarioSenhaString = usuarioSenha.getText().toString();
 
-            String senha = helper.procurarSenha(usuarioEmailString);
-            String usuarioNome = helper.nomeUsuario(usuarioEmailString);
+            if (usuarioEmailString.length() == 0){
+                usuarioEmail.requestFocus();
+                usuarioEmail.setError(getString(R.string.error_login_email_vazio));
+            }
 
-            if (usuarioSenhaString.equals(senha)){
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("Usuário", usuarioNome);
-                startActivity(intent);
-            } else {
-                Toast temp = Toast.makeText(LoginActivity.this, "Usuário e/ou senha não coincidem!", Toast.LENGTH_SHORT);
-                temp.show();
+            if (usuarioSenhaString.length() == 0){
+                usuarioSenha.requestFocus();
+                usuarioSenha.setError(getString(R.string.error_login_senha_vazia));
+            }
+
+            else {
+
+                String senha = helper.procurarSenha(usuarioEmailString);
+                String usuarioNome = helper.nomeUsuario(usuarioEmailString);
+
+                if (usuarioSenhaString.equals(senha)) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("Usuário", usuarioNome);
+                    startActivity(intent);
+                } else {
+                    Toast temp = Toast.makeText(LoginActivity.this, "Usuário e/ou senha não coincidem!", Toast.LENGTH_SHORT);
+                    temp.show();
+                }
             }
 
         }

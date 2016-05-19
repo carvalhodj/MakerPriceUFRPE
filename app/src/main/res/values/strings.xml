@@ -15,4 +15,6 @@
     <string name="usuario_bemvindo_login">Bem-vindo usuári(a,o)</string>
     <string name="empty_text" />
     <string name="descricao_imagem_tela_inicial">Logomarca MakerPrice</string>
+    <string name="error_login_email_vazio">Digite seu email!</string>
+    <string name="error_login_senha_vazia">Digite sua senha!</string>
 </resources>

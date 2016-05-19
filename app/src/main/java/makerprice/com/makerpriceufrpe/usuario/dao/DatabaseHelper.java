@@ -33,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         COLUMN_EMAIL + " TEXT, " +
                         COLUMN_NAME + " TEXT, " +
-                        COLUMN_PASS + " TEXT)");
+                        COLUMN_PASS + " TEXT);");
     }
 
     @Override

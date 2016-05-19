@@ -17,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*String nomeUsuario = getIntent().getStringExtra("Usuário");
         TextView tv = (TextView) findViewById(R.id.TVusuario);
-        tv.setText(nomeUsuario);*/
+        String nomeUsuario = usuarioSessao.getUsuario().getName();
+        tv.setText(nomeUsuario);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

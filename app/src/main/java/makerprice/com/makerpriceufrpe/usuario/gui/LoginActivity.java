@@ -12,9 +12,10 @@ import android.widget.Toast;
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.usuario.dao.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
 public class LoginActivity extends AppCompatActivity {
-    DatabaseHelper helper = new DatabaseHelper(this);
+    UsuarioService usuarioService = new UsuarioService(this);
     GuiUtil guiUtil = GuiUtil.getGuiUtil();
 
     @Override

@@ -6,10 +6,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 
 import makerprice.com.makerpriceufrpe.R;
-import makerprice.com.makerpriceufrpe.usuario.negocio.Sessao;
+import makerprice.com.makerpriceufrpe.infra.Sessao;
 
 public class MainActivity extends AppCompatActivity {
     Sessao usuarioSessao = Sessao.getInstancia();

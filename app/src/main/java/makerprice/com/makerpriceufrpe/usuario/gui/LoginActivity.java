@@ -14,6 +14,10 @@ import makerprice.com.makerpriceufrpe.usuario.dao.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
+/*
+
+ */
+
 public class LoginActivity extends AppCompatActivity {
     UsuarioService usuarioService = new UsuarioService(this);
     GuiUtil guiUtil = GuiUtil.getGuiUtil();

@@ -1,4 +1,4 @@
-package makerprice.com.makerpriceufrpe;
+package makerprice.com.makerpriceufrpe.gui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+
+import makerprice.com.makerpriceufrpe.R;
 
 public class MainActivity extends AppCompatActivity {
 

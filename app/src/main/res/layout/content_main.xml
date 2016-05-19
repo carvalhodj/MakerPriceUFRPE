@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="makerprice.com.makerpriceufrpe.MainActivity"
+    tools:context=".gui.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <TextView
@@ -23,8 +23,8 @@
         android:id="@+id/TVusuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/hello_world_login"
-        android:layout_marginLeft="8sp"
+        android:layout_toEndOf="@id/hello_world_login"
+        android:layout_marginStart="8sp"
         android:text="@string/empty_text"/>
 
 </RelativeLayout>

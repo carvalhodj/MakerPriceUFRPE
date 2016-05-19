@@ -49,20 +49,14 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             else {
-                /*try {
-                    //String senha = helper.procurarSenha(usuarioEmailString);
-                    //String usuarioNome = helper.nomeUsuario(usuarioEmailString);
+                try {
+                    usuarioService.login(usuarioEmailString, usuarioSenhaString);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }catch (Exception exception) {
+                    guiUtil.toastLong(getApplicationContext(), exception.getMessage());
+                }
 
-                    //if (usuarioSenhaString.equals(senha)) {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        //intent.putExtra("Usuário", usuarioNome);
-                        startActivity(intent);
-                    } else {
-                        guiUtil.toastLong(getApplicationContext(), "Usuário e/ou senha não coincidem!");
-                    }
-                //} catch (Exception excessao) {
-                    //Log.ERROR(Message);
-                }*/
             }
 
         }

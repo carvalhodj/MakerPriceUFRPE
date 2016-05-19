@@ -1,5 +1,6 @@
 package makerprice.com.makerpriceufrpe.usuario.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -32,7 +33,7 @@ public class UsuarioDAO {
             String nome = cursor.getString(
                     cursor.getColumnIndex(
                             DatabaseHelper.getColumnNome()));
-
+            usuario = new Usuario();
             usuario.setEmail(email);
             usuario.setName(nome);
             usuario.setPass(senha);
@@ -42,4 +43,19 @@ public class UsuarioDAO {
 
         return usuario;
     }
+    public long inserir(Usuario usuario){
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.getColumnEmail(), usuario.getEmail());
+        values.put(DatabaseHelper.getColumnNome(), usuario.getName());
+        values.put(DatabaseHelper.getColumnSenha(), usuario.getPass());
+
+        long id = db.insert(DatabaseHelper.getTableUser(), null, values);
+
+        db.close();
+        return id;
+
+    }
+
 }

@@ -21,9 +21,11 @@ public class UsuarioService  {
         Usuario usuario= usuarioDAO.getUsuario(email, senha);
 
         if(usuario==null) {
-            throw new Exception("Usuario ou senha invalidos.");
+            Exception exception=new Exception("Usuario ou senha invalidos.");
+            throw exception;
         }
 
     }
+
 
 }

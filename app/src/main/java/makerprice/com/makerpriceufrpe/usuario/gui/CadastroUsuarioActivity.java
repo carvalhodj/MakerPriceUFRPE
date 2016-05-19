@@ -11,10 +11,11 @@ import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.infra.Validacao;
 import makerprice.com.makerpriceufrpe.usuario.dao.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.usuario.dao.UsuarioDAO;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
-    DatabaseHelper helper = new DatabaseHelper(this);
+    UsuarioDAO helper = new UsuarioDAO(this);
     Validacao validacaoUtil = Validacao.getValidacaoUtil();
     GuiUtil guiUtil = GuiUtil.getGuiUtil();
 
@@ -47,11 +48,11 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             }
 
             else {
-                Usuario c = new Usuario();
-                c.setName(nomeString);
-                c.setEmail(emailString);
-                c.setPass(passString);
-                helper.inserirUsuario(c);
+                Usuario usuario = new Usuario();
+                usuario.setName(nomeString);
+                usuario.setEmail(emailString);
+                usuario.setPass(passString);
+                helper.inserir(usuario);
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }

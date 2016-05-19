@@ -1,17 +1,21 @@
 package makerprice.com.makerpriceufrpe.usuario.gui;
 
 import android.content.Intent;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.usuario.dao.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.R;
 
 public class LoginActivity extends AppCompatActivity {
     DatabaseHelper helper = new DatabaseHelper(this);
+    GuiUtil guiUtil = GuiUtil.getGuiUtil();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +42,24 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             else {
+                try {
+                    String senha = helper.procurarSenha(usuarioEmailString);
+                    //String usuarioNome = helper.nomeUsuario(usuarioEmailString);
 
-                String senha = helper.procurarSenha(usuarioEmailString);
-                String usuarioNome = helper.nomeUsuario(usuarioEmailString);
-
-                if (usuarioSenhaString.equals(senha)) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("Usuário", usuarioNome);
-                    startActivity(intent);
-                } else {
-                    Toast temp = Toast.makeText(LoginActivity.this, "Usuário e/ou senha não coincidem!", Toast.LENGTH_SHORT);
-                    temp.show();
+                    if (usuarioSenhaString.equals(senha)) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        //intent.putExtra("Usuário", usuarioNome);
+                        startActivity(intent);
+                    } else {
+                        guiUtil.toastLong(getApplicationContext(), "Usuário e/ou senha não coincidem!");
+                    }
+                } catch (Exception excessao) {
+                    //Log.ERROR(Message);
                 }
             }
 
         }
+
         else if (v.getId() == R.id.linkCadastrar) {
             Intent intent = new Intent(getApplicationContext(), CadastroUsuarioActivity.class);
             startActivity(intent);

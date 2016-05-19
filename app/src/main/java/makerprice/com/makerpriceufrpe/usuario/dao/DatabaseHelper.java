@@ -87,7 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return passUsuario;
     }
 
-    public String nomeUsuario(String email){
+    /*public String nomeUsuario(String email){
         db = this.getReadableDatabase();
 
         String query = "SELECT "+COLUMN_EMAIL+", "+COLUMN_NAME+" FROM "+TABLE_NAME;
@@ -107,5 +107,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return nomeUsuario;
-    }
+    }*/
 }

@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.usuario.negocio.Sessao;
 
 public class MainActivity extends AppCompatActivity {
+    Sessao usuarioSessao = Sessao.getInstancia();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

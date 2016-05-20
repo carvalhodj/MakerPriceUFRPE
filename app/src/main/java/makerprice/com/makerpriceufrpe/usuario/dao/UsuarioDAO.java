@@ -7,9 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
-/**
- * Created by J.Vitor on 19/05/2016.
- */
 public class UsuarioDAO {
     private DatabaseHelper helper;
 
@@ -27,8 +24,8 @@ public class UsuarioDAO {
 
         Cursor cursor = db.rawQuery(comando, argumentos);
 
-        Usuario usuario = new Usuario();
-        usuario = null;
+        Usuario usuario = null;
+
         if (cursor.moveToNext()) {
             String nome = cursor.getString(
                     cursor.getColumnIndex(

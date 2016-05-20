@@ -2,14 +2,12 @@ package makerprice.com.makerpriceufrpe.usuario.negocio;
 
 import android.content.Context;
 
+import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.usuario.dao.UsuarioDAO;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
-/**
- * Created by Vinicius on 19/05/2016.
- */
 public class UsuarioService  {
-
+    private Sessao sessao = Sessao.getInstancia();
     private UsuarioDAO usuarioDAO;
 
     public UsuarioService(Context context){
@@ -17,13 +15,14 @@ public class UsuarioService  {
     }
 
     public void login(String email, String senha) throws Exception{
-
+        sessao.reset();
         Usuario usuario= usuarioDAO.getUsuario(email, senha);
 
         if(usuario==null) {
-            Exception exception=new Exception("Usuario ou senha invalidos.");
-            throw exception;
+            throw new Exception("Usuario ou senha invalidos.");
         }
+
+        sessao.setUsuario(usuario);
 
     }
 

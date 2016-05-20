@@ -32,9 +32,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(
                 "CREATE TABLE " + TABLE_USER + " (" +
                         COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        COLUMN_EMAIL + " TEXT, " +
-                        COLUMN_NAME + " TEXT, " +
-                        COLUMN_PASS + " TEXT);");
+                        COLUMN_EMAIL + " TEXT NOT NULL, " +
+                        COLUMN_NAME + " TEXT NOT NULL, " +
+                        COLUMN_PASS + " TEXT NOT NULL);");
     }
 
     @Override

@@ -29,21 +29,39 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         if (v.getId() == R.id.botaoRealizarCadastroUsuario){
             EditText nome = (EditText) findViewById(R.id.campoNome);
             EditText email = (EditText) findViewById(R.id.campoEmail);
-            EditText pass = (EditText) findViewById(R.id.campoSenha);
-            EditText repPass = (EditText) findViewById(R.id.campoRepeteSenha);
+            EditText senha = (EditText) findViewById(R.id.campoSenha);
+            EditText repSenha = (EditText) findViewById(R.id.campoRepeteSenha);
 
             String nomeString = nome.getText().toString();
             String emailString = email.getText().toString();
-            String passString = pass.getText().toString();
-            String repPassString = repPass.getText().toString();
+            String senhaString = senha.getText().toString();
+            String repSenhaString = repSenha.getText().toString();
 
-            if(!validacaoUtil.isEmailValid(emailString)){
-                email.requestFocus();
-                email.setError("Email incorreto!");
+            if (nomeString.length() == 0){
+                nome.requestFocus();
+                nome.setError("Digite o nome!");
                 return;
             }
 
-            if (!passString.equals(repPassString)){
+            if (emailString.length() == 0){
+                email.requestFocus();
+                email.setError("Digite o email!");
+                return;
+            }
+
+            if (senhaString.length() == 0){
+                senha.requestFocus();
+                senha.setError("Digite a senha!");
+                return;
+            }
+
+            if(!validacaoUtil.isEmailValid(emailString)){
+                email.requestFocus();
+                email.setError("Email inválido!");
+                return;
+            }
+
+            if (!senhaString.equals(repSenhaString)){
                 guiUtil.toastShort(getApplicationContext(), "Senhas não coincidem!");
             }
 
@@ -51,7 +69,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                 Usuario usuario = new Usuario();
                 usuario.setName(nomeString);
                 usuario.setEmail(emailString);
-                usuario.setPass(passString);
+                usuario.setPass(senhaString);
                 helper.inserir(usuario);
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);

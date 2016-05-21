@@ -14,6 +14,8 @@ import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.usuario.dao.UsuarioDAO;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
+
+
 public class CadastroUsuarioActivity extends AppCompatActivity {
     UsuarioDAO helper = new UsuarioDAO(this);
     Validacao validacaoUtil = Validacao.getValidacaoUtil();

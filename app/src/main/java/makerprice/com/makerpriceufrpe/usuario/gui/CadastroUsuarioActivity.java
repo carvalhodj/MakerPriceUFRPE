@@ -15,6 +15,8 @@ import makerprice.com.makerpriceufrpe.usuario.dao.UsuarioDAO;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
+
+
 public class CadastroUsuarioActivity extends AppCompatActivity {
     UsuarioService usuarioService = new UsuarioService(this);
     UsuarioDAO helper = new UsuarioDAO(this);

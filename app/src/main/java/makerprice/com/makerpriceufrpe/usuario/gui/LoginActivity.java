@@ -8,11 +8,14 @@ import android.widget.EditText;
 
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.infra.Validacao;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
 public class LoginActivity extends AppCompatActivity {
     UsuarioService usuarioService = new UsuarioService(this);
     GuiUtil guiUtil = GuiUtil.getGuiUtil();
+    Validacao validacaoUtil = Validacao.getValidacaoUtil();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +37,25 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
+            if(!validacaoUtil.isEmailValid(usuarioEmailString)){
+                usuarioEmail.requestFocus();
+                usuarioEmail.setError(getString(R.string.email_invalido));
+                return;
+            }
+
             if (usuarioSenhaString.length() == 0){
                 usuarioSenha.requestFocus();
                 usuarioSenha.setError(getString(R.string.error_login_senha_vazia));
                 return;
             }
 
-            else {
                 try {
                     usuarioService.login(usuarioEmailString, usuarioSenhaString);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                }catch (Exception exception) {
+                } catch (Exception exception) {
                     guiUtil.toastLong(getApplicationContext(), exception.getMessage());
                 }
-
-            }
 
         }
 

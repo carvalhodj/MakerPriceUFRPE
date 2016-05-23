@@ -40,6 +40,38 @@ public class UsuarioDAO {
 
         return usuario;
     }
+
+    public Usuario getUsuario(String email){
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String comando = "SELECT * FROM " + DatabaseHelper.getTableUser() +
+                " WHERE " + DatabaseHelper.getColumnEmail() + " LIKE ?";
+
+        String[] argumentos = {email};
+
+        Cursor cursor = db.rawQuery(comando, argumentos);
+
+        Usuario usuario = null;
+
+        if (cursor.moveToNext()) {
+            String nome = cursor.getString(
+                    cursor.getColumnIndex(
+                            DatabaseHelper.getColumnNome()));
+            String senha = cursor.getString(
+                    cursor.getColumnIndex(
+                            DatabaseHelper.getColumnSenha()));
+
+            usuario = new Usuario();
+            usuario.setEmail(email);
+            usuario.setName(nome);
+            usuario.setPass(senha);
+        }
+        cursor.close();
+        db.close();
+
+        return usuario;
+    }
+
     public long inserir(Usuario usuario){
         SQLiteDatabase db = helper.getWritableDatabase();
 

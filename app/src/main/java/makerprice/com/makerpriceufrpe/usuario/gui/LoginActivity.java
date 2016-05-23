@@ -1,16 +1,12 @@
 package makerprice.com.makerpriceufrpe.usuario.gui;
 
 import android.content.Intent;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
-import makerprice.com.makerpriceufrpe.usuario.dao.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 

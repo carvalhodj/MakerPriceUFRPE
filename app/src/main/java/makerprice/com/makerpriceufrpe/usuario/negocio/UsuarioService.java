@@ -26,5 +26,24 @@ public class UsuarioService  {
 
     }
 
+    public void cadastrar(String nome, String email, String senha) throws Exception{
+
+        Usuario usuario = usuarioDAO.getUsuario(email);
+
+        if (usuario!=null){
+            throw new Exception("Email ja cadastrado");
+        }
+        usuario = new Usuario();
+        usuario.setName(nome);
+        usuario.setEmail(email);
+        usuario.setPass(senha);
+
+        usuarioDAO.inserir(usuario);
+
+        sessao.setUsuario(usuario);
+
+
+    }
+
 
 }

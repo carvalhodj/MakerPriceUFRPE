@@ -19,7 +19,6 @@ import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
     UsuarioService usuarioService = new UsuarioService(this);
-    UsuarioDAO helper = new UsuarioDAO(this);
     Validacao validacaoUtil = Validacao.getValidacaoUtil();
     GuiUtil guiUtil = GuiUtil.getGuiUtil();
 

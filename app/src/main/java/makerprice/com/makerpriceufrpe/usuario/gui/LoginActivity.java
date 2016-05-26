@@ -31,9 +31,15 @@ public class LoginActivity extends AppCompatActivity {
             String usuarioEmailString = usuarioEmail.getText().toString();
             String usuarioSenhaString = usuarioSenha.getText().toString();
 
-            if (usuarioEmailString.length() == 0){
+            if (validacaoUtil.isFieldEmpty(usuarioEmail)){
                 usuarioEmail.requestFocus();
                 usuarioEmail.setError(getString(R.string.error_login_email_vazio));
+                return;
+            }
+
+            if (validacaoUtil.isFieldEmpty(usuarioSenha)){
+                usuarioSenha.requestFocus();
+                usuarioSenha.setError(getString(R.string.error_login_senha_vazia));
                 return;
             }
 
@@ -43,17 +49,11 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            if (usuarioSenhaString.length() == 0){
-                usuarioSenha.requestFocus();
-                usuarioSenha.setError(getString(R.string.error_login_senha_vazia));
-                return;
-            }
-
-                try {
+            try {
                     usuarioService.login(usuarioEmailString, usuarioSenhaString);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                } catch (Exception exception) {
+            } catch (Exception exception) {
                     guiUtil.toastLong(getApplicationContext(), exception.getMessage());
                 }
 

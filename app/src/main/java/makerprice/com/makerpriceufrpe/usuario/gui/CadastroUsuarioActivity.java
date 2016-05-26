@@ -42,13 +42,13 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
             if (nomeString.length() == 0){
                 nome.requestFocus();
-                nome.setError("Digite o nome!");
+                nome.setError("Digite o nome");
                 return;
             }
 
             if (emailString.length() == 0){
                 email.requestFocus();
-                email.setError("Digite o email!");
+                email.setError("Digite o email");
                 return;
             }
 

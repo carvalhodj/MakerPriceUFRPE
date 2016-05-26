@@ -49,6 +49,12 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
+            if(!validacaoUtil.hasSpacePassword(usuarioSenha)){
+                usuarioSenha.requestFocus();
+                usuarioSenha.setError("Espaços!!!");
+                return;
+            }
+
             try {
                     usuarioService.login(usuarioEmailString, usuarioSenhaString);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);

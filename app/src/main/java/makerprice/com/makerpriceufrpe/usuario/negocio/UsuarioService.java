@@ -19,7 +19,7 @@ public class UsuarioService  {
         Usuario usuario= usuarioDAO.getUsuario(email, senha);
 
         if(usuario==null) {
-            throw new Exception("Usuario ou senha invalidos.");
+            throw new Exception("Usuário ou senha inválidos");
         }
 
         sessao.setUsuario(usuario);
@@ -31,7 +31,7 @@ public class UsuarioService  {
         Usuario usuario = usuarioDAO.getUsuario(email);
 
         if (usuario!=null){
-            throw new Exception("Email ja cadastrado");
+            throw new Exception("Email já cadastrado");
         }
         usuario = new Usuario();
         usuario.setName(nome);

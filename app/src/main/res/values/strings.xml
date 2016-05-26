@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">MakerPrice</string>
-    <string name="campoEmailHint">Email</string>
-    <string name="campoSenhaHint">Senha</string>
-    <string name="linkSignIn">Não tem cadastro? Clique aqui!</string>
-    <string name="textoBotaoSignUp">Entrar</string>
+    <string name="app_name" translatable="false">MakerPrice</string>
+    <string name="campo_email_hint" translatable="false">Email</string>
+    <string name="campo_senha_hint">Senha</string>
+    <string name="link_signup">Não tem cadastro? Clique aqui!</string>
+    <string name="texto_botao_signin">Entrar</string>
+
+    <string name="empty_text" />
 
     <string name="signup_nome">Nome</string>
     <string name="signup_email">Email</string>
@@ -13,7 +15,6 @@
     <string name="title_activity_main">MakerPrice</string>
     <string name="title_activity_cadastro_usuario">Cadastro</string>
     <string name="usuario_bemvindo_login">Bem-vindo(a) </string>
-    <string name="empty_text" />
     <string name="descricao_imagem_tela_inicial">Logomarca MakerPrice</string>
     <string name="error_login_email_vazio">Digite seu email!</string>
     <string name="error_login_senha_vazia">Digite sua senha!</string>

@@ -1,10 +1,13 @@
 package makerprice.com.makerpriceufrpe.infra;
 
+import android.content.Context;
+
 import java.util.Date;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
 public class Sessao {
     private static Sessao instancia = new Sessao();
+    private Context context;
     private Usuario usuario;
     private Date horaLogin;
 
@@ -30,6 +33,16 @@ public class Sessao {
     public void setHoraLogin(Date horaLogin) {
         this.horaLogin = horaLogin;
     }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context){
+        this.context = context;
+    }
+
+
 
     public void reset(){
         this.usuario = null;

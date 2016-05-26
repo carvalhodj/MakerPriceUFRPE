@@ -5,20 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.infra.Validacao;
-import makerprice.com.makerpriceufrpe.usuario.dao.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.R;
-import makerprice.com.makerpriceufrpe.usuario.dao.UsuarioDAO;
-import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
+import makerprice.com.makerpriceufrpe.infra.Sessao;
 
 
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
-    UsuarioService usuarioService = new UsuarioService(this);
+    private Sessao sessao = Sessao.getInstancia();
+    UsuarioService usuarioService = new UsuarioService();
     Validacao validacaoUtil = Validacao.getValidacaoUtil();
     GuiUtil guiUtil = GuiUtil.getGuiUtil();
 
@@ -26,6 +24,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
+        sessao.setContext(this);
     }
 
     public void cadastrar(View v){

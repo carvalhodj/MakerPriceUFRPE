@@ -8,11 +8,13 @@ import android.widget.EditText;
 
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.infra.Validacao;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
 public class LoginActivity extends AppCompatActivity {
-    UsuarioService usuarioService = new UsuarioService(this);
+    private Sessao sessao = Sessao.getInstancia();
+    UsuarioService usuarioService = new UsuarioService();
     GuiUtil guiUtil = GuiUtil.getGuiUtil();
     Validacao validacaoUtil = Validacao.getValidacaoUtil();
 
@@ -21,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sessao.setContext(this);
     }
 
     public void onButtonClick(View v){

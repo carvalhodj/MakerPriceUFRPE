@@ -4,13 +4,16 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import makerprice.com.makerpriceufrpe.infra.Sessao;
 
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
 public class UsuarioDAO {
     private DatabaseHelper helper;
+    private Sessao sessao = Sessao.getInstancia();
 
-    public UsuarioDAO(Context context) {
+    public UsuarioDAO() {
+        Context context = sessao.getContext();
         helper = new DatabaseHelper(context);
     }
     public Usuario getUsuario(String email, String senha) {

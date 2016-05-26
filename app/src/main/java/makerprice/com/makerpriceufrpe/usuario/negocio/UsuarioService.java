@@ -10,8 +10,8 @@ public class UsuarioService  {
     private Sessao sessao = Sessao.getInstancia();
     private UsuarioDAO usuarioDAO;
 
-    public UsuarioService(Context context){
-        usuarioDAO= new UsuarioDAO(context);
+    public UsuarioService(){
+        usuarioDAO = new UsuarioDAO();
     }
 
     public void login(String email, String senha) throws Exception{

@@ -1,11 +1,10 @@
 package makerprice.com.makerpriceufrpe.usuario.dao;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
+import makerprice.com.makerpriceufrpe.infra.Sessao;
 
 /**
  *
@@ -22,6 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_EMAIL = "email";
     private static final String COLUMN_PASS = "pass";
 
+    private Sessao sessao = Sessao.getInstancia();
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

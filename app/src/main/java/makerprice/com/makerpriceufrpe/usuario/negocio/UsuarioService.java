@@ -33,6 +33,8 @@ public class UsuarioService  {
         if (usuario!=null){
             throw new Exception("Email já cadastrado");
         }
+
+
         usuario = new Usuario();
         usuario.setName(nome);
         usuario.setEmail(email);

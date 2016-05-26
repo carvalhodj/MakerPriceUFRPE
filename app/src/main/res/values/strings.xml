@@ -19,4 +19,6 @@
     <string name="error_login_email_vazio">Digite seu email!</string>
     <string name="error_login_senha_vazia">Digite sua senha!</string>
     <string name="email_invalido">Email inválido!</string>
+    <string name="atualizarJson">Atualizar</string>
+    <string name="atualizar">Atualizar</string>
 </resources>

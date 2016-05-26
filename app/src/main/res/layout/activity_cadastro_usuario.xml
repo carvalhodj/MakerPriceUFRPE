@@ -67,4 +67,4 @@
         android:layout_below="@id/campoRepeteSenha"
         android:onClick="cadastrar"/>
 
-</>
+</RelativeLayout>

@@ -10,13 +10,11 @@ import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.infra.Validacao;
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
-import makerprice.com.makerpriceufrpe.infra.Sessao;
 
 
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
-    private Sessao sessao = Sessao.getInstancia();
-    UsuarioService usuarioService = new UsuarioService();
+    UsuarioService usuarioService = new UsuarioService(this);
     Validacao validacaoUtil = Validacao.getValidacaoUtil();
     GuiUtil guiUtil = GuiUtil.getGuiUtil();
 
@@ -24,7 +22,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
-        sessao.setContext(this);
     }
 
     public void cadastrar(View v){

@@ -65,4 +65,16 @@
         android:layout_centerHorizontal="true"
         android:onClick="onButtonClick"/>
 
+    <TextView
+        android:id="@+id/linkCadastrarLoja"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_signup_loja"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:layout_below="@+id/linkCadastrar"
+        android:layout_centerHorizontal="true"
+        android:onClick="onButtonClick"
+        />
+
 </RelativeLayout>

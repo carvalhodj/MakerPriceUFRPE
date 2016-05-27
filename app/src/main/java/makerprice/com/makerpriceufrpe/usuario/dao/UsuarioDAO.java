@@ -28,9 +28,12 @@ public class UsuarioDAO {
         Usuario usuario = null;
 
         if (cursor.moveToNext()) {
-            String nome = cursor.getString(
-                    cursor.getColumnIndex(
-                            DatabaseHelper.getColumnNome()));
+
+            String nameColumn= DatabaseHelper.getColumnNome();
+            int indexColumnName= cursor.getColumnIndex(nameColumn);
+
+            String nome = cursor.getString(indexColumnName);
+
             usuario = new Usuario();
             usuario.setEmail(email);
             usuario.setName(nome);

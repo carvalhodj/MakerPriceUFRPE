@@ -7,8 +7,79 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".loja.gui.CadastroLojaActivity"
+    android:background="@color/backgroundLightGray"
     >
 
+    <EditText
+    android:id="@+id/campoNomeLoja"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Nome"
+    android:inputType="textPersonName"
+    android:layout_marginTop="24dp"
+    android:maxLines="1"
+    android:textSize="16sp"
+    android:layout_alignParentStart="true"
+        />
 
+    <EditText
+        android:id="@+id/campoEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="24dp"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:layout_alignParentStart="true"
+        />
 
+    <EditText
+        android:id="@+id/campoCNPJ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CNPJ"
+        android:inputType="textVisiblePassword"
+        android:layout_marginTop="24dp"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:layout_alignParentStart="true"
+        />
+
+    <EditText
+        android:id="@+id/campoSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:layout_marginTop="24dp"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:layout_alignParentStart="true"
+        />
+
+    <EditText
+        android:id="@+id/campoRepeteSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Repita a senha"
+        android:inputType="textPassword"
+        android:layout_marginTop="24dp"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:layout_alignParentStart="true"
+        />
+
+    <Button
+        android:id="@+id/botaoRealizarCadastroLoja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cadastrar"
+        android:textSize="16sp"
+        android:layout_marginTop="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/campoRepeteSenha"
+        android:onClick="cadastrar"
+        />
 </RelativeLayout>

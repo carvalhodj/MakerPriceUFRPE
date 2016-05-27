@@ -3,6 +3,7 @@
     <string name="campo_email_hint" translatable="false">Email</string>
     <string name="campo_senha_hint">Senha</string>
     <string name="link_signup">Não tem cadastro? Clique aqui!</string>
+    <string name="link_signup_loja">Quer cadastrar sua Loja? Clique aqui!</string>
     <string name="texto_botao_signin">Entrar</string>
 
     <string name="empty_text" />

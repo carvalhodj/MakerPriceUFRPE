@@ -24,7 +24,7 @@ public class Validacao {
 
     public boolean hasSpacePassword(EditText campo){
         String senha = campo.getText().toString();
-        Pattern p= Pattern.compile("((?!\\s)\\A)(\\s|(?<!\\s)\\S){4,20}((?!\\s)\\Z)");
+        Pattern p= Pattern.compile("^[^\\s]+$");
         Matcher m = p.matcher(senha);
         return m.matches();
     }

@@ -36,32 +36,49 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             String senhaString = senha.getText().toString();
             String repSenhaString = repSenha.getText().toString();
 
-            if (nomeString.length() == 0){
+            if (validacaoUtil.isFieldEmpty(nome)){
                 nome.requestFocus();
-                nome.setError("Digite o nome");
+                nome.setError(getString(R.string.error_nome_vazio));
                 return;
             }
 
-            if (emailString.length() == 0){
+            if (validacaoUtil.isFieldEmpty(email)){
                 email.requestFocus();
-                email.setError("Digite o email");
+                email.setError(getString(R.string.error_email_vazio));
                 return;
             }
 
-            if (senhaString.length() == 0){
+            if (validacaoUtil.isFieldEmpty(senha) || validacaoUtil.isFieldEmpty(repSenha)){
+                if (validacaoUtil.isFieldEmpty(senha)){
+                    senha.requestFocus();
+                    senha.setError(getString(R.string.error_senha_vazia));
+                }
+
+                if (validacaoUtil.isFieldEmpty(repSenha)){
+                    repSenha.requestFocus();
+                    repSenha.setError(getString(R.string.error_senha_vazia));
+                }
+
+                return;
+            }
+
+            if (!validacaoUtil.hasSpacePassword(senha)){
                 senha.requestFocus();
-                senha.setError("Digite a senha!");
+                senha.setError(getString(R.string.error_espaco_branco));
                 return;
             }
 
             if(!validacaoUtil.isEmailValid(emailString)){
                 email.requestFocus();
-                email.setError("Email inválido!");
+                email.setError(getString(R.string.email_invalido));
                 return;
             }
 
             if (!senhaString.equals(repSenhaString)){
-                guiUtil.toastShort(getApplicationContext(), "Senhas não coincidem!");
+                senha.requestFocus();
+                senha.setError(getString(R.string.error_senha_diferente));
+                repSenha.requestFocus();
+                repSenha.setError(getString(R.string.error_senha_diferente));
             }
 
             else {

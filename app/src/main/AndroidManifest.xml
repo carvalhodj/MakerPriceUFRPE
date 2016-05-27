@@ -8,7 +8,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".usuario.gui.LoginActivity">
+        <activity
+            android:name=".usuario.gui.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +24,19 @@
         <activity
             android:name=".usuario.gui.CadastroUsuarioActivity"
             android:label="@string/title_activity_cadastro_usuario"
-            android:theme="@style/AppTheme" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+            android:theme="@style/AppTheme" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".projeto.gui.CadastroProjetoActivity"
+            android:label="@string/title_activity_cadastro_projeto"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

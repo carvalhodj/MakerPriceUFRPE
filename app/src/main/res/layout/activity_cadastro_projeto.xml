@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context="makerprice.com.makerpriceufrpe.projeto.gui.CadastroProjetoActivity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    >
+
+
+    <EditText
+        android:id="@+id/cadastroProjetoNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/cadastro_projeto_nome"
+        android:maxLines="1"
+        android:layout_marginTop="18dp"
+        android:textSize="16sp"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/cadastroProjetoDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="120dp"
+        android:isScrollContainer="true"
+        android:hint="@string/cadastro_projeto_descricao"
+        android:ems="10"
+        android:gravity="top|left"
+        android:layout_marginTop="18dp"
+        android:textSize="16sp"
+        android:inputType="textMultiLine"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/cadastroProjetoNome"/>
+
+    <TextView
+        android:id="@+id/cadastroProjetoPlataformaTexto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cadastro_projeto_texto_plataforma"
+        android:textSize="16sp"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/cadastroProjetoDescricao"
+        />
+
+    <Spinner
+        android:id="@+id/cadastroProjetoSpinnerPlataforma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/cadastro_projeto_plataformas"
+        android:layout_alignTop="@+id/cadastroProjetoPlataformaTexto"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/cadastroProjetoPlataformaTexto" />
+
+    <TextView
+        android:id="@+id/cadastroProjetoAplicacaoTexto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cadastro_projeto_texto_aplicacao"
+        android:textSize="16sp"
+        android:layout_marginTop="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/cadastroProjetoPlataformaTexto" />
+
+    <Spinner
+        android:id="@+id/cadastroProjetoSpinnerAplicacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/cadastro_projeto_aplicacao"
+        android:layout_alignTop="@+id/cadastroProjetoAplicacaoTexto"
+        android:layout_toEndOf="@+id/cadastroProjetoPlataformaTexto" />
+
+    <TextView
+        android:id="@+id/cadastroProjetoComponentes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IR PRA TELA DE SELECIONAR COMPONENTES!!"
+        android:textSize="16sp"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/cadastroProjetoSpinnerAplicacao"/>
+
+    <TextView
+        android:id="@+id/cadastroProjetoImagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LINK PARA IMAGEM!!"
+        android:textSize="16sp"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/cadastroProjetoComponentes"/>
+
+    <TextView
+        android:id="@+id/cadastroProjetoVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LINK PARA VIDEO!!"
+        android:textSize="16sp"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/cadastroProjetoImagem"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/signup_botao_cadastrar"
+        android:layout_marginTop="24dp"
+        android:textSize="16sp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/cadastroProjetoVideo"/>
+
+</RelativeLayout>
+</ScrollView>

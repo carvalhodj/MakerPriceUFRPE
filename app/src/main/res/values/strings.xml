@@ -14,12 +14,32 @@
     <string name="signup_rep_senha">Repita a senha</string>
     <string name="signup_botao_cadastrar">Cadastrar</string>
     <string name="title_activity_main">MakerPrice</string>
-    <string name="title_activity_cadastro_usuario">Cadastro</string>
+    <string name="title_activity_cadastro_usuario">Cadastrar Usuário</string>
     <string name="usuario_bemvindo_login">Bem-vindo(a) </string>
     <string name="descricao_imagem_tela_inicial">Logomarca MakerPrice</string>
-    <string name="error_login_email_vazio">Digite seu email!</string>
-    <string name="error_login_senha_vazia">Digite sua senha!</string>
-    <string name="email_invalido">Email inválido!</string>
+    <string name="error_email_vazio">Digite seu email</string>
+    <string name="error_senha_vazia">Digite sua senha</string>
+    <string name="email_invalido">Email inválido</string>
     <string name="atualizarJson">Atualizar</string>
     <string name="atualizar">Atualizar</string>
+    <string name="title_activity_cadastro_projeto">Cadastrar Projeto</string>
+    <string name="error_nome_vazio">Digite o nome</string>
+    <string name="error_espaco_branco">Não são permitidos espaços em branco</string>
+    <string name="error_senha_diferente">Senhas não coincidem</string>
+    <string name="cadastro_projeto_nome">Nome do projeto</string>
+    <string name="cadastro_projeto_descricao">Descrição do projeto</string>
+    <string name="cadastro_projeto_texto_plataforma">Plataforma</string>
+    <string name="cadastro_projeto_texto_aplicacao">Aplicação</string>
+
+    <string-array name="cadastro_projeto_plataformas">
+        <item>Arduino</item>
+        <item>Raspberry Pi</item>
+        <item>ESP8266</item>
+        <item>NodeMCU</item>
+    </string-array>
+
+    <string-array name="cadastro_projeto_aplicacao">
+        <item>Robótica</item>
+        <item>Automação</item>
+    </string-array>
 </resources>

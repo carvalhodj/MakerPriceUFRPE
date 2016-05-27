@@ -9,6 +9,7 @@ import android.widget.EditText;
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.infra.Validacao;
+import makerprice.com.makerpriceufrpe.projeto.gui.CadastroProjetoActivity;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
 public class LoginActivity extends AppCompatActivity {
@@ -33,25 +34,19 @@ public class LoginActivity extends AppCompatActivity {
 
             if (validacaoUtil.isFieldEmpty(usuarioEmail)){
                 usuarioEmail.requestFocus();
-                usuarioEmail.setError(getString(R.string.error_login_email_vazio));
+                usuarioEmail.setError(getString(R.string.error_email_vazio));
                 return;
             }
 
             if (validacaoUtil.isFieldEmpty(usuarioSenha)){
                 usuarioSenha.requestFocus();
-                usuarioSenha.setError(getString(R.string.error_login_senha_vazia));
+                usuarioSenha.setError(getString(R.string.error_senha_vazia));
                 return;
             }
 
             if(!validacaoUtil.isEmailValid(usuarioEmailString)){
                 usuarioEmail.requestFocus();
                 usuarioEmail.setError(getString(R.string.email_invalido));
-                return;
-            }
-
-            if(!validacaoUtil.hasSpacePassword(usuarioSenha)){
-                usuarioSenha.requestFocus();
-                usuarioSenha.setError("Espaços!!!");
                 return;
             }
 

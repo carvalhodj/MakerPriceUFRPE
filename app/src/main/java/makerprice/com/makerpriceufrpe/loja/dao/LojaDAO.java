@@ -14,13 +14,13 @@ public class LojaDAO {
     private DatabaseHelper helper;
 
     public LojaDAO(Context context) {
-        helper = new DatabaseHelper(context, "usuarioLoja");
+        helper = new DatabaseHelper(context);
     }
 
     public Loja getLoja(String email, String senha) {
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        String comando = "SELECT * FROM " + DatabaseHelper.getTableUserLoja() +
+        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_USER_LOJA +
                 " WHERE " + DatabaseHelper.getColumnEmail() + " LIKE ? AND " +
                 DatabaseHelper.getColumnSenha() + " LIKE ?";
 
@@ -51,7 +51,7 @@ public class LojaDAO {
     public Loja getLoja(String email){
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        String comando = "SELECT * FROM " + DatabaseHelper.getTableUserLoja() +
+        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_USER_LOJA +
                 " WHERE " + DatabaseHelper.getColumnEmail() + " LIKE ?";
 
         String[] argumentos = {email};
@@ -90,7 +90,7 @@ public class LojaDAO {
         values.put(DatabaseHelper.getColumnNome(), loja.getPessoaJuridica().getName());
         values.put(DatabaseHelper.getColumnSenha(), loja.getPessoaJuridica().getPass());
 
-        long id = db.insert(DatabaseHelper.getTableUser(), null, values);
+        long id = db.insert(DatabaseHelper.TABLE_USER_LOJA, null, values);
 
         db.close();
         return id;

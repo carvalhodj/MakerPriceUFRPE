@@ -11,8 +11,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private String tabela;
-
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "makerprice.db";
 
@@ -29,59 +27,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_LINKIMAGEM = "linkImagem";
 
 
-    public void setTabela(String tabela) {
-        this.tabela = tabela;
+
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
 
-    public String getTabela() {
-        return this.tabela;
-    }
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL(
+                "CREATE TABLE " + TABLE_USER + " (" +
+                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        COLUMN_EMAIL + " TEXT NOT NULL, " +
+                        COLUMN_NAME + " TEXT NOT NULL, " +
+                        COLUMN_PASS + " TEXT NOT NULL);");
 
-    public String criarTabelaUsuario() {
-        String ctu = "CREATE TABLE " + TABLE_USER + " (" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                COLUMN_EMAIL + " TEXT NOT NULL, " +
-                COLUMN_NAME + " TEXT NOT NULL, " +
-                COLUMN_PASS + " TEXT NOT NULL);";
-        return ctu;
-    }
-
-    public String criarTabelaUsuarioLoja() {
-        String ctul = "CREATE TABLE " + TABLE_USER_LOJA + " (" +
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_USER_LOJA + " (" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_EMAIL + " TEXT NOT NULL, " +
                 COLUMN_NAME + " TEXT NOT NULL, " +
                 COLUMN_PASS + " TEXT NOT NULL);" +
                 COLUMN_CNPJ + "TEXT NOT NULL)" +
                 COLUMN_AJSON + "TEXT NOT NULL" +
-                COLUMN_LINKIMAGEM + "TEXT NOT NULL);";
-        return ctul;
-    }
-
-
-    public DatabaseHelper(Context context, String tabela) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
-        switch (tabela) {
-            case "usuario":
-                this.setTabela(this.criarTabelaUsuario());
-                break;
-            case "usuarioLoja":
-                this.setTabela(this.criarTabelaUsuarioLoja());
-                break;
-        }
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(this.getTabela());
-                /*
-                (
-                "CREATE TABLE " + TABLE_USER + " (" +
-                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        COLUMN_EMAIL + " TEXT NOT NULL, " +
-                        COLUMN_NAME + " TEXT NOT NULL, " +
-                        COLUMN_PASS + " TEXT NOT NULL);"); */
+                COLUMN_LINKIMAGEM + "TEXT NOT NULL);");
     }
 
     @Override

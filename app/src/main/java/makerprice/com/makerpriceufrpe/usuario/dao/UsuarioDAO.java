@@ -13,7 +13,7 @@ public class UsuarioDAO {
     private DatabaseHelper helper;
 
     public UsuarioDAO(Context context) {
-        helper = new DatabaseHelper(context, "usuario");
+        helper = new DatabaseHelper(context);
     }
     public Usuario getUsuario(String email, String senha) {
         SQLiteDatabase db = helper.getReadableDatabase();

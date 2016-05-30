@@ -11,14 +11,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "makerprice.db";
+    public static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "makerprice.db";
 
-    private static final String TABLE_USER = "usuario";
-    private static final String COLUMN_ID = "_id";
-    private static final String COLUMN_NAME = "name";
-    private static final String COLUMN_EMAIL = "email";
-    private static final String COLUMN_PASS = "pass";
+    public static final String TABLE_USER = "usuario";
+    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_EMAIL = "email";
+    public static final String COLUMN_PASS = "pass";
 
 
     public DatabaseHelper(Context context) {
@@ -40,22 +40,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "DROP TABLE IF EXISTS " + TABLE_USER;
         db.execSQL(query);
         this.onCreate(db);
-    }
-
-    public static String getColumnEmail(){
-        return COLUMN_EMAIL;
-    }
-    public static String getColumnNome(){
-        return COLUMN_NAME;
-    }
-    public static String getColumnSenha(){
-        return COLUMN_PASS;
-    }
-    public static String getColumnID(){
-        return COLUMN_ID;
-    }
-
-    public static String getTableUser(){
-        return TABLE_USER;
     }
 }

@@ -1,5 +1,6 @@
 package makerprice.com.makerpriceufrpe.usuario.gui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
+import makerprice.com.makerpriceufrpe.projeto.gui.CadastroProjetoActivity;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(getApplicationContext(), CadastroProjetoActivity.class));
             }
         });
     }

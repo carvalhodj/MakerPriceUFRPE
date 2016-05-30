@@ -6,13 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
+import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
 public class UsuarioDAO {
     private DatabaseHelper helper;
 
     public UsuarioDAO(Context context) {
-        helper = new DatabaseHelper(context);
+        helper = new DatabaseHelper(context, "usuario");
     }
     public Usuario getUsuario(String email, String senha) {
         SQLiteDatabase db = helper.getReadableDatabase();

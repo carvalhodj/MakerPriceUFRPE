@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.google.gson.Gson;
+
 
 /**
  *
@@ -13,7 +15,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "makerprice.db";
-
 
     public static final String TABLE_USER = "usuario";
     public static final String COLUMN_ID = "_id";
@@ -26,6 +27,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_AJSON = "ajson";
     public static final String COLUMN_LINKIMAGEM = "linkImagem";
 
+    public static final String TABLE_PROJETO = "projeto";
+    public static final String COLUMN_DESCRICAO = "descricao";
+    public static final String COLUMN_PLATAFORMA = "plataforma";
+    public static final String COLUMN_APLICACAO = "aplicacao";
+    public static final String COLUMN_COMP1 = "componente_1";
+    public static final String COLUMN_COMP2 = "componente_2";
+    public static final String COLUMN_COMP3 = "componente_3";
 
 
     public DatabaseHelper(Context context) {
@@ -50,7 +58,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_CNPJ + "TEXT NOT NULL)" +
                 COLUMN_AJSON + "TEXT NOT NULL" +
                 COLUMN_LINKIMAGEM + "TEXT NOT NULL);");
+
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_PROJETO + " (" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_NAME + " TEXT NOT NULL, " +
+                COLUMN_DESCRICAO + " TEXT NOT NULL);" +
+                COLUMN_PLATAFORMA + "TEXT NOT NULL)" +
+                COLUMN_APLICACAO + "TEXT NOT NULL" +
+                COLUMN_COMP1 + "TEXT NOT NULL" +
+                COLUMN_COMP2 + "TEXT NOT NULL" +
+                COLUMN_COMP3 + "TEXT NOT NULL);");
     }
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

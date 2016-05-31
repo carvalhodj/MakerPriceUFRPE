@@ -27,4 +27,11 @@
         android:layout_marginStart="8sp"
         android:text="@string/empty_text"/>
 
+    <ListView
+        android:id="@+id/listaProjetos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/nome_usuario"/>
+
 </RelativeLayout>

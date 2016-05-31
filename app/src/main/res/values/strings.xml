@@ -24,6 +24,8 @@
     <string name="atualizar">Atualizar</string>
     <string name="title_activity_cadastro_projeto">Cadastrar Projeto</string>
     <string name="error_nome_vazio">Digite o nome</string>
+    <string name="error_descricao_vazia">Digite a descrição</string>
+    <string name="error_componente_vazio">Digite o componente</string>
     <string name="error_espaco_branco">Não são permitidos espaços em branco</string>
     <string name="error_senha_diferente">Senhas não coincidem</string>
     <string name="cadastro_projeto_nome">Nome do projeto</string>

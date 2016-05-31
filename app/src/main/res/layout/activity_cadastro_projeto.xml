@@ -80,35 +80,38 @@
         android:layout_alignTop="@+id/cadastroProjetoAplicacaoTexto"
         android:layout_toEndOf="@+id/cadastroProjetoPlataformaTexto" />
 
-    <TextView
-        android:id="@+id/cadastroProjetoComponentes"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/componente1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="IR PRA TELA DE SELECIONAR COMPONENTES!!"
+        android:hint="@string/componente1"
+        android:maxLines="1"
+        android:layout_marginTop="18dp"
         android:textSize="16sp"
-        android:layout_marginTop="24dp"
         android:layout_alignParentStart="true"
         android:layout_below="@id/cadastroProjetoSpinnerAplicacao"/>
 
-    <TextView
-        android:id="@+id/cadastroProjetoImagem"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/componente2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LINK PARA IMAGEM!!"
+        android:hint="@string/componente2"
+        android:maxLines="1"
+        android:layout_marginTop="18dp"
         android:textSize="16sp"
-        android:layout_marginTop="24dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/cadastroProjetoComponentes"/>
+        android:layout_below="@id/componente1"/>
 
-    <TextView
-        android:id="@+id/cadastroProjetoVideo"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/componente3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LINK PARA VIDEO!!"
+        android:hint="@string/componente3"
+        android:maxLines="1"
+        android:layout_marginTop="18dp"
         android:textSize="16sp"
-        android:layout_marginTop="24dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/cadastroProjetoImagem"/>
+        android:layout_below="@id/componente2"/>
 
     <Button
         android:layout_width="match_parent"
@@ -117,7 +120,7 @@
         android:layout_marginTop="24dp"
         android:textSize="16sp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/cadastroProjetoVideo"/>
+        android:layout_below="@id/componente3"/>
 
 </RelativeLayout>
 </ScrollView>

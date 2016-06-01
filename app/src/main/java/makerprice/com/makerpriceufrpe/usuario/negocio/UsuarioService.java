@@ -10,7 +10,7 @@ import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 public class UsuarioService  {
     private Sessao sessao = Sessao.getInstancia();
     private UsuarioDAO usuarioDAO;
-    private Criptografia criptografia;
+    private Criptografia criptografia=new Criptografia();
 
     public UsuarioService(Context context){
         usuarioDAO = new UsuarioDAO(context);

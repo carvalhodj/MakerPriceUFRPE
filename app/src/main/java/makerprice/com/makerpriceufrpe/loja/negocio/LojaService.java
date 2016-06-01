@@ -17,7 +17,7 @@ import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 public class LojaService {
     private Sessao sessao = Sessao.getInstancia();
     private LojaDAO lojaDAO;
-    private Criptografia criptografia;
+    private Criptografia criptografia=new Criptografia();
 
     public LojaService(Context context){
         lojaDAO= new LojaDAO(context);

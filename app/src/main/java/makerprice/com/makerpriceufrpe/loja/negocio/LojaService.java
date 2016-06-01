@@ -3,6 +3,7 @@ package makerprice.com.makerpriceufrpe.loja.negocio;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import makerprice.com.makerpriceufrpe.infra.Criptografia;
 import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.loja.dao.LojaDAO;
@@ -16,6 +17,7 @@ import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 public class LojaService {
     private Sessao sessao = Sessao.getInstancia();
     private LojaDAO lojaDAO;
+    private Criptografia criptografia;
 
     public LojaService(Context context){
         lojaDAO= new LojaDAO(context);
@@ -23,7 +25,10 @@ public class LojaService {
 
     public void login(String email, String senha)throws Exception{
         sessao.reset();
-        Loja loja= lojaDAO.getLoja(email, senha);
+
+        String senha_mascarada=criptografia.mascararSenha(senha);
+
+        Loja loja= lojaDAO.getLoja(email, senha_mascarada);
 
         if(loja == null){
             throw new Exception("Usuario ou senha Invalidos");
@@ -38,11 +43,12 @@ public class LojaService {
         if (loja != null){
             throw new Exception("Email já cadastrado");
         }
+        String senha_mascarada=criptografia.mascararSenha(senha);
 
         Usuario usuario= new Usuario();
         usuario.setName(nome);
         usuario.setEmail(email);
-        usuario.setPass(senha);
+        usuario.setPass(senha_mascarada);
 
         Loja pessoaJuridica= new Loja();
         pessoaJuridica.setBancoJson(bancoJson);

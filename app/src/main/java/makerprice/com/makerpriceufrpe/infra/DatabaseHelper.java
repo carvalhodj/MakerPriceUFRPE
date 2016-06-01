@@ -90,4 +90,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static String getColumnSenha() {
         return COLUMN_PASS;
     }
+
+    public static String getColumnCnpj(){ return COLUMN_CNPJ;}
+
+    public static String getColumnLinkimagem() {return  COLUMN_LINKIMAGEM;}
+
+    public static String getColumnAjson() {return COLUMN_AJSON;}
 }

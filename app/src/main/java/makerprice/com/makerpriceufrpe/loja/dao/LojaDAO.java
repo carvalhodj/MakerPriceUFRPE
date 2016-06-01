@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 
 import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
@@ -38,9 +39,9 @@ public class LojaDAO {
             String nome = cursor.getString(indexColumnName);
 
             loja = new Loja();
-            loja.getPessoaJuridica().setEmail(email);
-            loja.getPessoaJuridica().setName(nome);
-            loja.getPessoaJuridica().setPass(senha);
+            loja.getUsuario().setEmail(email);
+            loja.getUsuario().setName(nome);
+            loja.getUsuario().setPass(senha);
         }
         cursor.close();
         db.close();
@@ -72,9 +73,9 @@ public class LojaDAO {
             String senha = cursor.getString(indexColumnSenha);
 
             loja = new Loja();
-            loja.getPessoaJuridica().setEmail(email);
-            loja.getPessoaJuridica().setName(nome);
-            loja.getPessoaJuridica().setPass(senha);
+            loja.getUsuario().setEmail(email);
+            loja.getUsuario().setName(nome);
+            loja.getUsuario().setPass(senha);
         }
         cursor.close();
         db.close();
@@ -85,10 +86,22 @@ public class LojaDAO {
     public long inserir(Loja loja){
         SQLiteDatabase db = helper.getWritableDatabase();
 
+        String email,name,pass,cnpj,ajson,imagem;
+
+        email=loja.getUsuario().getEmail();
+        name=loja.getUsuario().getName();
+        pass=loja.getUsuario().getPass();
+        cnpj=loja.getCnpj();
+        ajson=loja.getBancoJson();
+        imagem=loja.getImagem();
+
         ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.getColumnEmail(), loja.getPessoaJuridica().getEmail());
-        values.put(DatabaseHelper.getColumnNome(), loja.getPessoaJuridica().getName());
-        values.put(DatabaseHelper.getColumnSenha(), loja.getPessoaJuridica().getPass());
+        values.put(DatabaseHelper.getColumnEmail(), email);
+        values.put(DatabaseHelper.getColumnNome(), name);
+        values.put(DatabaseHelper.getColumnSenha(), pass);
+        values.put(DatabaseHelper.getColumnCnpj(), cnpj);
+        values.put(DatabaseHelper.getColumnAjson(), ajson);
+        values.put(DatabaseHelper.getColumnLinkimagem(), imagem);
 
         long id = db.insert(DatabaseHelper.TABLE_USER_LOJA, null, values);
 

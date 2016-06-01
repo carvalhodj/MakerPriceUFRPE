@@ -5,7 +5,7 @@ import makerprice.com.makerpriceufrpe.usuario.dominio.*;
 public class Loja {
 
     String cnpj,imagem,bancoJson;
-    Usuario pessoaJuridica;
+    Usuario usuario;
 
     public String getCnpj(){
         return this.cnpj;
@@ -15,12 +15,12 @@ public class Loja {
         this.cnpj=cnpj;
     }
 
-    public Usuario getPessoaJuridica() {
-        return pessoaJuridica;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setPessoaJuridica(Usuario pessoaJuridica) {
-        this.pessoaJuridica = pessoaJuridica;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getBancoJson() {

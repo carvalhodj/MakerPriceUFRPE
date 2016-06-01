@@ -25,7 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/hello_world_login"
         android:layout_marginStart="8sp"
-        android:text="@string/empty_text"/>
+        android:text="@string/empty_text" />
+
 
     <ListView
         android:id="@+id/listaProjetos"

@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.infra.ProjetoListAdapter;
@@ -23,7 +24,7 @@ import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 public class MainActivity extends AppCompatActivity {
     Sessao sessao = Sessao.getInstancia();
     ProjetoService projetoService = new ProjetoService(this);
-    ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,25 +39,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ArrayList<Projeto> listaProjetos = projetoService.getTodosProjetos();
-        ArrayList<String> listaProjetosNomes = null;
-        for (Projeto projeto: listaProjetos){
-            listaProjetosNomes.add(projeto.getNome());
+        ProjetoListAdapter projetoAdapter;
+        ListView listView = (ListView) findViewById(R.id.listaProjetos);
+        ArrayList<Projeto> listaProjetosTela = projetoService.getTodosProjetos();
+        projetoAdapter = new ProjetoListAdapter(this, 0, listaProjetosTela);
+        listView.setAdapter(projetoAdapter);
 
-        }
-
-        listView = (ListView) findViewById(R.id.listaProjetos);
-
-        ArrayAdapter<String> arrayAdapter = new ProjetoListAdapter(this,listaProjetosNomes);
-        listView.setAdapter(arrayAdapter);
-
-
-
-
-
-
-
-        //
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

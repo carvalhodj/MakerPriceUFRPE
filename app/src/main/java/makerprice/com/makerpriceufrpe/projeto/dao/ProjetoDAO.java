@@ -119,9 +119,7 @@ public class ProjetoDAO {
 
         Cursor cursor = db.rawQuery(comando, null);
 
-        Projeto projeto;
-
-        ArrayList<Projeto> listaProjetos = null;
+        ArrayList<Projeto> listaProjetos = new ArrayList<>();
 
         while (cursor.moveToNext()) {
 
@@ -153,7 +151,7 @@ public class ProjetoDAO {
             int indexColumnComp3= cursor.getColumnIndex(comp3Column);
             String comp3 = cursor.getString(indexColumnComp3);
 
-            projeto = new Projeto();
+            Projeto projeto = new Projeto();
             projeto.setNome(nome);
             projeto.setDescricao(descricao);
             projeto.setPlataforma(plataforma);

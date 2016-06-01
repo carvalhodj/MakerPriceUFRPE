@@ -45,6 +45,8 @@ public class ProjetoListAdapter extends ArrayAdapter<Projeto> {
 
     public static class ViewHolder {
         public TextView nome_projeto_listagem;
+        public TextView plataforma_projeto_listagem;// EXTRA
+
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -55,6 +57,7 @@ public class ProjetoListAdapter extends ArrayAdapter<Projeto> {
                 vi = inflater.inflate(R.layout.padrao_lista_projeto, null);
                 holder = new ViewHolder();
                 holder.nome_projeto_listagem = (TextView) vi.findViewById(R.id.nome_projeto_listagem);
+                holder.plataforma_projeto_listagem = (TextView) vi.findViewById(R.id.plataforma_projeto_listagem);// EXTRA
                 vi.setTag(holder);
 
             } else {
@@ -62,6 +65,7 @@ public class ProjetoListAdapter extends ArrayAdapter<Projeto> {
             }
 
             holder.nome_projeto_listagem.setText(listaProjetos.get(position).getNome());
+            holder.plataforma_projeto_listagem.setText(listaProjetos.get(position).getPlataforma());// EXTRA
 
         } catch (Exception e) {
 

@@ -50,5 +50,7 @@ public class LojaService {
         pessoaJuridica.setImagem(linkImagem);
         pessoaJuridica.setUsuario(usuario);
 
+        lojaDAO.inserir(pessoaJuridica);
+
     }
 }

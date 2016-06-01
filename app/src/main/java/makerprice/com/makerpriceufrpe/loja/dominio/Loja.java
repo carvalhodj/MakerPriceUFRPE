@@ -6,6 +6,7 @@ public class Loja {
 
     String cnpj,imagem,bancoJson;
     Usuario usuario;
+    int x;
 
     public String getCnpj(){
         return this.cnpj;

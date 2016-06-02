@@ -4,16 +4,20 @@ import android.content.Context;
 
 import makerprice.com.makerpriceufrpe.infra.Criptografia;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
+import makerprice.com.makerpriceufrpe.usuario.dao.PessoaFisicaDAO;
 import makerprice.com.makerpriceufrpe.usuario.dao.UsuarioDAO;
+import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
 public class UsuarioService  {
     private Sessao sessao = Sessao.getInstancia();
     private UsuarioDAO usuarioDAO;
+    private PessoaFisicaDAO pessoaFisicaDAO;
     private Criptografia criptografia=new Criptografia();
 
     public UsuarioService(Context context){
         usuarioDAO = new UsuarioDAO(context);
+        pessoaFisicaDAO = new PessoaFisicaDAO(context);
     }
 
     public void login(String email, String senha) throws Exception{
@@ -27,7 +31,9 @@ public class UsuarioService  {
             throw new Exception("Usuário ou senha inválidos");
         }
 
-        sessao.setUsuario(usuario);
+        PessoaFisica pessoaFisica = pessoaFisicaDAO.getPessoaFisica(usuario);
+
+        sessao.setPessoaFisica(pessoaFisica);
 
     }
 
@@ -42,13 +48,21 @@ public class UsuarioService  {
         String senhaMascarada= criptografia.mascararSenha(senha);
 
         usuario = new Usuario();
-        usuario.setName(nome);
         usuario.setEmail(email);
         usuario.setPass(senhaMascarada);
 
-        usuarioDAO.inserir(usuario);
+        long idUsuario = usuarioDAO.inserir(usuario);
 
-        sessao.setUsuario(usuario);
+        usuario.setID(idUsuario);
+
+        PessoaFisica pessoaFisica = new PessoaFisica();
+        pessoaFisica.setNome(nome);
+        pessoaFisica.setUsuario(usuario);
+
+        long idPessoaFisica = pessoaFisicaDAO.inserir(pessoaFisica);
+        pessoaFisica.setID(idPessoaFisica);
+
+        sessao.setPessoaFisica(pessoaFisica);
 
 
     }

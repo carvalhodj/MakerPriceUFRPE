@@ -1,15 +1,8 @@
 package makerprice.com.makerpriceufrpe.usuario.dominio;
 
 public class Usuario {
-    String name, email, pass;
-
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public String getName(){
-        return this.name;
-    }
+    String email, pass;
+    long id;
 
     public void setEmail(String email){
         this.email = email;
@@ -26,4 +19,13 @@ public class Usuario {
     public String getPass(){
         return this.pass;
     }
+
+    public void setID(long id){
+        this.id = id;
+    }
+
+    public long getID(){
+        return this.id;
+    }
+
 }

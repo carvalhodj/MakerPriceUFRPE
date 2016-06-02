@@ -18,7 +18,8 @@ import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 import makerprice.com.makerpriceufrpe.projeto.gui.CadastroProjetoActivity;
 import makerprice.com.makerpriceufrpe.projeto.negocio.ProjetoService;
-import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
+import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
+
 
 public class MainActivity extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
@@ -31,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView tv = (TextView) findViewById(R.id.nome_usuario);
-        Usuario usuario = sessao.getUsuario();
-        String nomeUsuario = usuario.getName();
-        tv.setText(nomeUsuario);
+        PessoaFisica pessoaFisica = sessao.getPessoaFisica();
+        String nome = pessoaFisica.getNome();
+        tv.setText(nome);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

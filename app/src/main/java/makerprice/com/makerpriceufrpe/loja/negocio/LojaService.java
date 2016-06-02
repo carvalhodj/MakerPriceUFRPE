@@ -30,7 +30,7 @@ public class LojaService {
         if(loja == null){
             throw new Exception("Usuário ou senha inválidos");
         }
-        sessao.setUsuario(loja.getUsuario());
+        //sessao.setUsuario(loja.getUsuario());
 
     }
 
@@ -44,7 +44,7 @@ public class LojaService {
         String senhaMascarada=criptografia.mascararSenha(senha);
 
         Usuario usuario= new Usuario();
-        usuario.setName(nome);
+        //usuario.setName(nome);
         usuario.setEmail(email);
         usuario.setPass(senhaMascarada);
 
@@ -53,7 +53,7 @@ public class LojaService {
         pessoaJuridica.setUsuario(usuario);
 
         lojaDAO.inserir(pessoaJuridica);
-        sessao.setUsuario(usuario);
+        //sessao.setUsuario(usuario);
 
     }
 }

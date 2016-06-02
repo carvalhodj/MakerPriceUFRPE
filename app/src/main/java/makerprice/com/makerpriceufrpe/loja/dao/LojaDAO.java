@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 
 import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
@@ -40,7 +39,6 @@ public class LojaDAO {
 
             loja = new Loja();
             loja.getUsuario().setEmail(email);
-            loja.getUsuario().setName(nome);
             loja.getUsuario().setPass(senha);
         }
         cursor.close();
@@ -73,7 +71,6 @@ public class LojaDAO {
 
             loja = new Loja();
             loja.getUsuario().setEmail(email);
-            loja.getUsuario().setName(nome);
             loja.getUsuario().setPass(senha);
 
         }
@@ -89,7 +86,6 @@ public class LojaDAO {
         String email,name,pass,cnpj,ajson,imagem;
 
         email=loja.getUsuario().getEmail();
-        name=loja.getUsuario().getName();
         pass=loja.getUsuario().getPass();
         cnpj=loja.getCnpj();
         ajson=loja.getBancoJson();
@@ -97,7 +93,7 @@ public class LojaDAO {
 
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.getColumnEmail(), email);
-        values.put(DatabaseHelper.getColumnNome(), name);
+        //values.put(DatabaseHelper.getColumnNome(), name);
         values.put(DatabaseHelper.getColumnSenha(), pass);
         values.put(DatabaseHelper.getColumnCnpj(), cnpj);
         values.put(DatabaseHelper.getColumnAjson(), ajson);

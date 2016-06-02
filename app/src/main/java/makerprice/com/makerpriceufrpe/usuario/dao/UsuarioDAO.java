@@ -31,14 +31,13 @@ public class UsuarioDAO {
 
         if (cursor.moveToNext()) {
 
-            String nameColumn = DatabaseHelper.COLUMN_NAME;
-            int indexColumnName= cursor.getColumnIndex(nameColumn);
-
-            String nome = cursor.getString(indexColumnName);
+            String idColumn= DatabaseHelper.COLUMN_ID;
+            int indexColumnID= cursor.getColumnIndex(idColumn);
+            long id = cursor.getLong(indexColumnID);
 
             usuario = new Usuario();
+            usuario.setID(id);
             usuario.setEmail(email);
-            usuario.setName(nome);
             usuario.setPass(senha);
         }
         cursor.close();
@@ -61,23 +60,58 @@ public class UsuarioDAO {
 
         if (cursor.moveToNext()) {
 
-            String nameColumn= DatabaseHelper.COLUMN_NAME;
-            int indexColumnName= cursor.getColumnIndex(nameColumn);
-            String nome = cursor.getString(indexColumnName);
+            String idColumn= DatabaseHelper.COLUMN_ID;
+            int indexColumnID= cursor.getColumnIndex(idColumn);
+            long id = cursor.getLong(indexColumnID);
 
             String senhaColumn= DatabaseHelper.COLUMN_PASS;
             int indexColumnSenha= cursor.getColumnIndex(senhaColumn);
             String senha = cursor.getString(indexColumnSenha);
 
             usuario = new Usuario();
+            usuario.setID(id);
             usuario.setEmail(email);
-            usuario.setName(nome);
             usuario.setPass(senha);
         }
         cursor.close();
         db.close();
 
         return usuario;
+    }
+
+    public Usuario getUsuario(long id){
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_USER +
+                " WHERE " + DatabaseHelper.COLUMN_ID + " LIKE ?";
+
+        String idString = Long.toString(id);
+        String[] argumentos = {idString};
+
+        Cursor cursor = db.rawQuery(comando, argumentos);
+
+        Usuario usuario = null;
+
+        if (cursor.moveToNext()) {
+
+            String emailColumn= DatabaseHelper.COLUMN_EMAIL;
+            int indexColumnEmail= cursor.getColumnIndex(emailColumn);
+            String email = cursor.getString(indexColumnEmail);
+
+            String senhaColumn= DatabaseHelper.COLUMN_PASS;
+            int indexColumnSenha= cursor.getColumnIndex(senhaColumn);
+            String senha = cursor.getString(indexColumnSenha);
+
+            usuario = new Usuario();
+            usuario.setID(id);
+            usuario.setEmail(email);
+            usuario.setPass(senha);
+        }
+        cursor.close();
+        db.close();
+
+        return usuario;
+
     }
 
     public long inserir(Usuario usuario){
@@ -88,15 +122,10 @@ public class UsuarioDAO {
         String emailColumn = DatabaseHelper.COLUMN_EMAIL;
         String email = usuario.getEmail();
 
-        String nameColumn = DatabaseHelper.COLUMN_NAME;
-        String nome = usuario.getName();
-
         String senhaColumn = DatabaseHelper.COLUMN_PASS;
         String senha = usuario.getPass();
 
-
         values.put(emailColumn, email);
-        values.put(nameColumn, nome);
         values.put(senhaColumn, senha);
 
         String tabela = DatabaseHelper.TABLE_USER;

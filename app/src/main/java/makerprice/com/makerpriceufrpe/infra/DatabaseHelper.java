@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.google.gson.Gson;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -13,7 +12,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_USER = "usuario";
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_NAME = "name";
     public static final String COLUMN_EMAIL = "email";
     public static final String COLUMN_PASS = "pass";
 
@@ -29,6 +27,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_COMP1 = "componente_1";
     public static final String COLUMN_COMP2 = "componente_2";
     public static final String COLUMN_COMP3 = "componente_3";
+
+    public static final String TABLE_PESSOA_FISICA = "pessoa_fisica";
+    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_USUARIO_ID = "usuario_id";
 
 
     public DatabaseHelper(Context context) {
@@ -63,6 +65,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_COMP1 + " TEXT NOT NULL, " +
                 COLUMN_COMP2 + " TEXT NOT NULL, " +
                 COLUMN_COMP3 + " TEXT NOT NULL);");
+
+        sqLiteDatabase.execSQL(
+                "CREATE TABLE " + TABLE_PESSOA_FISICA + " (" +
+                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        COLUMN_NAME + " TEXT NOT NULL, " +
+                        COLUMN_USUARIO_ID + " INTEGER);");
     }
 
 

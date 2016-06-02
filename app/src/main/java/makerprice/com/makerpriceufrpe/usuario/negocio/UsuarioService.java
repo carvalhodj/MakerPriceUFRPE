@@ -45,7 +45,7 @@ public class UsuarioService  {
             throw new Exception("Email já cadastrado");
         }
 
-        String senhaMascarada= criptografia.mascararSenha(senha);
+        String senhaMascarada = criptografia.mascararSenha(senha);
 
         usuario = new Usuario();
         usuario.setEmail(email);
@@ -63,7 +63,6 @@ public class UsuarioService  {
         pessoaFisica.setID(idPessoaFisica);
 
         sessao.setPessoaFisica(pessoaFisica);
-
 
     }
 

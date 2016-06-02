@@ -19,9 +19,9 @@ public class UsuarioService  {
     public void login(String email, String senha) throws Exception{
         sessao.reset();
 
-        String senha_mascarada=criptografia.mascararSenha(senha);
+        String senhaMascarada=criptografia.mascararSenha(senha);
 
-        Usuario usuario= usuarioDAO.getUsuario(email, senha_mascarada);
+        Usuario usuario= usuarioDAO.getUsuario(email, senhaMascarada);
 
         if(usuario==null) {
             throw new Exception("Usuário ou senha inválidos");
@@ -39,12 +39,12 @@ public class UsuarioService  {
             throw new Exception("Email já cadastrado");
         }
 
-        String senha_mascarada= criptografia.mascararSenha(senha);
+        String senhaMascarada= criptografia.mascararSenha(senha);
 
         usuario = new Usuario();
         usuario.setName(nome);
         usuario.setEmail(email);
-        usuario.setPass(senha_mascarada);
+        usuario.setPass(senhaMascarada);
 
         usuarioDAO.inserir(usuario);
 

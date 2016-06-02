@@ -11,9 +11,8 @@ import makerprice.com.makerpriceufrpe.infra.Validacao;
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
-
-
 public class CadastroUsuarioActivity extends AppCompatActivity {
+
     UsuarioService usuarioService = new UsuarioService(this);
     Validacao validacaoUtil = Validacao.getValidacaoUtil();
     GuiUtil guiUtil = GuiUtil.getGuiUtil();
@@ -24,7 +23,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_usuario);
     }
 
-    public void cadastrar(View v){
+    public void onButtonClickUsuario(View v){
         if (v.getId() == R.id.botaoRealizarCadastroUsuario){
             EditText nome = (EditText) findViewById(R.id.campoNome);
             EditText email = (EditText) findViewById(R.id.campoEmail);

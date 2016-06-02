@@ -6,11 +6,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.gson.Gson;
 
-
-/**
- *
- */
-
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;

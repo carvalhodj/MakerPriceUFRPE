@@ -6,12 +6,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.infra.ProjetoListAdapter;
@@ -22,8 +21,8 @@ import makerprice.com.makerpriceufrpe.projeto.negocio.ProjetoService;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
 public class MainActivity extends AppCompatActivity {
-    Sessao sessao = Sessao.getInstancia();
-    ProjetoService projetoService = new ProjetoService(this);
+    private Sessao sessao = Sessao.getInstancia();
+    private ProjetoService projetoService = new ProjetoService(this);
 
 
     @Override
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Projeto> listaProjetosTela = projetoService.getTodosProjetos();
         projetoAdapter = new ProjetoListAdapter(this, 0, listaProjetosTela);
         listView.setAdapter(projetoAdapter);
+        //listView.setOnItemClickListener(new ListClickHandler());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +53,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*public class ListClickHandler implements AdapterView.OnItemClickListener{
+
+        @Override
+        public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
+
+            TextView listText = (TextView) view.findViewById(R.id.nome_projeto_listagem);
+            String text = listText.getText().toString();
+
+            Intent intent = new Intent(MainActivity.this, ProjetoActivity.class);
+
+            intent.putExtra("selected-item", text);
+            startActivity(intent);
+        }
+    }*/
 
 
 

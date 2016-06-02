@@ -14,8 +14,8 @@ import makerprice.com.makerpriceufrpe.usuario.gui.MainActivity;
 
 public class CadastroProjetoActivity extends AppCompatActivity {
 
-    Validacao validacaoUtil = Validacao.getValidacaoUtil();
-    ProjetoService projetoService = new ProjetoService(this);
+    private Validacao validacaoUtil = Validacao.getValidacaoUtil();
+    private ProjetoService projetoService = new ProjetoService(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +75,6 @@ public class CadastroProjetoActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
-
-
-
-
 
     }
 }

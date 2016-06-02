@@ -11,9 +11,6 @@ import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
-/**
- * Created by Vinicius on 26/05/2016.
- */
 public class LojaService {
     private Sessao sessao = Sessao.getInstancia();
     private LojaDAO lojaDAO;
@@ -26,35 +23,37 @@ public class LojaService {
     public void login(String email, String senha)throws Exception{
         sessao.reset();
 
-        String senha_mascarada=criptografia.mascararSenha(senha);
+        String senhaMascarada=criptografia.mascararSenha(senha);
 
-        Loja loja= lojaDAO.getLoja(email, senha_mascarada);
+        Loja loja= lojaDAO.getLoja(email, senhaMascarada);
 
         if(loja == null){
-            throw new Exception("Usuario ou senha Invalidos");
+            throw new Exception("Usuário ou senha inválidos");
         }
         sessao.setUsuario(loja.getUsuario());
 
     }
 
     public void cadastrar(String nome, String email, String senha, String cnpj) throws Exception {
-        Loja loja= lojaDAO.getLoja(email, senha);
+
+        Loja loja= lojaDAO.getLoja(email);
 
         if (loja != null){
             throw new Exception("Email já cadastrado");
         }
-        String senha_mascarada=criptografia.mascararSenha(senha);
+        String senhaMascarada=criptografia.mascararSenha(senha);
 
         Usuario usuario= new Usuario();
         usuario.setName(nome);
         usuario.setEmail(email);
-        usuario.setPass(senha_mascarada);
+        usuario.setPass(senhaMascarada);
 
         Loja pessoaJuridica= new Loja();
         pessoaJuridica.setCnpj(cnpj);
         pessoaJuridica.setUsuario(usuario);
 
         lojaDAO.inserir(pessoaJuridica);
+        sessao.setUsuario(usuario);
 
     }
 }

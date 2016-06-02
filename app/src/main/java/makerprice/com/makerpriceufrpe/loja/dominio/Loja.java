@@ -4,9 +4,9 @@ import makerprice.com.makerpriceufrpe.usuario.dominio.*;
 
 public class Loja {
 
-    String cnpj,imagem,bancoJson;
-    Usuario usuario;
-    int x;
+    private String cnpj,imagem,bancoJson;
+    private Usuario usuario;
+    private int x;
 
     public String getCnpj(){
         return this.cnpj;

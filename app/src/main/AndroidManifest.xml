@@ -36,7 +36,11 @@
         <activity
             android:name=".projeto.gui.CadastroProjetoActivity"
             android:label="@string/title_activity_cadastro_projeto"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".loja.gui.CadastroLojaActivity"
+            android:label="@string/title_cadastro_loja"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

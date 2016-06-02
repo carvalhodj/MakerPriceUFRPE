@@ -61,12 +61,12 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
-         else if (v.getId() == R.id.linkCadastrar) {
+        else if (v.getId() == R.id.linkCadastrar) {
             Intent intent = new Intent(getApplicationContext(), CadastroUsuarioActivity.class);
             startActivity(intent);
         }
 
-        if(v.getId() == R.id.linkCadastrarLoja){
+        else if(v.getId() == R.id.linkCadastrarLoja){
             Intent intent= new Intent(getApplicationContext(), CadastroLojaActivity.class);
             startActivity(intent);
         }

@@ -63,19 +63,19 @@ public class LojaDAO {
 
         if (cursor.moveToNext()) {
 
-            String nameColumn= DatabaseHelper.getColumnNome();
-            String senhaColumn= DatabaseHelper.getColumnSenha();
+            String nameColumn= DatabaseHelper.COLUMN_NAME;
             int indexColumnName= cursor.getColumnIndex(nameColumn);
-            int indexColumnSenha= cursor.getColumnIndex(senhaColumn);
-
-
             String nome = cursor.getString(indexColumnName);
+
+            String senhaColumn= DatabaseHelper.COLUMN_PASS;
+            int indexColumnSenha= cursor.getColumnIndex(senhaColumn);
             String senha = cursor.getString(indexColumnSenha);
 
             loja = new Loja();
             loja.getUsuario().setEmail(email);
             loja.getUsuario().setName(nome);
             loja.getUsuario().setPass(senha);
+
         }
         cursor.close();
         db.close();

@@ -1,8 +1,5 @@
 package makerprice.com.makerpriceufrpe.projeto.dominio;
 
-
-import java.util.ArrayList;
-
 public class Projeto {
     private String nome, descricao, plataforma, aplicacao, componente_1, componente_2, componente_3;
 

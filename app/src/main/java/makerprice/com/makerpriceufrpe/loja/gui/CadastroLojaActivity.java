@@ -2,6 +2,7 @@ package makerprice.com.makerpriceufrpe.loja.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -13,9 +14,6 @@ import makerprice.com.makerpriceufrpe.loja.negocio.LojaService;
 import makerprice.com.makerpriceufrpe.usuario.gui.MainActivity;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
-/**
- * Created by Vinicius on 26/05/2016.
- */
 public class CadastroLojaActivity extends AppCompatActivity {
 
     LojaService lojaService = new LojaService(this);
@@ -28,7 +26,8 @@ public class CadastroLojaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_loja);
     }
 
-    public void cadastrar(View v){
+    public void onButtonClickLoja(View v){
+
         if (v.getId() == R.id.botaoRealizarCadastroLoja){
             EditText nome = (EditText) findViewById(R.id.campoNomeLoja);
             EditText email = (EditText) findViewById(R.id.campoEmail);

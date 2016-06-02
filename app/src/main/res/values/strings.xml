@@ -36,6 +36,7 @@
     <string name = "componente1">Componente 1</string>
     <string name = "componente2">Componente 2</string>
     <string name = "componente3">Componente 3</string>
+    <string name="title_cadastro_loja">Cadastro Loja</string>
 
 
     <string-array name="cadastro_projeto_plataformas">

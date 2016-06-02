@@ -15,6 +15,7 @@ public class UsuarioDAO {
     public UsuarioDAO(Context context) {
         helper = new DatabaseHelper(context);
     }
+
     public Usuario getUsuario(String email, String senha) {
         SQLiteDatabase db = helper.getReadableDatabase();
 

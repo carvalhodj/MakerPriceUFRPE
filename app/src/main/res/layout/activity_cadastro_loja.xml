@@ -8,8 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".loja.gui.CadastroLojaActivity"
-    android:background="@color/backgroundLightGray"
-    >
+    android:background="@color/backgroundLightGray" >
 
     <EditText
     android:id="@+id/campoNomeLoja"
@@ -20,8 +19,7 @@
     android:layout_marginTop="24dp"
     android:maxLines="1"
     android:textSize="16sp"
-    android:layout_alignParentStart="true"
-        />
+    android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/campoEmail"
@@ -33,7 +31,7 @@
         android:maxLines="1"
         android:textSize="16sp"
         android:layout_alignParentStart="true"
-        />
+        android:layout_below="@id/campoNomeLoja"/>
 
     <EditText
         android:id="@+id/campoCNPJ"
@@ -45,7 +43,7 @@
         android:maxLines="1"
         android:textSize="16sp"
         android:layout_alignParentStart="true"
-        />
+        android:layout_below="@id/campoEmail" />
 
     <EditText
         android:id="@+id/campoSenha"
@@ -57,7 +55,7 @@
         android:maxLines="1"
         android:textSize="16sp"
         android:layout_alignParentStart="true"
-        />
+        android:layout_below="@id/campoCNPJ" />
 
     <EditText
         android:id="@+id/campoRepeteSenha"
@@ -69,7 +67,7 @@
         android:maxLines="1"
         android:textSize="16sp"
         android:layout_alignParentStart="true"
-        />
+        android:layout_below="@id/campoSenha" />
 
     <Button
         android:id="@+id/botaoRealizarCadastroLoja"
@@ -80,6 +78,6 @@
         android:layout_marginTop="48dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/campoRepeteSenha"
-        android:onClick="cadastrar"
-        />
+        android:onClick="onButtonClickLoja" />
+
 </RelativeLayout>

@@ -1,8 +1,5 @@
 package makerprice.com.makerpriceufrpe.usuario.dominio;
 
-/**
- *
- */
 public class Usuario {
     String name, email, pass;
 

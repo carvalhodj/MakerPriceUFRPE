@@ -37,7 +37,7 @@ public class LojaService {
 
     }
 
-    public void cadastrar(String nome, String email, String senha, String cnpj, String bancoJson, String linkImagem) throws Exception {
+    public void cadastrar(String nome, String email, String senha, String cnpj) throws Exception {
         Loja loja= lojaDAO.getLoja(email, senha);
 
         if (loja != null){
@@ -51,9 +51,7 @@ public class LojaService {
         usuario.setPass(senha_mascarada);
 
         Loja pessoaJuridica= new Loja();
-        pessoaJuridica.setBancoJson(bancoJson);
         pessoaJuridica.setCnpj(cnpj);
-        pessoaJuridica.setImagem(linkImagem);
         pessoaJuridica.setUsuario(usuario);
 
         lojaDAO.inserir(pessoaJuridica);

@@ -9,6 +9,7 @@ import android.widget.EditText;
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.infra.Validacao;
+import makerprice.com.makerpriceufrpe.loja.gui.CadastroLojaActivity;
 import makerprice.com.makerpriceufrpe.projeto.gui.CadastroProjetoActivity;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
@@ -60,8 +61,13 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
-        else if (v.getId() == R.id.linkCadastrar) {
+         else if (v.getId() == R.id.linkCadastrar) {
             Intent intent = new Intent(getApplicationContext(), CadastroUsuarioActivity.class);
+            startActivity(intent);
+        }
+
+        if(v.getId() == R.id.linkCadastrarLoja){
+            Intent intent= new Intent(getApplicationContext(), CadastroLojaActivity.class);
             startActivity(intent);
         }
     }

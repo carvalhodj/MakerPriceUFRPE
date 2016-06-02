@@ -23,7 +23,7 @@ public class UsuarioService  {
     public void login(String email, String senha) throws Exception{
         sessao.reset();
 
-        String senhaMascarada=criptografia.mascararSenha(senha);
+        String senhaMascarada = criptografia.mascararSenha(senha);
 
         Usuario usuario= usuarioDAO.getUsuario(email, senhaMascarada);
 

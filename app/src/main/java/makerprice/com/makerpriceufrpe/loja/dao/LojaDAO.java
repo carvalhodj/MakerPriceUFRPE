@@ -85,6 +85,7 @@ public class LojaDAO {
 
         String email,name,pass,cnpj,ajson,imagem;
 
+        name = loja.getNome();
         email=loja.getUsuario().getEmail();
         pass=loja.getUsuario().getPass();
         cnpj=loja.getCnpj();
@@ -93,11 +94,11 @@ public class LojaDAO {
 
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.getColumnEmail(), email);
-        //values.put(DatabaseHelper.getColumnNome(), name);
+        values.put(DatabaseHelper.getColumnNome(), name);
         values.put(DatabaseHelper.getColumnSenha(), pass);
         values.put(DatabaseHelper.getColumnCnpj(), cnpj);
-        values.put(DatabaseHelper.getColumnAjson(), ajson);
-        values.put(DatabaseHelper.getColumnLinkimagem(), imagem);
+        //values.put(DatabaseHelper.getColumnAjson(), ajson);
+        //values.put(DatabaseHelper.getColumnLinkimagem(), imagem);
 
         long id = db.insert(DatabaseHelper.TABLE_USER_LOJA, null, values);
 

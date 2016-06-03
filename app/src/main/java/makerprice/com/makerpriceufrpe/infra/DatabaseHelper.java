@@ -51,9 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_EMAIL + " TEXT NOT NULL, " +
                 COLUMN_NAME + " TEXT NOT NULL, " +
                 COLUMN_PASS + " TEXT NOT NULL, " +
-                COLUMN_CNPJ + " TEXT NOT NULL, " +
-                COLUMN_AJSON + " TEXT NOT NULL, " +
-                COLUMN_LINKIMAGEM + " TEXT NOT NULL);");
+                COLUMN_CNPJ + " TEXT NOT NULL);");
 
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_PROJETO + " (" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +

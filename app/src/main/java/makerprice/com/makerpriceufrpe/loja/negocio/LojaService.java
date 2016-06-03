@@ -44,16 +44,16 @@ public class LojaService {
         String senhaMascarada=criptografia.mascararSenha(senha);
 
         Usuario usuario= new Usuario();
-        //usuario.setName(nome);
         usuario.setEmail(email);
         usuario.setPass(senhaMascarada);
 
         Loja pessoaJuridica= new Loja();
+        pessoaJuridica.setNome(nome);
         pessoaJuridica.setCnpj(cnpj);
         pessoaJuridica.setUsuario(usuario);
 
         lojaDAO.inserir(pessoaJuridica);
-        //sessao.setUsuario(usuario);
+        sessao.setLoja(pessoaJuridica);
 
     }
 }

@@ -94,7 +94,7 @@ public class CadastroLojaActivity extends AppCompatActivity {
             else {
                 try {
                     lojaService.cadastrar(nomeString, emailString, senhaString, cnpjString);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LojaMainActivity.class);
                     startActivity(intent);
                 }catch(Exception exception){
                     guiUtil.toastLong(getApplicationContext(), exception.getMessage());

@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import makerprice.com.makerpriceufrpe.infra.ProjetoListAdapter;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 import makerprice.com.makerpriceufrpe.projeto.gui.CadastroProjetoActivity;
+import makerprice.com.makerpriceufrpe.projeto.gui.ProjetoMainActivity;
 import makerprice.com.makerpriceufrpe.projeto.negocio.ProjetoService;
 import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
 
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Projeto> listaProjetosTela = projetoService.getTodosProjetos();
         projetoAdapter = new ProjetoListAdapter(this, 0, listaProjetosTela);
         listView.setAdapter(projetoAdapter);
-        //listView.setOnItemClickListener(new ListClickHandler());
+        listView.setOnItemClickListener(new ListClickHandler());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /*public class ListClickHandler implements AdapterView.OnItemClickListener{
+    public class ListClickHandler implements AdapterView.OnItemClickListener{
 
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
@@ -62,12 +64,12 @@ public class MainActivity extends AppCompatActivity {
             TextView listText = (TextView) view.findViewById(R.id.nome_projeto_listagem);
             String text = listText.getText().toString();
 
-            Intent intent = new Intent(MainActivity.this, ProjetoActivity.class);
+            Intent intent = new Intent(MainActivity.this, ProjetoMainActivity.class);
 
             intent.putExtra("selected-item", text);
             startActivity(intent);
         }
-    }*/
+    }
 
 
 

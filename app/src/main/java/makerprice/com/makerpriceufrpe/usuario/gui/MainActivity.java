@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         ProjetoListAdapter projetoAdapter;
         ListView listView = (ListView) findViewById(R.id.listaProjetos);
-        ArrayList<Projeto> listaProjetosTela = projetoService.getTodosProjetos();
+
+        long idPessoa = pessoaFisica.getID();
+        ArrayList<Projeto> listaProjetosTela = projetoService.getTodosProjetosUnicoCriador(idPessoa);
         projetoAdapter = new ProjetoListAdapter(this, 0, listaProjetosTela);
         listView.setAdapter(projetoAdapter);
         listView.setOnItemClickListener(new ListClickHandler());

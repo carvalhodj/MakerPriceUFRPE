@@ -10,7 +10,9 @@ import android.widget.EditText;
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.infra.Validacao;
+import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
 import makerprice.com.makerpriceufrpe.loja.negocio.LojaService;
+import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 import makerprice.com.makerpriceufrpe.usuario.gui.MainActivity;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
@@ -93,10 +95,22 @@ public class CadastroLojaActivity extends AppCompatActivity {
 
             else {
                 try {
-                    lojaService.cadastrar(nomeString, emailString, senhaString, cnpjString);
+
+                    Usuario usuario = new Usuario();
+                    usuario.setEmail(emailString);
+                    usuario.setPass(senhaString);
+
+                    Loja novaLoja = new Loja();
+                    novaLoja.setNome(nomeString);
+                    novaLoja.setCnpj(cnpjString);
+                    novaLoja.setUsuario(usuario);
+
+                    lojaService.cadastrar(novaLoja);
+
                     Intent intent = new Intent(getApplicationContext(), LojaMainActivity.class);
                     startActivity(intent);
                 }catch(Exception exception){
+
                     guiUtil.toastLong(getApplicationContext(), exception.getMessage());
                 }
             }

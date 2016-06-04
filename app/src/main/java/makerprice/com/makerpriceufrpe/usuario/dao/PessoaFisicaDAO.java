@@ -16,6 +16,7 @@ public class PessoaFisicaDAO {
 
     public PessoaFisicaDAO(Context context) {
         helper = new DatabaseHelper(context);
+        usuarioDAO = new UsuarioDAO(context);
     }
 
     public PessoaFisica getPessoaFisica(long id){

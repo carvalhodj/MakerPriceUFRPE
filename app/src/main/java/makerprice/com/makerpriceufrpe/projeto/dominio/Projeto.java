@@ -1,7 +1,11 @@
 package makerprice.com.makerpriceufrpe.projeto.dominio;
 
+import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
+
 public class Projeto {
     private String nome, descricao, plataforma, aplicacao, componente_1, componente_2, componente_3;
+    private PessoaFisica criador;
+    private long id;
 
     public String getNome() { return nome; }
 
@@ -30,4 +34,20 @@ public class Projeto {
     public String getComponente_3() { return componente_3; }
 
     public void setComponente_3(String componente_3) { this.componente_3 = componente_3; }
+
+    public PessoaFisica getCriador() {
+        return criador;
+    }
+
+    public void setCriador(PessoaFisica criador) {
+        this.criador = criador;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

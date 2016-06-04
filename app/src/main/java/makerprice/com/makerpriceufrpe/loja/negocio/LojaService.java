@@ -34,26 +34,24 @@ public class LojaService {
 
     }
 
-    public void cadastrar(String nome, String email, String senha, String cnpj) throws Exception {
+    public void cadastrar(Loja novaLoja) throws Exception {
+
+        Usuario usuario = novaLoja.getUsuario();
+        String email = usuario.getEmail();
 
         Loja loja= lojaDAO.getLoja(email);
 
         if (loja != null){
             throw new Exception("Email já cadastrado");
         }
+
+        String senha = usuario.getPass();
         String senhaMascarada=criptografia.mascararSenha(senha);
 
-        Usuario usuario= new Usuario();
-        usuario.setEmail(email);
         usuario.setPass(senhaMascarada);
 
-        Loja pessoaJuridica= new Loja();
-        pessoaJuridica.setNome(nome);
-        pessoaJuridica.setCnpj(cnpj);
-        pessoaJuridica.setUsuario(usuario);
-
-        lojaDAO.inserir(pessoaJuridica);
-        sessao.setLoja(pessoaJuridica);
+        lojaDAO.inserir(novaLoja);
+        sessao.setLoja(novaLoja);
 
     }
 }

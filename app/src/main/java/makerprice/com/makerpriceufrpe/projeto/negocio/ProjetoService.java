@@ -17,16 +17,7 @@ public class ProjetoService {
         projetoDAO = new ProjetoDAO(context);
     }
 
-    public void cadastrar(String nome, String descricao, String plataforma, String aplicacao, String comp1, String comp2, String comp3) {
-
-        Projeto projeto = new Projeto();
-        projeto.setNome(nome);
-        projeto.setDescricao(descricao);
-        projeto.setPlataforma(plataforma);
-        projeto.setAplicacao(aplicacao);
-        projeto.setComponente_1(comp1);
-        projeto.setComponente_2(comp2);
-        projeto.setComponente_3(comp3);
+    public void cadastrar(Projeto projeto) {
 
         projetoDAO.inserir(projeto);
 
@@ -38,6 +29,10 @@ public class ProjetoService {
 
     public Projeto getProjeto(String nome){
         return projetoDAO.getProjeto(nome);
+    }
+
+    public ArrayList<Projeto> getTodosProjetosUnicoCriador(long idCriador){
+        return projetoDAO.getTodosProjetosUnicoCriador(idCriador);
     }
 
 

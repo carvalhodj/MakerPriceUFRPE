@@ -8,14 +8,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.infra.Validacao;
+import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 import makerprice.com.makerpriceufrpe.projeto.negocio.ProjetoService;
+import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
 import makerprice.com.makerpriceufrpe.usuario.gui.MainActivity;
 
 public class CadastroProjetoActivity extends AppCompatActivity {
 
     private Validacao validacaoUtil = Validacao.getValidacaoUtil();
     private ProjetoService projetoService = new ProjetoService(this);
+    private Sessao sessao = Sessao.getInstancia();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +74,19 @@ public class CadastroProjetoActivity extends AppCompatActivity {
             return;
         }
 
-        projetoService.cadastrar(nomeString, descricaoString, plataformaString, aplicacaoString,
-                componente1String, componente2String, componente3String);
+        PessoaFisica criador = sessao.getPessoaFisica();
+
+        Projeto projeto = new Projeto();
+        projeto.setNome(nomeString);
+        projeto.setDescricao(descricaoString);
+        projeto.setPlataforma(plataformaString);
+        projeto.setAplicacao(aplicacaoString);
+        projeto.setComponente_1(componente1String);
+        projeto.setComponente_2(componente2String);
+        projeto.setComponente_3(componente3String);
+        projeto.setCriador(criador);
+
+        projetoService.cadastrar(projeto);
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);

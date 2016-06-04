@@ -27,6 +27,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_COMP1 = "componente_1";
     public static final String COLUMN_COMP2 = "componente_2";
     public static final String COLUMN_COMP3 = "componente_3";
+    public static final String COLUMN_PESSOAFISICA_ID = "criador";
+
 
     public static final String TABLE_PESSOA_FISICA = "pessoa_fisica";
     public static final String COLUMN_NAME = "name";
@@ -61,7 +63,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_APLICACAO + " TEXT NOT NULL, " +
                 COLUMN_COMP1 + " TEXT NOT NULL, " +
                 COLUMN_COMP2 + " TEXT NOT NULL, " +
-                COLUMN_COMP3 + " TEXT NOT NULL);");
+                COLUMN_COMP3 + " TEXT NOT NULL, " +
+                COLUMN_PESSOAFISICA_ID + " INTEGER);");
 
         sqLiteDatabase.execSQL(
                 "CREATE TABLE " + TABLE_PESSOA_FISICA + " (" +

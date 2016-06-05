@@ -13,6 +13,7 @@ import makerprice.com.makerpriceufrpe.infra.Validacao;
 import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
 import makerprice.com.makerpriceufrpe.loja.negocio.LojaService;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
+import makerprice.com.makerpriceufrpe.usuario.gui.LoginActivity;
 import makerprice.com.makerpriceufrpe.usuario.gui.MainActivity;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
@@ -107,7 +108,7 @@ public class CadastroLojaActivity extends AppCompatActivity {
 
                     lojaService.cadastrar(novaLoja);
 
-                    Intent intent = new Intent(getApplicationContext(), LojaMainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                 }catch(Exception exception){
 

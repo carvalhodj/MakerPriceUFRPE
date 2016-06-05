@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".usuario.gui.MainActivity">
+    <item
+        android:id="@+id/botao_logout"
+        android:orderInCategory="100"
+        android:title="Logout"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_search"
+        android:orderInCategory="200"
+        android:title="Search"
+        android:icon="@drawable/ic_search_white_24dp"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/filtro_busca"
+        android:orderInCategory="300"
+        android:title="User"
+        android:icon="@drawable/ic_settings_input_component_white_24dp"
+        app:showAsAction="ifRoom" />
+
+</menu>

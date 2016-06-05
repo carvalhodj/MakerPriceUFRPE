@@ -108,7 +108,7 @@ public class CadastroLojaActivity extends AppCompatActivity {
 
                     lojaService.cadastrar(novaLoja);
 
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }catch(Exception exception){
 

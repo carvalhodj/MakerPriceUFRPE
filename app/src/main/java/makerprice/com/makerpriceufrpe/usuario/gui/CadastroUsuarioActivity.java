@@ -83,6 +83,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             else {
                 try {
                     usuarioService.cadastrar(nomeString, emailString, senhaString);
+                    guiUtil.toastLong(getApplicationContext(), "Cadastro realizado com sucesso");
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }catch(Exception exception){

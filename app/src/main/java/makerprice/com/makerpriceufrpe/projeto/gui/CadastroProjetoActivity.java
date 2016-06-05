@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.infra.Validacao;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
@@ -20,6 +21,7 @@ public class CadastroProjetoActivity extends AppCompatActivity {
     private Validacao validacaoUtil = Validacao.getValidacaoUtil();
     private ProjetoService projetoService = new ProjetoService(this);
     private Sessao sessao = Sessao.getInstancia();
+    private GuiUtil guiUtil = GuiUtil.getGuiUtil();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,7 @@ public class CadastroProjetoActivity extends AppCompatActivity {
         projeto.setCriador(criador);
 
         projetoService.cadastrar(projeto);
-
+        guiUtil.toastLong(getApplicationContext(), "Projeto cadastrado com sucesso");
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
 

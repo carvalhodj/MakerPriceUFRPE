@@ -1,23 +1,24 @@
 package makerprice.com.makerpriceufrpe.loja.negocio;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
 import makerprice.com.makerpriceufrpe.infra.Criptografia;
-import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.loja.dao.LojaDAO;
 import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
+import makerprice.com.makerpriceufrpe.usuario.dao.UsuarioDAO;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
-import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
+
 
 public class LojaService {
     private Sessao sessao = Sessao.getInstancia();
     private LojaDAO lojaDAO;
+    private UsuarioDAO usuarioDAO;
     private Criptografia criptografia=new Criptografia();
 
     public LojaService(Context context){
         lojaDAO= new LojaDAO(context);
+        usuarioDAO=new UsuarioDAO(context);
     }
 
     public void login(String email, String senha)throws Exception{
@@ -25,33 +26,40 @@ public class LojaService {
 
         String senhaMascarada=criptografia.mascararSenha(senha);
 
-        Loja loja= lojaDAO.getLoja(email, senhaMascarada);
+        Usuario usuario= usuarioDAO.getUsuario(email, senhaMascarada);
 
-        if(loja == null){
+        if(usuario==null) {
             throw new Exception("Usuário ou senha inválidos");
         }
-        //sessao.setUsuario(loja.getUsuario());
+
+        Loja loja = lojaDAO.getLoja(usuario);
+
+        sessao.setLoja(loja);
 
     }
 
-    public void cadastrar(Loja novaLoja) throws Exception {
+    public void cadastrar(Loja loja) throws Exception {
 
-        Usuario usuario = novaLoja.getUsuario();
-        String email = usuario.getEmail();
+        Usuario loja_usuario =loja.getUsuario() ;
+        String email=loja_usuario.getEmail();
+        String senha=loja_usuario.getPass();
 
-        Loja loja= lojaDAO.getLoja(email);
+        Usuario usuario= usuarioDAO.getUsuario(email);
 
-        if (loja != null){
+        if (usuario != null){
             throw new Exception("Email já cadastrado");
         }
 
-        String senha = usuario.getPass();
         String senhaMascarada=criptografia.mascararSenha(senha);
 
-        usuario.setPass(senhaMascarada);
 
-        lojaDAO.inserir(novaLoja);
-        sessao.setLoja(novaLoja);
+        loja_usuario.setPass(senhaMascarada);
+
+        loja.setUsuario(loja_usuario);
+
+        lojaDAO.inserir(loja);
+
+        sessao.setLoja(loja);
 
     }
 }

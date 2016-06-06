@@ -1,8 +1,11 @@
 package makerprice.com.makerpriceufrpe.projeto.gui;
 
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import makerprice.com.makerpriceufrpe.R;
@@ -22,6 +25,7 @@ public class ProjetoMainActivity extends AppCompatActivity {
 
         Projeto projeto = projetoService.getProjeto(item);
 
+        ImageView imageView = (ImageView) findViewById(R.id.projeto_imagem_principal);
         TextView textViewNome = (TextView) findViewById(R.id.nome_projeto_main);
         TextView textViewDescricao = (TextView) findViewById(R.id.descricao_projeto_main);
         TextView textViewPlataforma = (TextView) findViewById(R.id.plataforma_projeto_main);
@@ -38,5 +42,13 @@ public class ProjetoMainActivity extends AppCompatActivity {
         textViewComp2.setText(projeto.getComponente_2());
         textViewComp3.setText(projeto.getComponente_3());
 
+    }
+
+    public void onButtonClick(View v){
+
+        if (v.getId() == R.id.projeto_imagem_principal){
+            Intent intent= new Intent(getApplicationContext(), ImageSliderActivity.class);
+            startActivity(intent);
+        }
     }
 }

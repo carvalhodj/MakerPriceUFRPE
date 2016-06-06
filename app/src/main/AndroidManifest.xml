@@ -45,7 +45,8 @@
             android:name=".loja.gui.LojaMainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme" />
-        <activity android:name=".projeto.gui.ProjetoMainActivity"></activity>
+        <activity android:name=".projeto.gui.ProjetoMainActivity" />
+        <activity android:name=".projeto.gui.ImageSliderActivity"></activity>
     </application>
 
 </manifest>

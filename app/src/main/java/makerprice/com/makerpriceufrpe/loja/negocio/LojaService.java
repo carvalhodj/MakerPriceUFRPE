@@ -21,16 +21,8 @@ public class LojaService {
         usuarioDAO=new UsuarioDAO(context);
     }
 
-    public void login(String email, String senha)throws Exception{
+    public void login(Usuario usuario){
         sessao.reset();
-
-        String senhaMascarada=criptografia.mascararSenha(senha);
-
-        Usuario usuario= usuarioDAO.getUsuario(email, senhaMascarada);
-
-        if(usuario==null) {
-            throw new Exception("Usuário ou senha inválidos");
-        }
 
         Loja loja = lojaDAO.getLoja(usuario);
 
@@ -52,12 +44,14 @@ public class LojaService {
 
         String senhaMascarada=criptografia.mascararSenha(senha);
 
-
         loja_usuario.setPass(senhaMascarada);
 
-        loja.setUsuario(loja_usuario);
+        long idUsuario = usuarioDAO.inserir(loja_usuario);
 
-        lojaDAO.inserir(loja);
+        loja_usuario.setID(idUsuario);
+
+        long idLoja = lojaDAO.inserir(loja);
+        loja.setId(idLoja);
 
         sessao.setLoja(loja);
 

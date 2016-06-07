@@ -1,6 +1,5 @@
 package makerprice.com.makerpriceufrpe.infra;
 
-
 import android.content.Context;
 import android.widget.Toast;
 

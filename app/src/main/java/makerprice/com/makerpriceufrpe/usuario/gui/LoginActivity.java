@@ -8,15 +8,21 @@ import android.widget.EditText;
 
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.infra.Validacao;
 import makerprice.com.makerpriceufrpe.loja.gui.CadastroLojaActivity;
+import makerprice.com.makerpriceufrpe.loja.gui.LojaMainActivity;
+import makerprice.com.makerpriceufrpe.loja.negocio.LojaService;
 import makerprice.com.makerpriceufrpe.projeto.gui.CadastroProjetoActivity;
+import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
 public class LoginActivity extends AppCompatActivity {
     UsuarioService usuarioService = new UsuarioService(this);
+    LojaService lojaService = new LojaService(this);
     GuiUtil guiUtil = GuiUtil.getGuiUtil();
     Validacao validacaoUtil = Validacao.getValidacaoUtil();
+    private Sessao sessao = Sessao.getInstancia();
 
 
     @Override
@@ -52,9 +58,17 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             try {
-                    usuarioService.login(usuarioEmailString, usuarioSenhaString);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                    Usuario usuario = usuarioService.login(usuarioEmailString, usuarioSenhaString);
+                    if (sessao.getPessoaFisica()!=null){
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        lojaService.login(usuario);
+                        Intent intent = new Intent(getApplicationContext(), LojaMainActivity.class);
+                        startActivity(intent);
+                    }
+
             } catch (Exception exception) {
                     guiUtil.toastLong(getApplicationContext(), exception.getMessage());
                 }

@@ -20,7 +20,7 @@ public class UsuarioService  {
         pessoaFisicaDAO = new PessoaFisicaDAO(context);
     }
 
-    public void login(String email, String senha) throws Exception{
+    public Usuario login(String email, String senha) throws Exception{
         sessao.reset();
 
         String senhaMascarada = criptografia.mascararSenha(senha);
@@ -33,11 +33,16 @@ public class UsuarioService  {
 
         PessoaFisica pessoaFisica = pessoaFisicaDAO.getPessoaFisica(usuario);
 
-        sessao.setPessoaFisica(pessoaFisica);
+        if (pessoaFisica!=null){
+            sessao.setPessoaFisica(pessoaFisica);
+        }
+
+        return usuario;
 
     }
 
     public void cadastrar(String nome, String email, String senha) throws Exception{
+        sessao.reset();
 
         Usuario usuario = usuarioDAO.getUsuario(email);
 

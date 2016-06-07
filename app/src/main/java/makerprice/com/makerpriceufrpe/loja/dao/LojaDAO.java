@@ -35,9 +35,6 @@ public class LojaDAO {
         Loja loja = null;
 
         if (cursor.moveToNext()) {
-            String idColumn=DatabaseHelper.COLUMN_ID;
-            int indexColumnId=cursor.getColumnIndex(idColumn);
-            int idLoja=cursor.getInt(indexColumnId);
 
             String nomeColumn= DatabaseHelper.COLUMN_NAME;
             int indexColumnNome= cursor.getColumnIndex(nomeColumn);
@@ -54,7 +51,7 @@ public class LojaDAO {
             Usuario usuario = usuarioDAO.getUsuario(idUsuario);
 
             loja = new Loja();
-            loja.setId(idLoja);
+            loja.setId(id);
             loja.setNome(nome);
             loja.setCnpj(cnpj);
             loja.setUsuario(usuario);
@@ -88,14 +85,9 @@ public class LojaDAO {
             int indexColumnNome= cursor.getColumnIndex(nomeColumn);
             String nome = cursor.getString(indexColumnNome);
 
-            String usuarioIDColumn= DatabaseHelper.COLUMN_USUARIO_ID;
-            int indexColumnLojaID= cursor.getColumnIndex(usuarioIDColumn);
-            long id = cursor.getLong(indexColumnLojaID);
-
             String cnpjColumn= DatabaseHelper.COLUMN_CNPJ;
             int indexColumnCnpj= cursor.getColumnIndex(cnpjColumn);
             String cnpj = cursor.getString(indexColumnCnpj);
-
 
 
             loja = new Loja();
@@ -125,13 +117,14 @@ public class LojaDAO {
 
         String usuarioIdColumn=DatabaseHelper.COLUMN_USUARIO_ID;
         Usuario usuario=loja.getUsuario();
-        long idusario=usuario.getID();
+        long idUsario=usuario.getID();
 
         values.put(nomeColumn,nome);
         values.put(cnpjColumn,cnpj);
-        values.put(usuarioIdColumn,idusario);
+        values.put(usuarioIdColumn,idUsario);
 
         String tabela=DatabaseHelper.TABLE_USER_LOJA;
+
         long id=db.insert(tabela,null,values);
         db.close();
         return id;

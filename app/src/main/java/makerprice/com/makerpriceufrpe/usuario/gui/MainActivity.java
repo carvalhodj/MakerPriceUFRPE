@@ -15,6 +15,7 @@ import android.view.Menu;
 import java.util.ArrayList;
 
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.infra.ProjetoListAdapter;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
@@ -27,6 +28,7 @@ import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
 public class MainActivity extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
     private ProjetoService projetoService = new ProjetoService(this);
+    GuiUtil guiUtil = GuiUtil.getGuiUtil();
 
 
     @Override

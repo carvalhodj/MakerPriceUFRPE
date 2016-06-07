@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="16sp"
+        android:textColor="@color/colorBlack"
         android:layout_toRightOf="@+id/imagemProjeto"
         android:layout_marginTop="12dp"
         android:layout_below="@id/nome_projeto_listagem"/>

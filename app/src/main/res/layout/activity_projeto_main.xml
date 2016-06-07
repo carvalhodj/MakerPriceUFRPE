@@ -27,10 +27,11 @@
         android:layout_height="wrap_content"
         android:text="@string/signup_nome"
         android:textSize="16sp"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
         android:layout_marginTop="12dp"
         android:layout_alignParentStart="true"
         android:layout_below="@id/projeto_imagem_principal"
+        android:background="@drawable/rectangule_blue"
         />
 
     <TextView
@@ -49,10 +50,12 @@
         android:layout_height="wrap_content"
         android:text="@string/cadastro_projeto_descricao"
         android:textSize="16sp"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
         android:layout_marginTop="18dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/nome_projeto_main" />
+        android:layout_below="@id/nome_projeto_main"
+        android:background="@drawable/rectangule_blue"
+        />
 
     <TextView
         android:id="@+id/descricao_projeto_main"
@@ -71,10 +74,12 @@
         android:layout_height="wrap_content"
         android:text="@string/cadastro_projeto_texto_plataforma"
         android:textSize="16sp"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
         android:layout_marginTop="18dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/descricao_projeto_main" />
+        android:layout_below="@id/descricao_projeto_main"
+        android:background="@drawable/rectangule_blue"
+        />
 
     <TextView
         android:id="@+id/plataforma_projeto_main"
@@ -92,10 +97,12 @@
         android:layout_height="wrap_content"
         android:text="@string/cadastro_projeto_texto_aplicacao"
         android:textSize="16sp"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
         android:layout_marginTop="18dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/plataforma_projeto_main" />
+        android:layout_below="@id/plataforma_projeto_main"
+        android:background="@drawable/rectangule_blue"
+        />
 
     <TextView
         android:id="@+id/aplicacao_projeto_main"
@@ -113,10 +120,12 @@
         android:layout_height="wrap_content"
         android:text="@string/projeto_main_componentes"
         android:textSize="16sp"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
         android:layout_marginTop="18dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/aplicacao_projeto_main" />
+        android:layout_below="@id/aplicacao_projeto_main"
+        android:background="@drawable/rectangule_blue"
+        />
 
     <TextView
         android:id="@+id/comp1_projeto_main"

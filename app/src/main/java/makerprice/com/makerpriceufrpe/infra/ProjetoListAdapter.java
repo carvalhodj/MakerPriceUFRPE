@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
+import makerprice.com.makerpriceufrpe.infra.MakerPriceException;
 import java.util.ArrayList;
 
 import makerprice.com.makerpriceufrpe.R;
@@ -26,8 +26,8 @@ public class ProjetoListAdapter extends ArrayAdapter<Projeto> {
             this.listaProjetos = _listaProjetos;
             inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        } catch (Exception e) {
-
+        } catch (Exception e){
+           //throw  new MakerPriceException(e.getMessage());
         }
     }
     public int getCount() {

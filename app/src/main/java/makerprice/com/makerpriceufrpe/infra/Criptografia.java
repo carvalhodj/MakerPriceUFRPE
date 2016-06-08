@@ -3,7 +3,6 @@ package makerprice.com.makerpriceufrpe.infra;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 public class Criptografia {
     public String mascararSenha(String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest algorithm = MessageDigest.getInstance("SHA-256");

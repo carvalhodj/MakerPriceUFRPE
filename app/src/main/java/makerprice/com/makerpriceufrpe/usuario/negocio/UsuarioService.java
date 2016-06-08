@@ -2,7 +2,11 @@ package makerprice.com.makerpriceufrpe.usuario.negocio;
 
 import android.content.Context;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 import makerprice.com.makerpriceufrpe.infra.Criptografia;
+import makerprice.com.makerpriceufrpe.infra.MakerPriceException;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.usuario.dao.PessoaFisicaDAO;
 import makerprice.com.makerpriceufrpe.usuario.dao.UsuarioDAO;
@@ -20,7 +24,9 @@ public class UsuarioService  {
         pessoaFisicaDAO = new PessoaFisicaDAO(context);
     }
 
-    public Usuario login(String email, String senha) throws Exception{
+
+
+   public Usuario login(String email, String senha) throws MakerPriceException, UnsupportedEncodingException, NoSuchAlgorithmException {
         sessao.reset();
 
         String senhaMascarada = criptografia.mascararSenha(senha);
@@ -28,26 +34,21 @@ public class UsuarioService  {
         Usuario usuario= usuarioDAO.getUsuario(email, senhaMascarada);
 
         if(usuario==null) {
-            throw new Exception("Usuário ou senha inválidos");
+            throw new MakerPriceException("Usuário ou senha inválidos");
         }
 
         PessoaFisica pessoaFisica = pessoaFisicaDAO.getPessoaFisica(usuario);
 
-        if (pessoaFisica!=null){
-            sessao.setPessoaFisica(pessoaFisica);
-        }
+        sessao.setPessoaFisica(pessoaFisica);
 
-        return usuario;
-
-    }
-
-    public void cadastrar(String nome, String email, String senha) throws Exception{
-        sessao.reset();
+       return usuario;
+   }
+    public void cadastrar(String nome, String email, String senha) throws MakerPriceException, UnsupportedEncodingException, NoSuchAlgorithmException {
 
         Usuario usuario = usuarioDAO.getUsuario(email);
 
         if (usuario!=null){
-            throw new Exception("Email já cadastrado");
+            throw new MakerPriceException("Email já cadastrado");
         }
 
         String senhaMascarada = criptografia.mascararSenha(senha);

@@ -86,13 +86,14 @@ public class ProjetoDAO {
         return id;
     }
 
-    public Projeto getProjeto(String nome){
+    public Projeto getProjeto(String nomeProjeto, long idCriador){
         SQLiteDatabase db = helper.getReadableDatabase();
 
         String comando = "SELECT * FROM " + DatabaseHelper.TABLE_PROJETO +
-                " WHERE " + DatabaseHelper.COLUMN_NAME + " LIKE ?";
+                " WHERE " + DatabaseHelper.COLUMN_NAME + " LIKE ? " +
+                "AND " + DatabaseHelper.COLUMN_PESSOAFISICA_ID + " LIKE ?"; //MUDOU COLUMN_NAME PARA COLUMN_ID
 
-        String[] argumentos = {nome};
+        String[] argumentos = {nomeProjeto, String.valueOf(idCriador)}; // MUDOU NOME PARA IDPROJETO
 
         Cursor cursor = db.rawQuery(comando, argumentos);
 
@@ -100,7 +101,7 @@ public class ProjetoDAO {
 
         if (cursor.moveToNext()) {
 
-            String idColumn = DatabaseHelper.COLUMN_ID;
+            String idColumn = DatabaseHelper.COLUMN_ID;//MUDOU ID PARA NAME
             int indexColumnId = cursor.getColumnIndex(idColumn);
             long id = cursor.getLong(indexColumnId);
 
@@ -128,17 +129,13 @@ public class ProjetoDAO {
             int indexColumnComp3= cursor.getColumnIndex(comp3Column);
             String comp3 = cursor.getString(indexColumnComp3);
 
-            String idCriadorColumn = DatabaseHelper.COLUMN_PESSOAFISICA_ID;
-            int indexColumnIdCriador = cursor.getColumnIndex(idCriadorColumn);
-            long idCriador = cursor.getLong(indexColumnIdCriador);
-
-            ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id);
+            ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id); //MUDOU ID PARA IDPROJETO
 
             PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
 
             projeto = new Projeto();
-            projeto.setId(id);
-            projeto.setNome(nome);
+            projeto.setId(id); //MUDOU ID PARA IDPROJETO
+            projeto.setNome(nomeProjeto);
             projeto.setDescricao(descricao);
             projeto.setPlataforma(plataforma);
             projeto.setAplicacao(aplicacao);

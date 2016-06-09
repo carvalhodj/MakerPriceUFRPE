@@ -10,11 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 import makerprice.com.makerpriceufrpe.projeto.negocio.ProjetoService;
+import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
 
 public class ProjetoMainActivity extends AppCompatActivity {
     private ProjetoService projetoService = new ProjetoService(this);
+    private Sessao sessao = Sessao.getInstancia();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,10 @@ public class ProjetoMainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String item = intent.getStringExtra("selected-item");
 
-        Projeto projeto = projetoService.getProjeto(item);
+        PessoaFisica criador = sessao.getPessoaFisica();
+        long idCriador = criador.getID();
+
+        Projeto projeto = projetoService.getProjeto(item, idCriador);
 
         ImageView imageView = (ImageView) findViewById(R.id.projeto_imagem_principal);
         TextView textViewNome = (TextView) findViewById(R.id.nome_projeto_main);

@@ -20,7 +20,7 @@
         android:layout_height="200dp"
         android:src="@drawable/one"
         android:background="@drawable/rectangule_white"
-        android:onClick="onButtonClick"
+        android:onClick="onButtonClic"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 

@@ -256,6 +256,8 @@ public class ProjetoDAO {
             int indexColumnComp3= cursor.getColumnIndex(comp3Column);
             String comp3 = cursor.getString(indexColumnComp3);
 
+            ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id);
+
             PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
 
             Projeto projeto = new Projeto();
@@ -268,6 +270,7 @@ public class ProjetoDAO {
             projeto.setComponente_2(comp2);
             projeto.setComponente_3(comp3);
             projeto.setCriador(criador);
+            projeto.setImagens(listaImagensProjeto);
 
             listaProjetos.add(projeto);
 

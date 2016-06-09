@@ -1,6 +1,7 @@
 package makerprice.com.makerpriceufrpe.projeto.gui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ public class ProjetoMainActivity extends AppCompatActivity {
         textViewComp1.setText(projeto.getComponente_1());
         textViewComp2.setText(projeto.getComponente_2());
         textViewComp3.setText(projeto.getComponente_3());
+        imageView.setImageURI(Uri.parse(projeto.getImagens().get(0)));
 
     }
 

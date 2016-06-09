@@ -1,9 +1,12 @@
 package makerprice.com.makerpriceufrpe.projeto.dominio;
 
+import java.util.ArrayList;
+
 import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
 
 public class Projeto {
     private String nome, descricao, plataforma, aplicacao, componente_1, componente_2, componente_3;
+    private ArrayList<String> imagens = new ArrayList<>();
     private PessoaFisica criador;
     private long id;
 
@@ -49,5 +52,13 @@ public class Projeto {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public ArrayList<String> getImagens() {
+        return imagens;
+    }
+
+    public void setImagens(ArrayList<String> imagens) {
+        this.imagens = imagens;
     }
 }

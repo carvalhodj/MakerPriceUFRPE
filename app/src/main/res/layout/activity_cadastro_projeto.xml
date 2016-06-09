@@ -16,6 +16,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     >
 
+    <Button
+        android:id="@+id/botao_adicionar_foto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adicionar foto"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="adicionarFoto"/>
+
 
     <EditText
         android:id="@+id/cadastroProjetoNome"
@@ -25,7 +34,8 @@
         android:maxLines="1"
         android:layout_marginTop="18dp"
         android:textSize="16sp"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/botao_adicionar_foto"/>
 
     <EditText
         android:id="@+id/cadastroProjetoDescricao"

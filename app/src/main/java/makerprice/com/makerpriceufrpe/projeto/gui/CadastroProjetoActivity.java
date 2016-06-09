@@ -1,11 +1,16 @@
 package makerprice.com.makerpriceufrpe.projeto.gui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+
+import java.io.IOException;
 
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
@@ -22,6 +27,7 @@ public class CadastroProjetoActivity extends AppCompatActivity {
     private ProjetoService projetoService = new ProjetoService(this);
     private Sessao sessao = Sessao.getInstancia();
     private GuiUtil guiUtil = GuiUtil.getGuiUtil();
+    private Projeto projeto = new Projeto();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +84,6 @@ public class CadastroProjetoActivity extends AppCompatActivity {
 
         PessoaFisica criador = sessao.getPessoaFisica();
 
-        Projeto projeto = new Projeto();
         projeto.setNome(nomeString);
         projeto.setDescricao(descricaoString);
         projeto.setPlataforma(plataformaString);
@@ -92,6 +97,26 @@ public class CadastroProjetoActivity extends AppCompatActivity {
         guiUtil.toastLong(getApplicationContext(), "Projeto cadastrado com sucesso");
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
-
     }
+
+    public void adicionarFoto (View v){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1234);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1234 && resultCode == RESULT_OK){
+            //imagem veio da galeria
+            Uri uriImagemGaleria = data.getData();
+            String uriString = uriImagemGaleria.toString();
+            projeto.getImagens().add(uriString);
+
+        }
+    }
+
+
+
 }

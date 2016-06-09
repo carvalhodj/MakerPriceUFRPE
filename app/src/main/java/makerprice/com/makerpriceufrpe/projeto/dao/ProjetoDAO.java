@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ public class ProjetoDAO {
         SQLiteDatabase db = helper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        ContentValues valuesImagens = new ContentValues();
 
         String nameColumn = DatabaseHelper.COLUMN_NAME;
         String nome = projeto.getNome();
@@ -65,8 +67,20 @@ public class ProjetoDAO {
         values.put(criadorColumn, idCriadorString);
 
         String tabela = DatabaseHelper.TABLE_PROJETO;
+        String tabelaImagem = DatabaseHelper.TABLE_IMAGEM;
 
         long id = db.insert(tabela, null, values);
+
+        ArrayList<String> projetoImagens = projeto.getImagens();
+
+        String caminhoColumn = DatabaseHelper.COLUMN_CAMINHO;
+        String projetoId = DatabaseHelper.COLUMN_PROJETO_ID;
+
+        for (String imagem : projetoImagens){
+            valuesImagens.put(caminhoColumn, imagem);
+            valuesImagens.put(projetoId, id);
+            db.insert(tabelaImagem, null, valuesImagens);
+        }
 
         db.close();
         return id;
@@ -118,6 +132,8 @@ public class ProjetoDAO {
             int indexColumnIdCriador = cursor.getColumnIndex(idCriadorColumn);
             long idCriador = cursor.getLong(indexColumnIdCriador);
 
+            ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id);
+
             PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
 
             projeto = new Projeto();
@@ -130,6 +146,7 @@ public class ProjetoDAO {
             projeto.setComponente_2(comp2);
             projeto.setComponente_3(comp3);
             projeto.setCriador(criador);
+            projeto.setImagens(listaImagensProjeto);
         }
         cursor.close();
         db.close();
@@ -262,6 +279,38 @@ public class ProjetoDAO {
         db.close();
 
         return listaProjetos;
+    }
+
+    public ArrayList<String> getImagensUnicoProjeto (long id){
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_IMAGEM +
+                " WHERE " + DatabaseHelper.COLUMN_PROJETO_ID + " LIKE ?";
+
+        String idString = Long.toString(id);
+
+        String[] argumentos = {idString};
+
+        Cursor cursor = db.rawQuery(comando, argumentos);
+
+        ArrayList<String> listaImagensProjeto = new ArrayList<>();
+
+        String caminhoColumn = DatabaseHelper.COLUMN_CAMINHO;
+        int indexColumnCaminho = cursor.getColumnIndex(caminhoColumn);
+
+        while (cursor.moveToNext()) {
+
+            String caminho = cursor.getString(indexColumnCaminho);
+
+            listaImagensProjeto.add(caminho);
+
+        }
+        cursor.close();
+        db.close();
+
+        return listaImagensProjeto;
+
+
     }
 
 

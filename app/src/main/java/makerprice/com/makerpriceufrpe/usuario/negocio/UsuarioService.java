@@ -2,11 +2,7 @@ package makerprice.com.makerpriceufrpe.usuario.negocio;
 
 import android.content.Context;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-
 import makerprice.com.makerpriceufrpe.infra.Criptografia;
-import makerprice.com.makerpriceufrpe.infra.MakerPriceException;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.usuario.dao.PessoaFisicaDAO;
 import makerprice.com.makerpriceufrpe.usuario.dao.UsuarioDAO;
@@ -26,7 +22,7 @@ public class UsuarioService  {
 
 
 
-   public Usuario login(String email, String senha) throws MakerPriceException, UnsupportedEncodingException, NoSuchAlgorithmException {
+   public Usuario login(String email, String senha) throws Exception {
         sessao.reset();
 
         String senhaMascarada = criptografia.mascararSenha(senha);
@@ -34,21 +30,24 @@ public class UsuarioService  {
         Usuario usuario= usuarioDAO.getUsuario(email, senhaMascarada);
 
         if(usuario==null) {
-            throw new MakerPriceException("Usuário ou senha inválidos");
+            throw new Exception("Usuário ou senha inválidos");
         }
 
         PessoaFisica pessoaFisica = pessoaFisicaDAO.getPessoaFisica(usuario);
 
-        sessao.setPessoaFisica(pessoaFisica);
+       if (pessoaFisica != null){
+           sessao.setPessoaFisica(pessoaFisica);
+       }
 
        return usuario;
    }
-    public void cadastrar(String nome, String email, String senha) throws MakerPriceException, UnsupportedEncodingException, NoSuchAlgorithmException {
+    public void cadastrar(String nome, String email, String senha) throws Exception {
+        sessao.reset();
 
         Usuario usuario = usuarioDAO.getUsuario(email);
 
         if (usuario!=null){
-            throw new MakerPriceException("Email já cadastrado");
+            throw new Exception("Email já cadastrado");
         }
 
         String senhaMascarada = criptografia.mascararSenha(senha);

@@ -3,6 +3,7 @@ package makerprice.com.makerpriceufrpe.infra;
 import java.util.Date;
 
 import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
+import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
 
 public class Sessao {
@@ -10,6 +11,7 @@ public class Sessao {
     private PessoaFisica pessoaFisica;
     private Date horaLogin;
     private Loja loja;
+    private Projeto projeto;
 
     private Sessao(){
     }
@@ -44,4 +46,11 @@ public class Sessao {
         this.loja = null;
     }
 
+    public Projeto getProjeto() {
+        return projeto;
+    }
+
+    public void setProjeto(Projeto projeto) {
+        this.projeto = projeto;
+    }
 }

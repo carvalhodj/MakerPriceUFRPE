@@ -16,16 +16,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     >
 
-    <Button
-        android:id="@+id/botao_adicionar_foto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Adicionar foto"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="adicionarFoto"/>
-
-
     <EditText
         android:id="@+id/cadastroProjetoNome"
         android:layout_width="match_parent"
@@ -34,8 +24,7 @@
         android:maxLines="1"
         android:layout_marginTop="18dp"
         android:textSize="16sp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/botao_adicionar_foto"/>
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/cadastroProjetoDescricao"
@@ -124,13 +113,23 @@
         android:layout_below="@id/componente2"/>
 
     <Button
+        android:id="@+id/botao_adicionar_foto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adicionar foto"
+        android:onClick="adicionarFoto"
+        android:layout_below="@+id/componente3"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/botao_cadastrar_projeto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/signup_botao_cadastrar"
         android:layout_marginTop="24dp"
         android:textSize="16sp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/componente3"
+        android:layout_below="@id/botao_adicionar_foto"
         android:onClick="cadastrar"/>
 
 </RelativeLayout>

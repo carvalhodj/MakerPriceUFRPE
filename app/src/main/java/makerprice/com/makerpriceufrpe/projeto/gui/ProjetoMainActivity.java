@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
+
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.infra.Converter;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
@@ -61,11 +63,11 @@ public class ProjetoMainActivity extends AppCompatActivity {
 
     }
 
-    public void onButtonClic(View v){
+    public void onButtonClickProjeto(View v){
 
         if (v.getId() == R.id.projeto_imagem_principal){
-            Intent intent= new Intent(getApplicationContext(), ImageSliderActivity.class);
-            intent.putExtra("lista-imagens", projeto.getImagens());
+            Intent intent= new Intent(this, ListaImagensProjetoActivity.class);
+            sessao.setProjeto(projeto);
             startActivity(intent);
         }
     }

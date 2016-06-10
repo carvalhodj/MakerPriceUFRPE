@@ -8,19 +8,19 @@ import android.os.Bundle;
 import java.util.ArrayList;
 
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.infra.Sessao;
 
 public class ImageSliderActivity extends AppCompatActivity {
+    private Sessao sessao = Sessao.getInstancia();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_slider);
-        Intent intent = getIntent();
-        ArrayList<String> listaImagens = intent.getStringArrayListExtra("lista-imagens");
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         ImageAdapter adapter = new ImageAdapter(this);
-        adapter.setImagesGal(listaImagens);
+        adapter.setImagesGal(sessao.getProjeto().getImagens());
         viewPager.setAdapter(adapter);
     }
 }

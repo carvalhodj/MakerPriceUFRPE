@@ -23,7 +23,7 @@ public class ProjetoListAdapter extends ArrayAdapter<Projeto> {
     private Activity activity;
     private ArrayList<Projeto> listaProjetos;
     private static LayoutInflater inflater = null;
-    private GuiUtil guiUtil = GuiUtil.getGuiUtil();
+    private Converter converter = Converter.getInstancia();
 
     public ProjetoListAdapter (Activity activity, int textViewResourceId, ArrayList<Projeto> _listaProjetos){
         super(activity, textViewResourceId, _listaProjetos);
@@ -55,17 +55,6 @@ public class ProjetoListAdapter extends ArrayAdapter<Projeto> {
 
     }
 
-    private Bitmap StringToBitMap(String encodedString){
-        try {
-            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
-
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
         final ViewHolder holder;
@@ -82,7 +71,7 @@ public class ProjetoListAdapter extends ArrayAdapter<Projeto> {
                 holder = (ViewHolder) vi.getTag();
             }
             String imagemPrincipal = listaProjetos.get(position).getImagens().get(0);
-            Bitmap imagem = StringToBitMap(imagemPrincipal);
+            Bitmap imagem = converter.StringToBitMap(imagemPrincipal);
             holder.nome_projeto_listagem.setText(listaProjetos.get(position).getNome());
             holder.plataforma_projeto_listagem.setText(listaProjetos.get(position).getPlataforma());
             holder.imagemProjeto.setImageBitmap(imagem);

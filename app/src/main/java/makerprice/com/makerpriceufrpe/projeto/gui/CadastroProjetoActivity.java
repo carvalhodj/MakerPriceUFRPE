@@ -18,6 +18,7 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.infra.Converter;
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.infra.Validacao;
@@ -33,6 +34,7 @@ public class CadastroProjetoActivity extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
     private GuiUtil guiUtil = GuiUtil.getGuiUtil();
     private Projeto projeto = new Projeto();
+    private Converter converter = Converter.getInstancia();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,34 +114,25 @@ public class CadastroProjetoActivity extends AppCompatActivity {
     }
 
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
-        ParcelFileDescriptor parcelFileDescriptor =
-                getContentResolver().openFileDescriptor(uri, "r");
+        ParcelFileDescriptor parcelFileDescriptor = getContentResolver().openFileDescriptor(uri, "r");
         FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
         Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
         parcelFileDescriptor.close();
         return image;
     }
 
-    private String BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp= Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1234 && resultCode == RESULT_OK){
-            //imagem veio da galeria
             Uri uriImagemGaleria = data.getData();
             Bitmap imagemGaleriaBitmap = null;
             try {
-                imagemGaleriaBitmap = getBitmapFromUri(uriImagemGaleria);
+                ParcelFileDescriptor parcelFileDescriptor = getContentResolver().openFileDescriptor(uriImagemGaleria, "r");
+                imagemGaleriaBitmap = converter.getBitmapFromUri(parcelFileDescriptor);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String imagemBitmapString = BitMapToString(imagemGaleriaBitmap);
+            String imagemBitmapString = converter.BitMapToString(imagemGaleriaBitmap);
             projeto.getImagens().add(imagemBitmapString);
 
         }

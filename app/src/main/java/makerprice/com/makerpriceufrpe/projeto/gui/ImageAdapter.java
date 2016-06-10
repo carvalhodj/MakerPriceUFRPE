@@ -14,9 +14,11 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.infra.Converter;
 
 public class ImageAdapter extends PagerAdapter {
     Context context;
+    private Converter converter = Converter.getInstancia();
 
     private ArrayList<Bitmap> imagesGal = new ArrayList<>();
 
@@ -39,20 +41,9 @@ public class ImageAdapter extends PagerAdapter {
         return view == ((ImageView) object);
     }
 
-    private Bitmap StringToBitMap(String encodedString){
-        try {
-            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
-
     public void setImagesGal(ArrayList<String> imagens){
         for (String imagem : imagens){
-            Bitmap imagemBitmap = StringToBitMap(imagem);
+            Bitmap imagemBitmap = converter.StringToBitMap(imagem);
             imagesGal.add(imagemBitmap);
         }
     }

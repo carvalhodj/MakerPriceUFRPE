@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.infra.Converter;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 import makerprice.com.makerpriceufrpe.projeto.negocio.ProjetoService;
@@ -22,6 +23,7 @@ public class ProjetoMainActivity extends AppCompatActivity {
     private ProjetoService projetoService = new ProjetoService(this);
     private Sessao sessao = Sessao.getInstancia();
     private Projeto projeto;
+    private Converter converter = Converter.getInstancia();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class ProjetoMainActivity extends AppCompatActivity {
         textViewComp3.setText(projeto.getComponente_3());
 
         String imagemPrincipal = projeto.getImagens().get(0);
-        Bitmap imagem = StringToBitMap(imagemPrincipal);
+        Bitmap imagem = converter.StringToBitMap(imagemPrincipal);
         imageView.setImageBitmap(imagem);
 
     }
@@ -65,17 +67,6 @@ public class ProjetoMainActivity extends AppCompatActivity {
             Intent intent= new Intent(getApplicationContext(), ImageSliderActivity.class);
             intent.putExtra("lista-imagens", projeto.getImagens());
             startActivity(intent);
-        }
-    }
-
-    private Bitmap StringToBitMap(String encodedString){
-        try {
-            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
         }
     }
 }

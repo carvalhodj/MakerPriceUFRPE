@@ -38,6 +38,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CAMINHO = "caminho";
     public static final String COLUMN_PROJETO_ID = "projeto_id";
 
+    public static final String TABLE_COMPONENTE = "componente";
+    public static final String COLUMN_TIPO = "tipo";
+    public static final String COLUMN_COR = "cor";
+    public static final String COLUMN_RESISTENCIA = "resistencia";
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -80,7 +85,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         COLUMN_CAMINHO + " TEXT NOT NULL, " +
                         COLUMN_PROJETO_ID + " INTEGER);");
+
+        sqLiteDatabase.execSQL(
+                "CREATE TABLE " + TABLE_COMPONENTE + " (" +
+                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        COLUMN_TIPO + " TEXT, " +
+                        COLUMN_COR + " TEXT, " +
+                        COLUMN_RESISTENCIA + " TEXT);");
     }
+
 
 
 

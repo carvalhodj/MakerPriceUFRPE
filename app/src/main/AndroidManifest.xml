@@ -57,7 +57,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".projeto.gui.ProjetoMainActivity" />
         <activity android:name=".projeto.gui.ImageSliderActivity" />
-        <activity android:name=".projeto.gui.ListaImagensProjetoActivity"></activity>
+        <activity android:name=".projeto.gui.ListaImagensProjetoActivity" />
+        <activity android:name=".Componente.gui.CadastroComponenteActivity"></activity>
     </application>
 
 </manifest>

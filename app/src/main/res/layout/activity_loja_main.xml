@@ -27,6 +27,16 @@
         android:layout_marginStart="8sp"
         android:text="@string/empty_text" />
 
+    <Button
+        android:id="@+id/btn_tela_componente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar Componentes"
+        android:layout_below="@id/nome_loja"
+        android:layout_marginTop="18dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="telaComponente"/>
+
 
 
 </RelativeLayout>

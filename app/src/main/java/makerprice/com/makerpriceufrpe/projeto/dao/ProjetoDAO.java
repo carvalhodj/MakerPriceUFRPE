@@ -91,9 +91,9 @@ public class ProjetoDAO {
 
         String comando = "SELECT * FROM " + DatabaseHelper.TABLE_PROJETO +
                 " WHERE " + DatabaseHelper.COLUMN_NAME + " LIKE ? " +
-                "AND " + DatabaseHelper.COLUMN_PESSOAFISICA_ID + " LIKE ?"; //MUDOU COLUMN_NAME PARA COLUMN_ID
+                "AND " + DatabaseHelper.COLUMN_PESSOAFISICA_ID + " LIKE ?";
 
-        String[] argumentos = {nomeProjeto, String.valueOf(idCriador)}; // MUDOU NOME PARA IDPROJETO
+        String[] argumentos = {nomeProjeto, String.valueOf(idCriador)};
 
         Cursor cursor = db.rawQuery(comando, argumentos);
 
@@ -101,7 +101,7 @@ public class ProjetoDAO {
 
         if (cursor.moveToNext()) {
 
-            String idColumn = DatabaseHelper.COLUMN_ID;//MUDOU ID PARA NAME
+            String idColumn = DatabaseHelper.COLUMN_ID;
             int indexColumnId = cursor.getColumnIndex(idColumn);
             long id = cursor.getLong(indexColumnId);
 
@@ -129,12 +129,12 @@ public class ProjetoDAO {
             int indexColumnComp3= cursor.getColumnIndex(comp3Column);
             String comp3 = cursor.getString(indexColumnComp3);
 
-            ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id); //MUDOU ID PARA IDPROJETO
+            ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id);
 
             PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
 
             projeto = new Projeto();
-            projeto.setId(id); //MUDOU ID PARA IDPROJETO
+            projeto.setId(id);
             projeto.setNome(nomeProjeto);
             projeto.setDescricao(descricao);
             projeto.setPlataforma(plataforma);

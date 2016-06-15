@@ -1,10 +1,13 @@
 package makerprice.com.makerpriceufrpe.loja.gui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
+import makerprice.com.makerpriceufrpe.Componente.gui.CadastroComponenteActivity;
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
@@ -23,4 +26,10 @@ public class LojaMainActivity extends AppCompatActivity {
         tv.setText(nome);
 
     }
+
+    public void telaComponente(View v) {
+        Intent intent = new Intent(this, CadastroComponenteActivity.class);
+        startActivity(intent);
+    }
+
 }

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -16,8 +17,11 @@ import android.widget.Spinner;
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.componente.negocio.ComponenteService;
 import makerprice.com.makerpriceufrpe.infra.Converter;
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
@@ -35,11 +39,23 @@ public class CadastroProjetoActivity extends AppCompatActivity {
     private GuiUtil guiUtil = GuiUtil.getGuiUtil();
     private Projeto projeto = new Projeto();
     private Converter converter = Converter.getInstancia();
+    private ComponenteService componenteService = new ComponenteService(this);
+    private Spinner componente1;
+    private Spinner componente2;
+    private Spinner componente3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_projeto);
+
+        componente1 = (Spinner) findViewById(R.id.componente1);
+        componente2 = (Spinner) findViewById(R.id.componente2);
+        componente3 = (Spinner) findViewById(R.id.componente3);
+
+        loadSpinnerData(componente1);
+        loadSpinnerData(componente2);
+        loadSpinnerData(componente3);
     }
 
     public void cadastrar(View v){
@@ -47,17 +63,14 @@ public class CadastroProjetoActivity extends AppCompatActivity {
         EditText descricao = (EditText) findViewById(R.id.cadastroProjetoDescricao);
         Spinner plataforma = (Spinner) findViewById(R.id.cadastroProjetoSpinnerPlataforma);
         Spinner aplicacao = (Spinner) findViewById(R.id.cadastroProjetoSpinnerAplicacao);
-        EditText componente1 = (EditText) findViewById(R.id.componente1);
-        EditText componente2 = (EditText) findViewById(R.id.componente2);
-        EditText componente3 = (EditText) findViewById(R.id.componente3);
 
         String nomeString = nome.getText().toString();
         String descricaoString = descricao.getText().toString();
         String plataformaString = plataforma.getSelectedItem().toString();
         String aplicacaoString = aplicacao.getSelectedItem().toString();
-        String componente1String = componente1.getText().toString();
-        String componente2String = componente2.getText().toString();
-        String componente3String = componente3.getText().toString();
+        String componente1String = componente1.getSelectedItem().toString();
+        String componente2String = componente2.getSelectedItem().toString();
+        String componente3String = componente3.getSelectedItem().toString();
 
         if (validacaoUtil.isFieldEmpty(nome)){
             nome.requestFocus();
@@ -68,24 +81,6 @@ public class CadastroProjetoActivity extends AppCompatActivity {
         if (validacaoUtil.isFieldEmpty(descricao)){
             descricao.requestFocus();
             descricao.setError(getString(R.string.error_descricao_vazia));
-            return;
-        }
-
-        if (validacaoUtil.isFieldEmpty(componente1)){
-            componente1.requestFocus();
-            componente1.setError(getString(R.string.error_componente_vazio));
-            return;
-        }
-
-        if (validacaoUtil.isFieldEmpty(componente2)){
-            componente2.requestFocus();
-            componente2.setError(getString(R.string.error_componente_vazio));
-            return;
-        }
-
-        if (validacaoUtil.isFieldEmpty(componente3)){
-            componente3.requestFocus();
-            componente3.setError(getString(R.string.error_componente_vazio));
             return;
         }
 
@@ -119,6 +114,19 @@ public class CadastroProjetoActivity extends AppCompatActivity {
         Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
         parcelFileDescriptor.close();
         return image;
+    }
+
+    public void loadSpinnerData(Spinner spinner) {
+
+        ArrayList<String> componentes = componenteService.getTodosComponentesSpinner();
+        /*ArrayList<String> componentes = new ArrayList<String>();
+        componentes.add("resistor");
+        componentes.add("capacitor");*/
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, componentes);
+
+        spinner.setAdapter(dataAdapter);
     }
 
     @Override

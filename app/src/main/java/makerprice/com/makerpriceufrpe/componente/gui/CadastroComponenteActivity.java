@@ -1,17 +1,16 @@
-package makerprice.com.makerpriceufrpe.Componente.gui;
+package makerprice.com.makerpriceufrpe.componente.gui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import makerprice.com.makerpriceufrpe.Componente.dao.ComponenteDAO;
-import makerprice.com.makerpriceufrpe.Componente.dominio.Componente;
-import makerprice.com.makerpriceufrpe.Componente.dominio.ComponenteEnum;
-import makerprice.com.makerpriceufrpe.Componente.dominio.ComponenteEspc;
+import makerprice.com.makerpriceufrpe.componente.dao.ComponenteDAO;
+import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteEnum;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteEspc;
 import makerprice.com.makerpriceufrpe.R;
 
 public class CadastroComponenteActivity extends AppCompatActivity {
@@ -28,15 +27,22 @@ public class CadastroComponenteActivity extends AppCompatActivity {
 
 
         Map propriedades = new HashMap();
+        Map propriedades2 = new HashMap();
 
         propriedades.put("tipo", ComponenteEnum.ComponenteTipo.RESISTOR);
-        //propriedades.put("cor", ComponenteEnum.Cor.VERMELHO);
         propriedades.put("resistencia", ComponenteEnum.Resistencia.R330);
 
+        propriedades2.put("tipo", ComponenteEnum.ComponenteTipo.LED);
+        propriedades2.put("cor", ComponenteEnum.Cor.VERDE);
+
         ComponenteEspc compSpec = new ComponenteEspc(propriedades);
+        ComponenteEspc compSpec2 = new ComponenteEspc(propriedades2);
 
         Componente componente = new Componente("11277", compSpec);
-            componenteDAO.inserir(componente);
+        componenteDAO.inserir(componente);
+
+        Componente componente2 = new Componente("12345", compSpec2);
+        componenteDAO.inserir(componente2);
 
     }
 

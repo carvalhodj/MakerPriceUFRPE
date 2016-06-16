@@ -1,4 +1,4 @@
-package makerprice.com.makerpriceufrpe.Componente.dominio;
+package makerprice.com.makerpriceufrpe.componente.dominio;
 
 
 public class ComponenteEnum {

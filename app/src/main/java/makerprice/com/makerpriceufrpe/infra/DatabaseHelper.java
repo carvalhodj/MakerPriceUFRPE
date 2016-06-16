@@ -43,6 +43,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_COR = "cor";
     public static final String COLUMN_RESISTENCIA = "resistencia";
 
+    public static final String[] COLUMNS_COMPONENTE_SPEC = {
+            COLUMN_TIPO, COLUMN_COR, COLUMN_RESISTENCIA
+    };
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

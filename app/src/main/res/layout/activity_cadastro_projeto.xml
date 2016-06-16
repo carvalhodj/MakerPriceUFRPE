@@ -79,34 +79,31 @@
         android:layout_alignTop="@+id/cadastroProjetoAplicacaoTexto"
         android:layout_toEndOf="@+id/cadastroProjetoPlataformaTexto" />
 
-    <EditText
+    <Spinner
         android:id="@+id/componente1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/componente1"
-        android:maxLines="1"
         android:layout_marginTop="18dp"
         android:textSize="16sp"
         android:layout_alignParentStart="true"
         android:layout_below="@id/cadastroProjetoSpinnerAplicacao"/>
 
-    <EditText
+    <Spinner
         android:id="@+id/componente2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/componente2"
-        android:maxLines="1"
         android:layout_marginTop="18dp"
         android:textSize="16sp"
         android:layout_alignParentStart="true"
         android:layout_below="@id/componente1"/>
 
-    <EditText
+    <Spinner
         android:id="@+id/componente3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/componente3"
-        android:maxLines="1"
         android:layout_marginTop="18dp"
         android:textSize="16sp"
         android:layout_alignParentStart="true"

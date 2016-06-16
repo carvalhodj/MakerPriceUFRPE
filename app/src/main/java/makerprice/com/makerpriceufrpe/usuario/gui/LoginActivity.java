@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import makerprice.com.makerpriceufrpe.Componente.gui.CadastroComponenteActivity;
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
@@ -14,7 +13,6 @@ import makerprice.com.makerpriceufrpe.infra.Validacao;
 import makerprice.com.makerpriceufrpe.loja.gui.CadastroLojaActivity;
 import makerprice.com.makerpriceufrpe.loja.gui.LojaMainActivity;
 import makerprice.com.makerpriceufrpe.loja.negocio.LojaService;
-import makerprice.com.makerpriceufrpe.projeto.gui.CadastroProjetoActivity;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 

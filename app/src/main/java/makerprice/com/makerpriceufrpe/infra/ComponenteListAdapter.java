@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
@@ -64,9 +66,14 @@ public class ComponenteListAdapter extends ArrayAdapter<Componente> {
                 holder = (ViewHolder) vi.getTag();
             }
 
-            Object nome = listaComponente.get(position).getComponenteEspc().getPropriedade("tipo");
-            //Melhorar essa parte
-            holder.nome_componente_listagem.setText(nome.toString());
+            Map prop = listaComponente.get(position).getComponenteEspc().getPropriedades();
+            Iterator<Map.Entry<String,String>> iterator = prop.entrySet().iterator();
+            String dado = "";
+            while (iterator.hasNext()) {
+                Map.Entry<String,String> entry = (Map.Entry<String,String>) iterator.next();
+                dado += entry.getValue() + " ";
+            }
+            holder.nome_componente_listagem.setText(dado);
             
         } catch (Exception e) {
 

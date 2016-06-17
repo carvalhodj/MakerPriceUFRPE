@@ -4,12 +4,13 @@ package makerprice.com.makerpriceufrpe.componente.dominio;
 public class ComponenteEnum {
 
     public enum ComponenteTipo{
-        RESISTOR, LED;
+        RESISTOR, LED, CAPACITOR;
 
         public String toString(){
             switch(this){
                 case RESISTOR: return "resistor";
                 case LED: return "led";
+                case CAPACITOR: return "capacitor";
                 default: return "não especificado";
             }
         }
@@ -40,6 +41,18 @@ public class ComponenteEnum {
             }
         }
 
+    }
+
+    public enum Capacitancia{
+        UF1, UF100;
+
+        public String toString(){
+            switch (this){
+                case UF1: return "1uF";
+                case UF100: return "100uF";
+                default: return "não especificado";
+            }
+        }
     }
 
 }

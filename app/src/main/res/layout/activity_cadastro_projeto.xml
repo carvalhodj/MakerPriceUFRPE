@@ -14,6 +14,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/backgroundLightGray"
     >
 
     <EditText
@@ -81,7 +82,7 @@
 
     <Spinner
         android:id="@+id/componente1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/componente1"
         android:layout_marginTop="18dp"
@@ -91,7 +92,7 @@
 
     <Spinner
         android:id="@+id/componente2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/componente2"
         android:layout_marginTop="18dp"
@@ -101,7 +102,7 @@
 
     <Spinner
         android:id="@+id/componente3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/componente3"
         android:layout_marginTop="18dp"

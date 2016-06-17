@@ -12,10 +12,11 @@ import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteEnum;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteEspc;
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.componente.negocio.ComponenteService;
 
 public class CadastroComponenteActivity extends AppCompatActivity {
 
-    private ComponenteDAO componenteDAO = new ComponenteDAO(this);
+    private ComponenteService componenteService = new ComponenteService(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +26,9 @@ public class CadastroComponenteActivity extends AppCompatActivity {
 
     public void cadastrarComponente (View v) {
 
-
         Map propriedades = new HashMap();
         Map propriedades2 = new HashMap();
+        Map propriedades3 = new HashMap();
 
         propriedades.put("tipo", ComponenteEnum.ComponenteTipo.RESISTOR);
         propriedades.put("resistencia", ComponenteEnum.Resistencia.R330);
@@ -35,14 +36,24 @@ public class CadastroComponenteActivity extends AppCompatActivity {
         propriedades2.put("tipo", ComponenteEnum.ComponenteTipo.LED);
         propriedades2.put("cor", ComponenteEnum.Cor.VERDE);
 
+        propriedades3.put("tipo", ComponenteEnum.ComponenteTipo.CAPACITOR);
+        propriedades3.put("capacitancia", ComponenteEnum.Capacitancia.UF100);
+
         ComponenteEspc compSpec = new ComponenteEspc(propriedades);
         ComponenteEspc compSpec2 = new ComponenteEspc(propriedades2);
+        ComponenteEspc compSpec3 = new ComponenteEspc(propriedades3);
 
-        Componente componente = new Componente("11277", compSpec);
-        componenteDAO.inserir(componente);
+        Componente componente = new Componente();
+        componente.setComponenteEspc(compSpec);
+        componenteService.inserirComponente(componente);
 
-        Componente componente2 = new Componente("12345", compSpec2);
-        componenteDAO.inserir(componente2);
+        Componente componente2 = new Componente();
+        componente2.setComponenteEspc(compSpec2);
+        componenteService.inserirComponente(componente2);
+
+        Componente componente3 = new Componente();
+        componente3.setComponenteEspc(compSpec3);
+        componenteService.inserirComponente(componente3);
 
     }
 

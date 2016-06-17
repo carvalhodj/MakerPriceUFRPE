@@ -3,21 +3,22 @@ package makerprice.com.makerpriceufrpe.componente.dominio;
 
 public class Componente {
 
-    private String serialNumber;
     private ComponenteEspc componenteEspc;
-
-
-    public Componente(String serialNumber, ComponenteEspc espc){
-        this.serialNumber= serialNumber;
-        this.componenteEspc= espc;
-    }
+    private long id;
 
     public ComponenteEspc getComponenteEspc() {
         return componenteEspc;
     }
 
-    public String getSerialNumber() {
-        return serialNumber;
+    public void setComponenteEspc(ComponenteEspc componenteEspc) {
+        this.componenteEspc = componenteEspc;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

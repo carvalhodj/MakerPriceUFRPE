@@ -6,6 +6,7 @@ import android.content.Context;
 import java.util.ArrayList;
 
 import makerprice.com.makerpriceufrpe.componente.dao.ComponenteDAO;
+import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 
 public class ComponenteService {
@@ -17,5 +18,11 @@ public class ComponenteService {
     public ArrayList<String> getTodosComponentesSpinner() {
         return componenteDAO.getTodosComponentesString();
     }
+
+    public void inserirComponente(Componente componente) {
+        long id = componenteDAO.inserir(componente);
+        componente.setId(id);
+    }
+
 
 }

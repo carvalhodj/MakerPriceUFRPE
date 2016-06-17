@@ -119,12 +119,9 @@ public class CadastroProjetoActivity extends AppCompatActivity {
     public void loadSpinnerData(Spinner spinner) {
 
         ArrayList<String> componentes = componenteService.getTodosComponentesSpinner();
-        /*ArrayList<String> componentes = new ArrayList<String>();
-        componentes.add("resistor");
-        componentes.add("capacitor");*/
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, componentes);
+                android.R.layout.simple_spinner_dropdown_item, componentes);
 
         spinner.setAdapter(dataAdapter);
     }

@@ -41,10 +41,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_COMPONENTE = "componente";
     public static final String COLUMN_TIPO = "tipo";
     public static final String COLUMN_COR = "cor";
+    public static final String COLUMN_CAPACITANCIA = "capacitancia";
     public static final String COLUMN_RESISTENCIA = "resistencia";
 
     public static final String[] COLUMNS_COMPONENTE_SPEC = {
-            COLUMN_TIPO, COLUMN_COR, COLUMN_RESISTENCIA
+            COLUMN_TIPO, COLUMN_COR, COLUMN_CAPACITANCIA, COLUMN_RESISTENCIA
     };
 
 
@@ -95,6 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         COLUMN_TIPO + " TEXT, " +
                         COLUMN_COR + " TEXT, " +
+                        COLUMN_CAPACITANCIA + " TEXT, " +
                         COLUMN_RESISTENCIA + " TEXT);");
     }
 

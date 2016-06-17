@@ -77,6 +77,10 @@ public class ComponenteDAO {
             int indexColumnCor= cursor.getColumnIndex(corColumn);
             String cor = cursor.getString(indexColumnCor);
 
+            String capacitanciaColumn= DatabaseHelper.COLUMN_CAPACITANCIA;
+            int indexColumnCapacitancia= cursor.getColumnIndex(capacitanciaColumn);
+            String capacitancia = cursor.getString(indexColumnCapacitancia);
+
             String resistenciaColumn= DatabaseHelper.COLUMN_RESISTENCIA;
             int indexColumnResistencia= cursor.getColumnIndex(resistenciaColumn);
             String resistencia = cursor.getString(indexColumnResistencia);
@@ -87,6 +91,8 @@ public class ComponenteDAO {
                 itemComponente = tipo + " " + resistencia;
             } else if (Objects.equals(tipo, "led")) {
                 itemComponente = tipo + " " + cor;
+            } else if (Objects.equals(tipo, "capacitor")) {
+                itemComponente = tipo + " " + capacitancia;
             }
 
             listaComponentes.add(itemComponente);

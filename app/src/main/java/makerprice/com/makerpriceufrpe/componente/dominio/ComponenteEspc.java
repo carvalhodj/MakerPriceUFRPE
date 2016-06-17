@@ -7,7 +7,6 @@ public class ComponenteEspc {
 
     private Map propriedades;
 
-
     public ComponenteEspc(Map propriedades){
         if (propriedades==null){
             this.propriedades= new HashMap();

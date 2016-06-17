@@ -134,11 +134,13 @@ public class CadastroProjetoActivity extends AppCompatActivity {
             try {
                 ParcelFileDescriptor parcelFileDescriptor = getContentResolver().openFileDescriptor(uriImagemGaleria, "r");
                 imagemGaleriaBitmap = converter.getBitmapFromUri(parcelFileDescriptor);
+                String imagemBitmapString = converter.BitMapToString(imagemGaleriaBitmap);
+                projeto.getImagens().add(imagemBitmapString);
+                guiUtil.toastShort(getApplicationContext(), "Imagem adicionada");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String imagemBitmapString = converter.BitMapToString(imagemGaleriaBitmap);
-            projeto.getImagens().add(imagemBitmapString);
+
 
         }
     }

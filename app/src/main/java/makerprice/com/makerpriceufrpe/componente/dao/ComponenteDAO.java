@@ -35,21 +35,7 @@ public class ComponenteDAO {
                 values.put(col,prop.toString());
             }
         }
-     /*
-        String tipoColumn = DatabaseHelper.COLUMN_TIPO;
-        String tipo = componente.getComponenteEspc().getPropriedade("tipo").toString();
 
-        String corColumn = DatabaseHelper.COLUMN_COR;
-
-        String resistenciaColumn = DatabaseHelper.COLUMN_RESISTENCIA;
-        String resistencia = null;
-        if (componente.getComponenteEspc().getPropriedade("resistencia") != null) {
-            resistencia = componente.getComponenteEspc().getPropriedade("resistencia").toString();
-        }
-
-        values.put(corColumn,cor);
-        values.put(resistenciaColumn,resistencia);
-*/
         String tabela = DatabaseHelper.TABLE_COMPONENTE;
 
         long id=db.insert(tabela,null,values);

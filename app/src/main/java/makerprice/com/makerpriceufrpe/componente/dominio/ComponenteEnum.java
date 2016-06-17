@@ -18,14 +18,21 @@ public class ComponenteEnum {
     }
 
     public enum Cor{
-        VERMELHO,VERDE;
+        VERMELHO("vermelho", "minha cor vermelha"),VERDE("verde", "minha cor verde");
+        private String nome;
+        private String descricao;
+        Cor(String nome, String descricao) {
+            this.nome = nome;
+            this.descricao = descricao;
+        }
 
-        public String toString(){
-            switch(this){
-                case VERMELHO: return "vermelho";
-                case VERDE: return "verde";
-                default: return "não especificado";
-            }
+        public String getNome() {
+            return nome;
+        }
+
+        public String getDescricao() {
+            return this.descricao;
+
 
         }
     }

@@ -29,7 +29,7 @@ public class ProjetoService {
 
     public Projeto getProjeto(String nomeProjeto, long idUsuario){
         return projetoDAO.getProjeto(nomeProjeto, idUsuario);
-    } //MUDOU NOME PARA IDPROJETO
+    }
 
     public ArrayList<Projeto> getTodosProjetosUnicoCriador(long idCriador){
         return projetoDAO.getTodosProjetosUnicoCriador(idCriador);

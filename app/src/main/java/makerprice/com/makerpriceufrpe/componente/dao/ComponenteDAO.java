@@ -7,9 +7,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteEnum;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteEspc;
 import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
 
@@ -44,44 +48,24 @@ public class ComponenteDAO {
 
     }
 
-    public ArrayList<String> getTodosComponentesString() {
+    public List<Componente> getTodosComponentes() {
         SQLiteDatabase db = helper.getReadableDatabase();
 
         String comando = "SELECT * FROM " + DatabaseHelper.TABLE_COMPONENTE;
 
         Cursor cursor = db.rawQuery(comando, null);
 
-        ArrayList<String> listaComponentes = new ArrayList<String>();
+        ArrayList<Componente> listaComponentes = new ArrayList<>();
 
         while (cursor.moveToNext()) {
 
-            String tipoColumn= DatabaseHelper.COLUMN_TIPO;
-            int indexColumnTipo = cursor.getColumnIndex(tipoColumn);
-            String tipo = cursor.getString(indexColumnTipo);
+            String idColumn= DatabaseHelper.COLUMN_ID;
+            int indexColumnId = cursor.getColumnIndex(idColumn);
+            long id = cursor.getLong(indexColumnId);
 
-            String corColumn= DatabaseHelper.COLUMN_COR;
-            int indexColumnCor= cursor.getColumnIndex(corColumn);
-            String cor = cursor.getString(indexColumnCor);
+            Componente componente = getComponente(id);
 
-            String capacitanciaColumn= DatabaseHelper.COLUMN_CAPACITANCIA;
-            int indexColumnCapacitancia= cursor.getColumnIndex(capacitanciaColumn);
-            String capacitancia = cursor.getString(indexColumnCapacitancia);
-
-            String resistenciaColumn= DatabaseHelper.COLUMN_RESISTENCIA;
-            int indexColumnResistencia= cursor.getColumnIndex(resistenciaColumn);
-            String resistencia = cursor.getString(indexColumnResistencia);
-
-            String itemComponente = null;
-
-            if (Objects.equals(tipo, "resistor")) {
-                itemComponente = tipo + " " + resistencia;
-            } else if (Objects.equals(tipo, "led")) {
-                itemComponente = tipo + " " + cor;
-            } else if (Objects.equals(tipo, "capacitor")) {
-                itemComponente = tipo + " " + capacitancia;
-            }
-
-            listaComponentes.add(itemComponente);
+            listaComponentes.add(componente);
         }
         cursor.close();
         db.close();
@@ -89,6 +73,102 @@ public class ComponenteDAO {
         return listaComponentes;
     }
 
+    public Componente getComponente(long idComponente) {
+        SQLiteDatabase db = helper.getReadableDatabase();
 
+        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_COMPONENTE +
+                " WHERE " + DatabaseHelper.COLUMN_ID + " LIKE ?";
 
+        String idString = Long.toString(idComponente);
+
+        String[] argumentos = {idString};
+
+        Cursor cursor = db.rawQuery(comando, argumentos);
+
+        Componente componente = null;
+
+        if (cursor.moveToNext()) {
+
+            String tipoColumn = DatabaseHelper.COLUMN_TIPO;
+            int indexColumnTipo = cursor.getColumnIndex(tipoColumn);
+            String tipo = cursor.getString(indexColumnTipo);
+
+            String corColumn = DatabaseHelper.COLUMN_COR;
+            int indexColumnCor = cursor.getColumnIndex(corColumn);
+            String cor = cursor.getString(indexColumnCor);
+
+            String capacitanciaColumn = DatabaseHelper.COLUMN_CAPACITANCIA;
+            int indexColumnCapacitancia = cursor.getColumnIndex(capacitanciaColumn);
+            String capacitancia = cursor.getString(indexColumnCapacitancia);
+
+            String resistenciaColumn = DatabaseHelper.COLUMN_RESISTENCIA;
+            int indexColumnResistencia = cursor.getColumnIndex(resistenciaColumn);
+            String resistencia = cursor.getString(indexColumnResistencia);
+
+            Map propriedades = new HashMap();
+
+            if (Objects.equals(tipo, "resistor")) {
+
+                propriedades.put("tipo", ComponenteEnum.ComponenteTipo.RESISTOR.getNome());
+                propriedades.put("resistencia", ComponenteEnum.Resistencia.R330.getNome());
+
+            } else if (Objects.equals(tipo, "led")) {
+
+                propriedades.put("tipo", ComponenteEnum.ComponenteTipo.LED.getNome());
+                propriedades.put("cor", ComponenteEnum.Cor.VERDE.getNome());
+
+            } else if (Objects.equals(tipo, "capacitor")) {
+
+                propriedades.put("tipo", ComponenteEnum.ComponenteTipo.CAPACITOR.getNome());
+                propriedades.put("capacitancia", ComponenteEnum.Capacitancia.UF100.getNome());
+
+            }
+
+            ComponenteEspc compSpec = new ComponenteEspc(propriedades);
+
+            componente = new Componente();
+            componente.setComponenteEspc(compSpec);
+            componente.setId(idComponente);
+
+        }
+
+        return componente;
+    }
+
+    public List<Componente> getTodosComponentesProjeto(long idProjeto){
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_COMPONENTE_PROJETO +
+                " WHERE " + DatabaseHelper.COLUMN_PROJETO_ID + " LIKE ?";
+
+        String idString = Long.toString(idProjeto);
+
+        String[] argumentos = {idString};
+
+        Cursor cursor = db.rawQuery(comando, argumentos);
+
+        ArrayList<Componente> listaComponentesProjeto = new ArrayList<>();
+
+        String idComponenteColumn = DatabaseHelper.COLUMN_COMPONENTE_ID;
+        int indexColumnComponente = cursor.getColumnIndex(idComponenteColumn);
+
+        while (cursor.moveToNext()) {
+
+            long id = cursor.getLong(indexColumnComponente);
+
+            Componente componente = getComponente(id);
+
+            listaComponentesProjeto.add(componente);
+
+        }
+        cursor.close();
+        db.close();
+
+        return listaComponentesProjeto;
+
+    }
 }
+
+
+
+

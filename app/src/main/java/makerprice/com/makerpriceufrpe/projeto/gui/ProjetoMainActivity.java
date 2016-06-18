@@ -10,9 +10,11 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.util.List;
 
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.infra.Converter;
@@ -45,17 +47,12 @@ public class ProjetoMainActivity extends AppCompatActivity {
         TextView textViewDescricao = (TextView) findViewById(R.id.descricao_projeto_main);
         TextView textViewPlataforma = (TextView) findViewById(R.id.plataforma_projeto_main);
         TextView textViewAplicacao = (TextView) findViewById(R.id.aplicacao_projeto_main);
-        TextView textViewComp1 = (TextView) findViewById(R.id.comp1_projeto_main);
-        TextView textViewComp2 = (TextView) findViewById(R.id.comp2_projeto_main);
-        TextView textViewComp3 = (TextView) findViewById(R.id.comp3_projeto_main);
+        ListView listViewComponentes = (ListView) findViewById(R.id.lista_componentes_projeto);
 
         textViewNome.setText(projeto.getNome());
         textViewDescricao.setText(projeto.getDescricao());
         textViewPlataforma.setText(projeto.getPlataforma());
         textViewAplicacao.setText(projeto.getAplicacao());
-        textViewComp1.setText(projeto.getComponente_1());
-        textViewComp2.setText(projeto.getComponente_2());
-        textViewComp3.setText(projeto.getComponente_3());
 
         String imagemPrincipal = projeto.getImagens().get(0);
         Bitmap imagem = converter.StringToBitMap(imagemPrincipal);

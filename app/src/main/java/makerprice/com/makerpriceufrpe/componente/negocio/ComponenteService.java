@@ -15,8 +15,8 @@ public class ComponenteService {
 
     public ComponenteService (Context context) {componenteDAO = new ComponenteDAO(context);}
 
-    public ArrayList<String> getTodosComponentesSpinner() {
-        return componenteDAO.getTodosComponentesString();
+    public ArrayList<Componente> getTodosComponentesSpinner() {
+        return (ArrayList<Componente>) componenteDAO.getTodosComponentes();
     }
 
     public void inserirComponente(Componente componente) {

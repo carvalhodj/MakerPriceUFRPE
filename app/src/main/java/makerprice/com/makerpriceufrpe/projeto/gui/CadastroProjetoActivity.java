@@ -9,19 +9,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import makerprice.com.makerpriceufrpe.R;
+import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
 import makerprice.com.makerpriceufrpe.componente.negocio.ComponenteService;
+import makerprice.com.makerpriceufrpe.infra.ComponenteListAdapter;
 import makerprice.com.makerpriceufrpe.infra.Converter;
 import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
@@ -68,7 +76,9 @@ public class CadastroProjetoActivity extends AppCompatActivity {
         String descricaoString = descricao.getText().toString();
         String plataformaString = plataforma.getSelectedItem().toString();
         String aplicacaoString = aplicacao.getSelectedItem().toString();
-        String componente1String = componente1.getSelectedItem().toString();
+        Componente componente1String = (Componente) componente1.getSelectedItem();
+        String comp1 = Objects.toString(componente1String.getId(), null);
+        guiUtil.toastLong(this, comp1);
         String componente2String = componente2.getSelectedItem().toString();
         String componente3String = componente3.getSelectedItem().toString();
 
@@ -90,9 +100,6 @@ public class CadastroProjetoActivity extends AppCompatActivity {
         projeto.setDescricao(descricaoString);
         projeto.setPlataforma(plataformaString);
         projeto.setAplicacao(aplicacaoString);
-        projeto.setComponente_1(componente1String);
-        projeto.setComponente_2(componente2String);
-        projeto.setComponente_3(componente3String);
         projeto.setCriador(criador);
 
         projetoService.cadastrar(projeto);
@@ -118,13 +125,26 @@ public class CadastroProjetoActivity extends AppCompatActivity {
 
     public void loadSpinnerData(Spinner spinner) {
 
-        ArrayList<String> componentes = componenteService.getTodosComponentesSpinner();
+        ArrayList<Componente> componentes = componenteService.getTodosComponentesSpinner();
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item, componentes);
+        //ArrayList<String> componentesString = new ArrayList<>();
 
+        /*for (Componente comp : componentes) {
+            Map prop = comp.getComponenteEspc().getPropriedades();
+            Iterator<Map.Entry<String,String>> iterator = prop.entrySet().iterator();
+            String dado = "";
+            while (iterator.hasNext()) {
+                Map.Entry<String,String> entry = (Map.Entry<String,String>) iterator.next();
+                dado += entry.getValue() + " ";
+            }*/
+
+            //componentesString.add(dado);
+
+        ComponenteListAdapter dataAdapter = new ComponenteListAdapter(this, 0, componentes);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

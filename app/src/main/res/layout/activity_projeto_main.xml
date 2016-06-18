@@ -130,34 +130,15 @@
         android:background="@drawable/rectangule_blue"
         />
 
-    <TextView
-        android:id="@+id/comp1_projeto_main"
+    <ListView
+        android:id="@+id/lista_componentes_projeto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/empty_text"
-        android:textSize="16sp"
+        android:layout_height="56dp"
+        android:layout_below="@id/comp_titulo_projeto_main"
         android:layout_marginTop="18dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/comp_titulo_projeto_main" />
-    <TextView
-        android:id="@+id/comp2_projeto_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/empty_text"
-        android:textSize="16sp"
-        android:layout_marginTop="18dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/comp1_projeto_main" />
-
-    <TextView
-        android:id="@+id/comp3_projeto_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/empty_text"
-        android:textSize="16sp"
-        android:layout_marginTop="18dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/comp2_projeto_main" />
+        android:scrollbars="vertical">
+    </ListView>
 
 
 

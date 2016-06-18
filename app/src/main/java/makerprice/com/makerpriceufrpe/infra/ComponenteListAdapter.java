@@ -59,7 +59,7 @@ public class ComponenteListAdapter extends ArrayAdapter<Componente> {
             if (convertView == null) {
                 vi = inflater.inflate(R.layout.padrao_lista_componente, null);
                 holder = new ViewHolder();
-                holder.nome_componente_listagem = (TextView) vi.findViewById(R.id.nome_projeto_listagem);
+                holder.nome_componente_listagem = (TextView) vi.findViewById(R.id.nome_componente_listagem);
                 vi.setTag(holder);
 
             } else {

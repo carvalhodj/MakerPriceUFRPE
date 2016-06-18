@@ -48,6 +48,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             COLUMN_TIPO, COLUMN_COR, COLUMN_CAPACITANCIA, COLUMN_RESISTENCIA
     };
 
+    public static final String TABLE_COMPONENTE_PROJETO = "componente_projeto";
+    public static final String COLUMN_COMPONENTE_ID = "componente_id";
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -74,9 +77,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_DESCRICAO + " TEXT NOT NULL, " +
                 COLUMN_PLATAFORMA + " TEXT NOT NULL, " +
                 COLUMN_APLICACAO + " TEXT NOT NULL, " +
-                COLUMN_COMP1 + " TEXT NOT NULL, " +
-                COLUMN_COMP2 + " TEXT NOT NULL, " +
-                COLUMN_COMP3 + " TEXT NOT NULL, " +
                 COLUMN_PESSOAFISICA_ID + " INTEGER);");
 
         sqLiteDatabase.execSQL(
@@ -98,7 +98,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_COR + " TEXT, " +
                         COLUMN_CAPACITANCIA + " TEXT, " +
                         COLUMN_RESISTENCIA + " TEXT);");
+
+        sqLiteDatabase.execSQL(
+                "CREATE TABLE " + TABLE_COMPONENTE_PROJETO + " (" +
+                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        COLUMN_PROJETO_ID + " INTEGER NOT NULL, " +
+                        COLUMN_COMPONENTE_ID + " INTEGER NOT NULL);");
     }
+
 
 
 

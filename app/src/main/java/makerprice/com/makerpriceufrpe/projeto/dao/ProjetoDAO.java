@@ -41,15 +41,6 @@ public class ProjetoDAO {
         String aplicacaoColumn = DatabaseHelper.COLUMN_APLICACAO;
         String aplicacao = projeto.getAplicacao();
 
-        String comp1Column = DatabaseHelper.COLUMN_COMP1;
-        String comp1 = projeto.getComponente_1();
-
-        String comp2Column = DatabaseHelper.COLUMN_COMP2;
-        String comp2 = projeto.getComponente_2();
-
-        String comp3Column = DatabaseHelper.COLUMN_COMP3;
-        String comp3 = projeto.getComponente_3();
-
         PessoaFisica criador = projeto.getCriador();
         long idCriador = criador.getID();
 
@@ -61,9 +52,6 @@ public class ProjetoDAO {
         values.put(descricaoColumn, descricao);
         values.put(plataformaColumn, plataforma);
         values.put(aplicacaoColumn, aplicacao);
-        values.put(comp1Column, comp1);
-        values.put(comp2Column, comp2);
-        values.put(comp3Column, comp3);
         values.put(criadorColumn, idCriadorString);
 
         String tabela = DatabaseHelper.TABLE_PROJETO;
@@ -139,9 +127,9 @@ public class ProjetoDAO {
             projeto.setDescricao(descricao);
             projeto.setPlataforma(plataforma);
             projeto.setAplicacao(aplicacao);
-            projeto.setComponente_1(comp1);
-            projeto.setComponente_2(comp2);
-            projeto.setComponente_3(comp3);
+            //projeto.setComponente_1(comp1);
+            //projeto.setComponente_2(comp2);
+            //projeto.setComponente_3(comp3);
             projeto.setCriador(criador);
             projeto.setImagens(listaImagensProjeto);
         }
@@ -195,9 +183,6 @@ public class ProjetoDAO {
             projeto.setDescricao(descricao);
             projeto.setPlataforma(plataforma);
             projeto.setAplicacao(aplicacao);
-            projeto.setComponente_1(comp1);
-            projeto.setComponente_2(comp2);
-            projeto.setComponente_3(comp3);
 
             listaProjetos.add(projeto);
 
@@ -266,9 +251,6 @@ public class ProjetoDAO {
             projeto.setDescricao(descricao);
             projeto.setPlataforma(plataforma);
             projeto.setAplicacao(aplicacao);
-            projeto.setComponente_1(comp1);
-            projeto.setComponente_2(comp2);
-            projeto.setComponente_3(comp3);
             projeto.setCriador(criador);
             projeto.setImagens(listaImagensProjeto);
 

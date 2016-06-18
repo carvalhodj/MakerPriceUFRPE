@@ -21,4 +21,5 @@ public final class GuiUtil {
         Toast.makeText(context, texto, Toast.LENGTH_SHORT).show();
     }
 
+
 }

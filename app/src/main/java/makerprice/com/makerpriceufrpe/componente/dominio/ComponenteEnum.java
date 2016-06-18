@@ -4,62 +4,63 @@ package makerprice.com.makerpriceufrpe.componente.dominio;
 public class ComponenteEnum {
 
     public enum ComponenteTipo{
-        RESISTOR, LED, CAPACITOR;
-
-        public String toString(){
-            switch(this){
-                case RESISTOR: return "resistor";
-                case LED: return "led";
-                case CAPACITOR: return "capacitor";
-                default: return "não especificado";
-            }
-        }
-
-    }
-
-    public enum Cor{
-        VERMELHO("vermelho", "minha cor vermelha"),VERDE("verde", "minha cor verde");
+        RESISTOR("resistor"), LED("led"), CAPACITOR("capacitor");
         private String nome;
-        private String descricao;
-        Cor(String nome, String descricao) {
+
+        ComponenteTipo(String nome){
             this.nome = nome;
-            this.descricao = descricao;
         }
 
         public String getNome() {
             return nome;
         }
 
-        public String getDescricao() {
-            return this.descricao;
-
-
-        }
     }
 
-    public enum Resistencia{
-        R220,R330;
+    public enum Cor{
+        VERMELHO("vermelho"),VERDE("verde");
+        private String nome;
 
-        public String toString(){
-            switch(this){
-                case R220: return "220R";
-                case R330: return "330R";
-                default: return "não especificado";
-            }
+        Cor(String nome) {
+            this.nome = nome;
+        }
+
+        public String getNome() {
+            return nome;
         }
 
     }
 
-    public enum Capacitancia{
-        UF1, UF100;
+    public enum Resistencia{
+        R220("220R"),R330("330R");
 
-        public String toString(){
-            switch (this){
-                case UF1: return "1uF";
-                case UF100: return "100uF";
-                default: return "não especificado";
-            }
+        private String nome;
+
+        Resistencia(String nome){
+            this.nome = nome;
         }
+
+        public String getNome() {
+            return nome;
+        }
+
+    }
+
+
+
+    public enum Capacitancia {
+        UF1("1uF"), UF100("100uF");
+
+        private String nome;
+
+        Capacitancia(String nome) {
+            this.nome = nome;
+        }
+
+        public String getNome() {
+            return nome;
+        }
+
     }
 
 }

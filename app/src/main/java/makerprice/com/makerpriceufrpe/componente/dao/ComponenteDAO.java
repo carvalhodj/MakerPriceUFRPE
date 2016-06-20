@@ -16,6 +16,7 @@ import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteEnum;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteEspc;
 import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
+import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 
 public class ComponenteDAO {
 
@@ -166,6 +167,64 @@ public class ComponenteDAO {
 
         return listaComponentesProjeto;
 
+    }
+
+    public void vincularProjetoComponentes(Projeto projeto){
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        String idProjetoColumn = DatabaseHelper.COLUMN_PROJETO_ID;
+        String idComponenteColumn = DatabaseHelper.COLUMN_COMPONENTE_ID;
+        String tabela = DatabaseHelper.TABLE_COMPONENTE_PROJETO;
+
+        ArrayList<Componente> componentes = projeto.getComponentes();
+        long idProjeto = projeto.getId();
+
+        for (Componente comp : componentes){
+
+            long idComponente = comp.getId();
+
+            values.put(idProjetoColumn, idProjeto);
+            values.put(idComponenteColumn, idComponente);
+
+            long id = db.insert(tabela, null, values);
+
+        }
+
+        db.close();
+
+    }
+
+    public List<Componente> getComponentesUnicoProjeto(long idProjeto){
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_COMPONENTE_PROJETO +
+                " WHERE " + DatabaseHelper.COLUMN_PROJETO_ID + " LIKE ? ";
+
+        String[] argumentos = {String.valueOf(idProjeto)};
+
+        Cursor cursor = db.rawQuery(comando, argumentos);
+
+        List<Componente> componentes = new ArrayList<>();
+        Componente componente;
+
+        while (cursor.moveToNext()) {
+
+            String idComponenteColumn = DatabaseHelper.COLUMN_COMPONENTE_ID;
+            int indexColumnComponenteId = cursor.getColumnIndex(idComponenteColumn);
+            long idComponente = cursor.getLong(indexColumnComponenteId);
+
+            componente = getComponente(idComponente);
+
+            componentes.add(componente);
+        }
+        cursor.close();
+        db.close();
+
+        return componentes;
     }
 }
 

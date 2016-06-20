@@ -1,6 +1,7 @@
 package makerprice.com.makerpriceufrpe.projeto.dao;
 
 
+import android.content.ClipboardManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,6 +10,8 @@ import android.provider.ContactsContract;
 
 import java.util.ArrayList;
 
+import makerprice.com.makerpriceufrpe.componente.dao.ComponenteDAO;
+import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
 import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 import makerprice.com.makerpriceufrpe.usuario.dao.PessoaFisicaDAO;
@@ -17,10 +20,12 @@ import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
 public class ProjetoDAO {
     private DatabaseHelper helper;
     private PessoaFisicaDAO pessoaFisicaDAO;
+    private ComponenteDAO componenteDAO;
 
     public ProjetoDAO(Context context) {
         helper = new DatabaseHelper(context);
         pessoaFisicaDAO = new PessoaFisicaDAO(context);
+        componenteDAO = new ComponenteDAO(context);
     }
 
     public long inserir(Projeto projeto){
@@ -70,6 +75,8 @@ public class ProjetoDAO {
             db.insert(tabelaImagem, null, valuesImagens);
         }
 
+        componenteDAO.vincularProjetoComponentes(projeto);
+
         db.close();
         return id;
     }
@@ -105,21 +112,11 @@ public class ProjetoDAO {
             int indexColumnAplicacao= cursor.getColumnIndex(aplicacaoColumn);
             String aplicacao = cursor.getString(indexColumnAplicacao);
 
-            String comp1Column= DatabaseHelper.COLUMN_COMP1;
-            int indexColumnComp1= cursor.getColumnIndex(comp1Column);
-            String comp1 = cursor.getString(indexColumnComp1);
-
-            String comp2Column = DatabaseHelper.COLUMN_COMP2;
-            int indexColumnComp2= cursor.getColumnIndex(comp2Column);
-            String comp2 = cursor.getString(indexColumnComp2);
-
-            String comp3Column= DatabaseHelper.COLUMN_COMP3;
-            int indexColumnComp3= cursor.getColumnIndex(comp3Column);
-            String comp3 = cursor.getString(indexColumnComp3);
-
             ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id);
 
             PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
+
+            ArrayList<Componente> listaComponentes = (ArrayList<Componente>) componenteDAO.getComponentesUnicoProjeto(id);
 
             projeto = new Projeto();
             projeto.setId(id);
@@ -127,11 +124,9 @@ public class ProjetoDAO {
             projeto.setDescricao(descricao);
             projeto.setPlataforma(plataforma);
             projeto.setAplicacao(aplicacao);
-            //projeto.setComponente_1(comp1);
-            //projeto.setComponente_2(comp2);
-            //projeto.setComponente_3(comp3);
             projeto.setCriador(criador);
             projeto.setImagens(listaImagensProjeto);
+            projeto.setComponentes(listaComponentes);
         }
         cursor.close();
         db.close();
@@ -150,6 +145,10 @@ public class ProjetoDAO {
 
         while (cursor.moveToNext()) {
 
+            String idColumn = DatabaseHelper.COLUMN_ID;
+            int indexColumnId = cursor.getColumnIndex(idColumn);
+            long id = cursor.getLong(indexColumnId);
+
             String nomeColumn= DatabaseHelper.COLUMN_NAME;
             int indexColumnNome= cursor.getColumnIndex(nomeColumn);
             String nome = cursor.getString(indexColumnNome);
@@ -166,23 +165,26 @@ public class ProjetoDAO {
             int indexColumnAplicacao= cursor.getColumnIndex(aplicacaoColumn);
             String aplicacao = cursor.getString(indexColumnAplicacao);
 
-            String comp1Column= DatabaseHelper.COLUMN_COMP1;
-            int indexColumnComp1= cursor.getColumnIndex(comp1Column);
-            String comp1 = cursor.getString(indexColumnComp1);
+            String idCriadorColumn = DatabaseHelper.COLUMN_PESSOAFISICA_ID;
+            int indexColumnCriadorId = cursor.getColumnIndex(idCriadorColumn);
+            long idCriador = cursor.getLong(indexColumnCriadorId);
 
-            String comp2Column = DatabaseHelper.COLUMN_COMP2;
-            int indexColumnComp2= cursor.getColumnIndex(comp2Column);
-            String comp2 = cursor.getString(indexColumnComp2);
+            ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id);
 
-            String comp3Column= DatabaseHelper.COLUMN_COMP3;
-            int indexColumnComp3= cursor.getColumnIndex(comp3Column);
-            String comp3 = cursor.getString(indexColumnComp3);
+            PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
+
+            ArrayList<Componente> listaComponentes = (ArrayList<Componente>) componenteDAO.getComponentesUnicoProjeto(id);
+
 
             Projeto projeto = new Projeto();
+            projeto.setId(id);
             projeto.setNome(nome);
             projeto.setDescricao(descricao);
             projeto.setPlataforma(plataforma);
             projeto.setAplicacao(aplicacao);
+            projeto.setCriador(criador);
+            projeto.setImagens(listaImagensProjeto);
+            projeto.setComponentes(listaComponentes);
 
             listaProjetos.add(projeto);
 
@@ -229,21 +231,12 @@ public class ProjetoDAO {
             int indexColumnAplicacao= cursor.getColumnIndex(aplicacaoColumn);
             String aplicacao = cursor.getString(indexColumnAplicacao);
 
-            String comp1Column= DatabaseHelper.COLUMN_COMP1;
-            int indexColumnComp1= cursor.getColumnIndex(comp1Column);
-            String comp1 = cursor.getString(indexColumnComp1);
-
-            String comp2Column = DatabaseHelper.COLUMN_COMP2;
-            int indexColumnComp2= cursor.getColumnIndex(comp2Column);
-            String comp2 = cursor.getString(indexColumnComp2);
-
-            String comp3Column= DatabaseHelper.COLUMN_COMP3;
-            int indexColumnComp3= cursor.getColumnIndex(comp3Column);
-            String comp3 = cursor.getString(indexColumnComp3);
 
             ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id);
 
             PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
+
+            ArrayList<Componente> listaComponentes = (ArrayList<Componente>) componenteDAO.getComponentesUnicoProjeto(id);
 
             Projeto projeto = new Projeto();
             projeto.setId(id);
@@ -253,6 +246,7 @@ public class ProjetoDAO {
             projeto.setAplicacao(aplicacao);
             projeto.setCriador(criador);
             projeto.setImagens(listaImagensProjeto);
+            projeto.setComponentes(listaComponentes);
 
             listaProjetos.add(projeto);
 

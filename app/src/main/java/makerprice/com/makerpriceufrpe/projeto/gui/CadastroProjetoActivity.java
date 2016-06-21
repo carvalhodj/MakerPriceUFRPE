@@ -76,11 +76,9 @@ public class CadastroProjetoActivity extends AppCompatActivity {
         String descricaoString = descricao.getText().toString();
         String plataformaString = plataforma.getSelectedItem().toString();
         String aplicacaoString = aplicacao.getSelectedItem().toString();
-        Componente componente1String = (Componente) componente1.getSelectedItem();
-        String comp1 = Objects.toString(componente1String.getId(), null);
-        guiUtil.toastLong(this, comp1);
-        String componente2String = componente2.getSelectedItem().toString();
-        String componente3String = componente3.getSelectedItem().toString();
+        Componente comp1 = (Componente) componente1.getSelectedItem();
+        Componente comp2 = (Componente) componente2.getSelectedItem();
+        Componente comp3 = (Componente) componente3.getSelectedItem();
 
         if (validacaoUtil.isFieldEmpty(nome)){
             nome.requestFocus();
@@ -96,11 +94,17 @@ public class CadastroProjetoActivity extends AppCompatActivity {
 
         PessoaFisica criador = sessao.getPessoaFisica();
 
+        ArrayList<Componente> listaComponentes = new ArrayList<>();
+        listaComponentes.add(comp1);
+        listaComponentes.add(comp2);
+        listaComponentes.add(comp3);
+
         projeto.setNome(nomeString);
         projeto.setDescricao(descricaoString);
         projeto.setPlataforma(plataformaString);
         projeto.setAplicacao(aplicacaoString);
         projeto.setCriador(criador);
+        projeto.setComponentes(listaComponentes);
 
         projetoService.cadastrar(projeto);
         guiUtil.toastLong(getApplicationContext(), "Projeto cadastrado com sucesso");
@@ -124,25 +128,11 @@ public class CadastroProjetoActivity extends AppCompatActivity {
     }
 
     public void loadSpinnerData(Spinner spinner) {
-
         ArrayList<Componente> componentes = componenteService.getTodosComponentesSpinner();
-
-        //ArrayList<String> componentesString = new ArrayList<>();
-
-        /*for (Componente comp : componentes) {
-            Map prop = comp.getComponenteEspc().getPropriedades();
-            Iterator<Map.Entry<String,String>> iterator = prop.entrySet().iterator();
-            String dado = "";
-            while (iterator.hasNext()) {
-                Map.Entry<String,String> entry = (Map.Entry<String,String>) iterator.next();
-                dado += entry.getValue() + " ";
-            }*/
-
-            //componentesString.add(dado);
-
         ComponenteListAdapter dataAdapter = new ComponenteListAdapter(this, 0, componentes);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
+
     }
 
 

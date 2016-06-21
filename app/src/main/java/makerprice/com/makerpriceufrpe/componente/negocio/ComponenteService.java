@@ -4,6 +4,7 @@ package makerprice.com.makerpriceufrpe.componente.negocio;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import makerprice.com.makerpriceufrpe.componente.dao.ComponenteDAO;
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
@@ -22,6 +23,10 @@ public class ComponenteService {
     public void inserirComponente(Componente componente) {
         long id = componenteDAO.inserir(componente);
         componente.setId(id);
+    }
+
+    public List<Componente> getComponentesUnicoProjeto(long idProjeto) {
+        return componenteDAO.getComponentesUnicoProjeto(idProjeto);
     }
 
 

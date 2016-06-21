@@ -49,7 +49,6 @@ public class ProjetoDAO {
         PessoaFisica criador = projeto.getCriador();
         long idCriador = criador.getID();
 
-
         String criadorColumn = DatabaseHelper.COLUMN_PESSOAFISICA_ID;
         String idCriadorString = Long.toString(idCriador);
 
@@ -63,6 +62,8 @@ public class ProjetoDAO {
         String tabelaImagem = DatabaseHelper.TABLE_IMAGEM;
 
         long id = db.insert(tabela, null, values);
+
+        projeto.setId(id);
 
         ArrayList<String> projetoImagens = projeto.getImagens();
 

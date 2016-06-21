@@ -16,7 +16,7 @@ import makerprice.com.makerpriceufrpe.loja.negocio.LojaService;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
-public class LoginActivity extends AppCompatActivity {
+public class            LoginActivity extends AppCompatActivity {
     UsuarioService usuarioService = new UsuarioService(this);
     LojaService lojaService = new LojaService(this);
     GuiUtil guiUtil = GuiUtil.getGuiUtil();

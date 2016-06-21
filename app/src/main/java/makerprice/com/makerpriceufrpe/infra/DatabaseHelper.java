@@ -1,5 +1,6 @@
 package makerprice.com.makerpriceufrpe.infra;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -50,6 +51,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_COMPONENTE_PROJETO = "componente_projeto";
     public static final String COLUMN_COMPONENTE_ID = "componente_id";
+
+    public static final String TABLE_COMPONENTE_LOJA = "componente_loja";
+    public static final String COLUMN_LOJA_ID = "loja_id";
+    public static final String COLUMN_PRECO = "preco";
 
 
     public DatabaseHelper(Context context) {
@@ -104,11 +109,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         COLUMN_PROJETO_ID + " INTEGER NOT NULL, " +
                         COLUMN_COMPONENTE_ID + " INTEGER NOT NULL);");
+
+        sqLiteDatabase.execSQL(
+                "CREATE TABLE " + TABLE_COMPONENTE_LOJA + " (" +
+                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREM    ENT," +
+                        COLUMN_LOJA_ID + " INTEGER NOT NULL, " +
+                        COLUMN_COMPONENTE_ID + " INTEGER NOT NULL, " +
+                        COLUMN_PRECO + " INTEGER NOT NULL);");
+
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (1, 1, 1);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (1, 1, 2);");
     }
-
-
-
-
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -134,4 +149,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static String getColumnLinkimagem() {return  COLUMN_LINKIMAGEM;}
 
     public static String getColumnAjson() {return COLUMN_AJSON;}
+
 }

@@ -15,16 +15,19 @@ import java.util.Objects;
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteEnum;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteEspc;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteLoja;
 import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
+import makerprice.com.makerpriceufrpe.loja.dao.LojaDAO;
+import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 
 public class ComponenteDAO {
-
     private DatabaseHelper helper;
+    private LojaDAO lojaDAO;
 
     public ComponenteDAO(Context context) {
         helper = new DatabaseHelper(context);
-
+        lojaDAO = new LojaDAO(context);
     }
 
     public long inserir(Componente componente){
@@ -225,6 +228,66 @@ public class ComponenteDAO {
         db.close();
 
         return componentes;
+    }
+
+    public List<ComponenteLoja> getPrecoProjeto(Projeto projeto) {
+        ArrayList<Componente> listaComponentesProjeto = projeto.getComponentes();
+        ArrayList<ComponenteLoja> listaComponenteLoja = new ArrayList<>();
+        ComponenteLoja componenteLoja;
+
+        for (Componente comp : listaComponentesProjeto) {
+            componenteLoja = getMinimo(comp);
+            listaComponenteLoja.add(componenteLoja);
+        }
+
+        return listaComponenteLoja;
+    }
+
+    public ComponenteLoja getMinimo(Componente componente) {
+        long idComponente = componente.getId();
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_COMPONENTE_LOJA +
+                " WHERE " + DatabaseHelper.COLUMN_COMPONENTE_ID + " LIKE ? " +
+                "ORDER BY " + DatabaseHelper.COLUMN_PRECO + " ASC";
+
+        String[] argumentos = {String.valueOf(idComponente)};
+
+        Cursor cursor = db.rawQuery(comando, argumentos);
+
+        Loja loja = null;
+
+        ComponenteLoja componenteLoja = null;
+
+        if (cursor.moveToNext()) {
+
+            String idColumn = DatabaseHelper.COLUMN_ID;
+            int indexColumnId = cursor.getColumnIndex(idColumn);
+            long id = cursor.getLong(indexColumnId);
+
+            String idLojaColumn = DatabaseHelper.COLUMN_LOJA_ID;
+            int indexColumnLojaId = cursor.getColumnIndex(idLojaColumn);
+            long idLoja = cursor.getLong(indexColumnLojaId);
+
+            String precoColumn = DatabaseHelper.COLUMN_PRECO;
+            int indexColumnPreco = cursor.getColumnIndex(precoColumn);
+            int preco = cursor.getInt(indexColumnPreco);
+
+            loja = lojaDAO.getLoja(idLoja);
+
+            componenteLoja = new ComponenteLoja();
+            componenteLoja.setId(id);
+            componenteLoja.setComponente(componente);
+            componenteLoja.setLoja(loja);
+            componenteLoja.setPreco(preco);
+
+
+        }
+        cursor.close();
+        db.close();
+
+        return componenteLoja;
     }
 }
 

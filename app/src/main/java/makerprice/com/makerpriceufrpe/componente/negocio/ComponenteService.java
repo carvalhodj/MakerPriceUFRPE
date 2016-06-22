@@ -8,7 +8,9 @@ import java.util.List;
 
 import makerprice.com.makerpriceufrpe.componente.dao.ComponenteDAO;
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteLoja;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
+import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 
 public class ComponenteService {
     private Sessao sessao = Sessao.getInstancia();
@@ -27,6 +29,10 @@ public class ComponenteService {
 
     public List<Componente> getComponentesUnicoProjeto(long idProjeto) {
         return componenteDAO.getComponentesUnicoProjeto(idProjeto);
+    }
+
+    public List<ComponenteLoja> getPrecoProjeto(Projeto projeto) {
+        return componenteDAO.getPrecoProjeto(projeto);
     }
 
 

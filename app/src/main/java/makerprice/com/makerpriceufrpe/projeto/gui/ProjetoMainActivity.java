@@ -20,8 +20,10 @@ import java.util.List;
 
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteLoja;
 import makerprice.com.makerpriceufrpe.componente.negocio.ComponenteService;
 import makerprice.com.makerpriceufrpe.infra.ComponenteListAdapter;
+import makerprice.com.makerpriceufrpe.infra.ComponenteLojaListAdapter;
 import makerprice.com.makerpriceufrpe.infra.Converter;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
@@ -54,6 +56,7 @@ public class ProjetoMainActivity extends AppCompatActivity {
         TextView textViewDescricao = (TextView) findViewById(R.id.descricao_projeto_main);
         TextView textViewPlataforma = (TextView) findViewById(R.id.plataforma_projeto_main);
         TextView textViewAplicacao = (TextView) findViewById(R.id.aplicacao_projeto_main);
+        TextView textViewPrecoTotal = (TextView) findViewById(R.id.preco_total_projeto);
         ListView listViewComponentes = (ListView) findViewById(R.id.lista_componentes_projeto);
 
         textViewNome.setText(projeto.getNome());
@@ -61,10 +64,16 @@ public class ProjetoMainActivity extends AppCompatActivity {
         textViewPlataforma.setText(projeto.getPlataforma());
         textViewAplicacao.setText(projeto.getAplicacao());
 
-        ArrayList<Componente> listaComponentes = (ArrayList<Componente>) componenteService.getComponentesUnicoProjeto(projeto.getId());
-        ComponenteListAdapter componenteAdapter = new ComponenteListAdapter(this, 0, listaComponentes);
-        listViewComponentes.setAdapter(componenteAdapter);
+        ArrayList<ComponenteLoja> listaComponenteLoja = (ArrayList<ComponenteLoja>) componenteService.getPrecoProjeto(projeto);
+        ComponenteLojaListAdapter componenteLojaAdapter = new ComponenteLojaListAdapter(this, 0, listaComponenteLoja);
+        listViewComponentes.setAdapter(componenteLojaAdapter);
         listViewComponentes.setOnItemClickListener(new ListClickHandler());
+
+        int precoTotal = 0;
+        for (ComponenteLoja componenteLoja : listaComponenteLoja) {
+            precoTotal += componenteLoja.getPreco();
+        }
+        textViewPrecoTotal.setText("R$ " + String.valueOf(precoTotal));
 
         String imagemPrincipal = projeto.getImagens().get(0);
         Bitmap imagem = converter.StringToBitMap(imagemPrincipal);

@@ -17,7 +17,7 @@ public class LojaDAO {
 
     public LojaDAO(Context context) {
         helper = new DatabaseHelper(context);
-        usuarioDAO=new UsuarioDAO(context);
+        usuarioDAO = new UsuarioDAO(context);
     }
 
     public Loja getLoja(long id) {
@@ -104,6 +104,7 @@ public class LojaDAO {
 
 
     }
+
     public long inserir(Loja loja){
         SQLiteDatabase db = helper.getWritableDatabase();
 

@@ -112,17 +112,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(
                 "CREATE TABLE " + TABLE_COMPONENTE_LOJA + " (" +
-                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREM    ENT," +
+                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         COLUMN_LOJA_ID + " INTEGER NOT NULL, " +
                         COLUMN_COMPONENTE_ID + " INTEGER NOT NULL, " +
                         COLUMN_PRECO + " INTEGER NOT NULL);");
 
         sqLiteDatabase.execSQL(
                 "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
-                        "VALUES (1, 1, 1);");
+                        "VALUES (1, 1, 30);");
         sqLiteDatabase.execSQL(
                 "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
-                        "VALUES (1, 1, 2);");
+                        "VALUES (2, 1, 60);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (2, 2, 20);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (1, 2, 40);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (1, 3, 25);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (2, 3, 35);");
+
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,10 +22,13 @@ import java.util.List;
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteLoja;
+import makerprice.com.makerpriceufrpe.componente.gui.ComponenteActivity;
+import makerprice.com.makerpriceufrpe.componente.negocio.Comparador;
 import makerprice.com.makerpriceufrpe.componente.negocio.ComponenteService;
 import makerprice.com.makerpriceufrpe.infra.ComponenteListAdapter;
 import makerprice.com.makerpriceufrpe.infra.ComponenteLojaListAdapter;
 import makerprice.com.makerpriceufrpe.infra.Converter;
+import makerprice.com.makerpriceufrpe.infra.GuiUtil;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 import makerprice.com.makerpriceufrpe.projeto.negocio.ProjetoService;
@@ -37,6 +41,8 @@ public class ProjetoMainActivity extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
     private Projeto projeto;
     private Converter converter = Converter.getInstancia();
+    private Comparador comparador = new Comparador(this);
+    private GuiUtil guiUtil = GuiUtil.getGuiUtil();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +70,20 @@ public class ProjetoMainActivity extends AppCompatActivity {
         textViewPlataforma.setText(projeto.getPlataforma());
         textViewAplicacao.setText(projeto.getAplicacao());
 
-        ArrayList<ComponenteLoja> listaComponenteLoja = (ArrayList<ComponenteLoja>) componenteService.getPrecoProjeto(projeto);
+        ArrayList<ComponenteLoja> listaComponenteLoja = (ArrayList<ComponenteLoja>) comparador.getPrecoProjeto(projeto);
         ComponenteLojaListAdapter componenteLojaAdapter = new ComponenteLojaListAdapter(this, 0, listaComponenteLoja);
         listViewComponentes.setAdapter(componenteLojaAdapter);
-        listViewComponentes.setOnItemClickListener(new ListClickHandler());
+        //listViewComponentes.setOnItemClickListener(new ListClickHandler());
+        listViewComponentes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ComponenteLoja componenteLoja = (ComponenteLoja) parent.getAdapter().getItem(position);
+
+                Intent intent = new Intent(ProjetoMainActivity.this, ComponenteActivity.class);
+                intent.putExtra("selected-item", String.valueOf(componenteLoja.getComponente().getId()));
+                startActivity(intent);
+            }
+        });
 
         int precoTotal = 0;
         for (ComponenteLoja componenteLoja : listaComponenteLoja) {
@@ -90,18 +106,4 @@ public class ProjetoMainActivity extends AppCompatActivity {
         }
     }
 
-    public class ListClickHandler implements AdapterView.OnItemClickListener{
-
-        @Override
-        public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
-
-            //TextView listText = (TextView) view.findViewById(R.id.nome_componente_listagem);
-            //String text = listText.getText().toString();
-
-            Intent intent = new Intent(ProjetoMainActivity.this, MainActivity.class);
-
-            //intent.putExtra("selected-item", text);
-            startActivity(intent);
-        }
-    }
 }

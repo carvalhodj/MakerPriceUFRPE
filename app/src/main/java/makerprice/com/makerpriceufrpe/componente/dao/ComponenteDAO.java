@@ -230,19 +230,6 @@ public class ComponenteDAO {
         return componentes;
     }
 
-    public List<ComponenteLoja> getPrecoProjeto(Projeto projeto) {
-        ArrayList<Componente> listaComponentesProjeto = projeto.getComponentes();
-        ArrayList<ComponenteLoja> listaComponenteLoja = new ArrayList<>();
-        ComponenteLoja componenteLoja;
-
-        for (Componente comp : listaComponentesProjeto) {
-            componenteLoja = getMinimo(comp);
-            listaComponenteLoja.add(componenteLoja);
-        }
-
-        return listaComponenteLoja;
-    }
-
     public ComponenteLoja getMinimo(Componente componente) {
         long idComponente = componente.getId();
 
@@ -288,6 +275,57 @@ public class ComponenteDAO {
         db.close();
 
         return componenteLoja;
+    }
+
+    public List<ComponenteLoja> getComponenteLojas(Componente componente) {
+        long idComponente = componente.getId();
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_COMPONENTE_LOJA +
+                " WHERE " + DatabaseHelper.COLUMN_COMPONENTE_ID + " LIKE ? " +
+                "ORDER BY " + DatabaseHelper.COLUMN_PRECO + " ASC";
+
+        String[] argumentos = {String.valueOf(idComponente)};
+
+        Cursor cursor = db.rawQuery(comando, argumentos);
+
+        Loja loja = null;
+
+        ComponenteLoja componenteLoja = null;
+
+        ArrayList<ComponenteLoja> listaComponenteLoja = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+
+            String idColumn = DatabaseHelper.COLUMN_ID;
+            int indexColumnId = cursor.getColumnIndex(idColumn);
+            long id = cursor.getLong(indexColumnId);
+
+            String idLojaColumn = DatabaseHelper.COLUMN_LOJA_ID;
+            int indexColumnLojaId = cursor.getColumnIndex(idLojaColumn);
+            long idLoja = cursor.getLong(indexColumnLojaId);
+
+            String precoColumn = DatabaseHelper.COLUMN_PRECO;
+            int indexColumnPreco = cursor.getColumnIndex(precoColumn);
+            int preco = cursor.getInt(indexColumnPreco);
+
+            loja = lojaDAO.getLoja(idLoja);
+
+            componenteLoja = new ComponenteLoja();
+            componenteLoja.setId(id);
+            componenteLoja.setComponente(componente);
+            componenteLoja.setLoja(loja);
+            componenteLoja.setPreco(preco);
+
+            listaComponenteLoja.add(componenteLoja);
+
+
+        }
+        cursor.close();
+        db.close();
+
+        return listaComponenteLoja;
     }
 }
 

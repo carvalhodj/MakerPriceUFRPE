@@ -18,7 +18,6 @@ import makerprice.com.makerpriceufrpe.usuario.negocio.UsuarioService;
 
 public class LoginActivity extends AppCompatActivity {
     UsuarioService usuarioService = new UsuarioService(this);
-    LojaService lojaService = new LojaService(this);
     GuiUtil guiUtil = GuiUtil.getGuiUtil();
     Validacao validacaoUtil = Validacao.getValidacaoUtil();
     private Sessao sessao = Sessao.getInstancia();
@@ -57,13 +56,12 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             try {
-                    Usuario usuario = usuarioService.login(usuarioEmailString, usuarioSenhaString);
+                    usuarioService.login(usuarioEmailString, usuarioSenhaString);
                     if (sessao.getPessoaFisica()!=null){
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                     }
                     else{
-                        lojaService.login(usuario);
                         Intent intent = new Intent(getApplicationContext(), LojaMainActivity.class);
                         startActivity(intent);
                     }

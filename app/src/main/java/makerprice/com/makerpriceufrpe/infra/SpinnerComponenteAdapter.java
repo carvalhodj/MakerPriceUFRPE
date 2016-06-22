@@ -11,9 +11,6 @@ import java.util.ArrayList;
 
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
 
-/**
- * Created by d3jota on 17/06/16.
- */
 public class SpinnerComponenteAdapter extends ArrayAdapter<Componente> {
 
     // Your sent context

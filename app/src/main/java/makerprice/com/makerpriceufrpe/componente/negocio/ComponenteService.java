@@ -31,9 +31,8 @@ public class ComponenteService {
         return componenteDAO.getComponentesUnicoProjeto(idProjeto);
     }
 
-    public List<ComponenteLoja> getPrecoProjeto(Projeto projeto) {
-        return componenteDAO.getPrecoProjeto(projeto);
+    public Componente getComponente(long id) {
+        return componenteDAO.getComponente(id);
     }
-
 
 }

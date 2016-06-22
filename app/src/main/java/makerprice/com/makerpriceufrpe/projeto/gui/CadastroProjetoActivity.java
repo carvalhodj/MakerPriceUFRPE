@@ -148,7 +148,7 @@ public class CadastroProjetoActivity extends AppCompatActivity {
                 projeto.getImagens().add(imagemBitmapString);
                 guiUtil.toastShort(getApplicationContext(), "Imagem adicionada");
             } catch (IOException e) {
-                e.printStackTrace();
+                guiUtil.toastLong(getApplicationContext(), "Erro ao adicionar a imagem. Tente novamente.");
             }
 
 

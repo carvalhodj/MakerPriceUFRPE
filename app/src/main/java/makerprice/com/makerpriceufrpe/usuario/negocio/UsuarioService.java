@@ -4,6 +4,7 @@ import android.content.Context;
 
 import makerprice.com.makerpriceufrpe.infra.Criptografia;
 import makerprice.com.makerpriceufrpe.infra.Sessao;
+import makerprice.com.makerpriceufrpe.loja.negocio.LojaService;
 import makerprice.com.makerpriceufrpe.usuario.dao.PessoaFisicaDAO;
 import makerprice.com.makerpriceufrpe.usuario.dao.UsuarioDAO;
 import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
@@ -13,16 +14,18 @@ public class UsuarioService  {
     private Sessao sessao = Sessao.getInstancia();
     private UsuarioDAO usuarioDAO;
     private PessoaFisicaDAO pessoaFisicaDAO;
-    private Criptografia criptografia=new Criptografia();
+    private Criptografia criptografia = new Criptografia();
+    private LojaService lojaService;
 
     public UsuarioService(Context context){
         usuarioDAO = new UsuarioDAO(context);
         pessoaFisicaDAO = new PessoaFisicaDAO(context);
+        lojaService = new LojaService(context);
     }
 
 
 
-   public Usuario login(String email, String senha) throws Exception {
+   public void login(String email, String senha) throws Exception {
         sessao.reset();
 
         String senhaMascarada = criptografia.mascararSenha(senha);
@@ -39,7 +42,10 @@ public class UsuarioService  {
            sessao.setPessoaFisica(pessoaFisica);
        }
 
-       return usuario;
+       else {
+           lojaService.login(usuario);
+       }
+
    }
     public void cadastrar(String nome, String email, String senha) throws Exception {
         sessao.reset();

@@ -32,7 +32,7 @@ public class LojaService {
 
     public void cadastrar(Loja loja) throws Exception {
 
-        Usuario loja_usuario =loja.getUsuario() ;
+        Usuario loja_usuario =loja.getUsuario();
         String email=loja_usuario.getEmail();
         String senha=loja_usuario.getPass();
 

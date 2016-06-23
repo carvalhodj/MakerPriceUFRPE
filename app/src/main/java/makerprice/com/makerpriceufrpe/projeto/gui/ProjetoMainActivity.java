@@ -73,7 +73,6 @@ public class ProjetoMainActivity extends AppCompatActivity {
         ArrayList<ComponenteLoja> listaComponenteLoja = (ArrayList<ComponenteLoja>) comparador.getPrecoProjeto(projeto);
         ComponenteLojaListAdapter componenteLojaAdapter = new ComponenteLojaListAdapter(this, 0, listaComponenteLoja);
         listViewComponentes.setAdapter(componenteLojaAdapter);
-        //listViewComponentes.setOnItemClickListener(new ListClickHandler());
         listViewComponentes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -85,7 +84,7 @@ public class ProjetoMainActivity extends AppCompatActivity {
             }
         });
 
-        int precoTotal = 0;
+        double precoTotal = 0;
         for (ComponenteLoja componenteLoja : listaComponenteLoja) {
             precoTotal += componenteLoja.getPreco();
         }

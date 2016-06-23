@@ -6,7 +6,7 @@ import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
 public class ComponenteLoja {
     private Loja loja;
     private Componente componente;
-    private int preco;
+    private double preco;
     private long id;
 
     public Loja getLoja() {
@@ -17,11 +17,11 @@ public class ComponenteLoja {
         this.loja = loja;
     }
 
-    public int getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(int preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 

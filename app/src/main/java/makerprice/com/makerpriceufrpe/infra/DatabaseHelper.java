@@ -115,26 +115,75 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         COLUMN_LOJA_ID + " INTEGER NOT NULL, " +
                         COLUMN_COMPONENTE_ID + " INTEGER NOT NULL, " +
-                        COLUMN_PRECO + " INTEGER NOT NULL);");
+                        COLUMN_PRECO + " REAL NOT NULL);");
 
         sqLiteDatabase.execSQL(
                 "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
-                        "VALUES (1, 1, 30);");
+                        "VALUES (1, 1, 0.10);");
         sqLiteDatabase.execSQL(
                 "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
-                        "VALUES (2, 1, 60);");
+                        "VALUES (2, 1, 0.05);");
         sqLiteDatabase.execSQL(
                 "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
-                        "VALUES (2, 2, 20);");
+                        "VALUES (3, 1, 0.30);");
+
+
         sqLiteDatabase.execSQL(
                 "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
-                        "VALUES (1, 2, 40);");
+                        "VALUES (1, 2, 0.25);");
         sqLiteDatabase.execSQL(
                 "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
-                        "VALUES (1, 3, 25);");
+                        "VALUES (2, 2, 0.20);");
         sqLiteDatabase.execSQL(
                 "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
-                        "VALUES (2, 3, 35);");
+                        "VALUES (3, 2, 0.18);");
+
+
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (1, 3, 2.00);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (2, 3, 1.50);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (3, 3, 1.75);");
+
+
+        //////////////////////////////////////////////////////////////////////////////////////
+
+
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (1, 4, 1.35);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (2, 4, 1.45);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (3, 4, 1.50);");
+
+
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (1, 5, 2.00);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (2, 5, 2.20);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (3, 5, 1.70);");
+
+
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (1, 6, 2.10);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (2, 6, 1.35);");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_COMPONENTE_LOJA + " (loja_id, componente_id, preco) " +
+                        "VALUES (3, 6, 1.75);");
 
     }
 

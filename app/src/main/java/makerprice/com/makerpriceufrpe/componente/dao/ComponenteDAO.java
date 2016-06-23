@@ -114,17 +114,38 @@ public class ComponenteDAO {
             if (Objects.equals(tipo, "resistor")) {
 
                 propriedades.put("tipo", ComponenteEnum.ComponenteTipo.RESISTOR.getNome());
-                propriedades.put("resistencia", ComponenteEnum.Resistencia.R330.getNome());
+
+                if (Objects.equals(resistencia, "330R")) {
+                    propriedades.put("resistencia", ComponenteEnum.Resistencia.R330.getNome());
+                }
+
+                else if (Objects.equals(resistencia, "220R")) {
+                    propriedades.put("resistencia", ComponenteEnum.Resistencia.R220.getNome());
+                }
 
             } else if (Objects.equals(tipo, "led")) {
 
                 propriedades.put("tipo", ComponenteEnum.ComponenteTipo.LED.getNome());
-                propriedades.put("cor", ComponenteEnum.Cor.VERDE.getNome());
+
+                if (Objects.equals(cor, "verde")) {
+                    propriedades.put("cor", ComponenteEnum.Cor.VERDE.getNome());
+                }
+
+                else if(Objects.equals(cor, "vermelho")) {
+                    propriedades.put("cor", ComponenteEnum.Cor.VERMELHO.getNome());
+                }
 
             } else if (Objects.equals(tipo, "capacitor")) {
 
                 propriedades.put("tipo", ComponenteEnum.ComponenteTipo.CAPACITOR.getNome());
-                propriedades.put("capacitancia", ComponenteEnum.Capacitancia.UF100.getNome());
+
+                if (Objects.equals(capacitancia, "100uF")) {
+                    propriedades.put("capacitancia", ComponenteEnum.Capacitancia.UF100.getNome());
+                }
+
+                else if (Objects.equals(capacitancia, "1uF")) {
+                    propriedades.put("capacitancia", ComponenteEnum.Capacitancia.UF1.getNome());
+                }
 
             }
 
@@ -259,7 +280,7 @@ public class ComponenteDAO {
 
             String precoColumn = DatabaseHelper.COLUMN_PRECO;
             int indexColumnPreco = cursor.getColumnIndex(precoColumn);
-            int preco = cursor.getInt(indexColumnPreco);
+            double preco = cursor.getDouble(indexColumnPreco);
 
             loja = lojaDAO.getLoja(idLoja);
 
@@ -308,7 +329,7 @@ public class ComponenteDAO {
 
             String precoColumn = DatabaseHelper.COLUMN_PRECO;
             int indexColumnPreco = cursor.getColumnIndex(precoColumn);
-            int preco = cursor.getInt(indexColumnPreco);
+            double preco = cursor.getDouble(indexColumnPreco);
 
             loja = lojaDAO.getLoja(idLoja);
 

@@ -24,7 +24,6 @@ public class CadastroComponenteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_componente);
-        guiUtil.toastLong(getApplicationContext(), ComponenteEnum.ComponenteTipo.RESISTOR.getNome());
     }
 
     public void cadastrarComponente (View v) {
@@ -32,19 +31,34 @@ public class CadastroComponenteActivity extends AppCompatActivity {
         Map propriedades = new HashMap();
         Map propriedades2 = new HashMap();
         Map propriedades3 = new HashMap();
+        Map propriedades4 = new HashMap();
+        Map propriedades5 = new HashMap();
+        Map propriedades6 = new HashMap();
 
         propriedades.put("tipo", ComponenteEnum.ComponenteTipo.RESISTOR.getNome());
         propriedades.put("resistencia", ComponenteEnum.Resistencia.R330.getNome());
 
-        propriedades2.put("tipo", ComponenteEnum.ComponenteTipo.LED.getNome());
-        propriedades2.put("cor", ComponenteEnum.Cor.VERDE.getNome());
+        propriedades2.put("tipo", ComponenteEnum.ComponenteTipo.RESISTOR.getNome());
+        propriedades2.put("resistencia", ComponenteEnum.Resistencia.R220.getNome());
 
-        propriedades3.put("tipo", ComponenteEnum.ComponenteTipo.CAPACITOR.getNome());
-        propriedades3.put("capacitancia", ComponenteEnum.Capacitancia.UF100.getNome());
+        propriedades3.put("tipo", ComponenteEnum.ComponenteTipo.LED.getNome());
+        propriedades3.put("cor", ComponenteEnum.Cor.VERDE.getNome());
+
+        propriedades4.put("tipo", ComponenteEnum.ComponenteTipo.LED.getNome());
+        propriedades4.put("cor", ComponenteEnum.Cor.VERMELHO.getNome());
+
+        propriedades5.put("tipo", ComponenteEnum.ComponenteTipo.CAPACITOR.getNome());
+        propriedades5.put("capacitancia", ComponenteEnum.Capacitancia.UF100.getNome());
+
+        propriedades6.put("tipo", ComponenteEnum.ComponenteTipo.CAPACITOR.getNome());
+        propriedades6.put("capacitancia", ComponenteEnum.Capacitancia.UF1.getNome());
 
         ComponenteEspc compSpec = new ComponenteEspc(propriedades);
         ComponenteEspc compSpec2 = new ComponenteEspc(propriedades2);
         ComponenteEspc compSpec3 = new ComponenteEspc(propriedades3);
+        ComponenteEspc compSpec4 = new ComponenteEspc(propriedades4);
+        ComponenteEspc compSpec5 = new ComponenteEspc(propriedades5);
+        ComponenteEspc compSpec6 = new ComponenteEspc(propriedades6);
 
         Componente componente = new Componente();
         componente.setComponenteEspc(compSpec);
@@ -57,6 +71,18 @@ public class CadastroComponenteActivity extends AppCompatActivity {
         Componente componente3 = new Componente();
         componente3.setComponenteEspc(compSpec3);
         componenteService.inserirComponente(componente3);
+
+        Componente componente4 = new Componente();
+        componente4.setComponenteEspc(compSpec4);
+        componenteService.inserirComponente(componente4);
+
+        Componente componente5 = new Componente();
+        componente5.setComponenteEspc(compSpec5);
+        componenteService.inserirComponente(componente5);
+
+        Componente componente6 = new Componente();
+        componente6.setComponenteEspc(compSpec6);
+        componenteService.inserirComponente(componente6);
 
     }
 

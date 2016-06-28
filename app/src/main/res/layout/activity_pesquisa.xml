@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/backgroundLightGray"
     tools:context="makerprice.com.makerpriceufrpe.usuario.gui.PesquisaActivity">
 
     <EditText
@@ -15,9 +16,9 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:hint="Digite a busca"
-        android:layout_marginTop="18dp"
-        android:layout_alignParentStart="true"
-        android:maxLines="1"/>
+        android:layout_marginTop="24dp"
+        android:maxLines="1"
+        android:layout_below="@+id/texto_pesquisa_parametro" />
 
     <Button
         android:id="@+id/botao_pesquisar"
@@ -28,6 +29,16 @@
         android:text="Buscar"
         android:onClick="onButtonClickPesquisar"/>
 
+    <TextView
+        android:id="@+id/pesquisa_vazia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/botao_pesquisar"
+        android:layout_marginTop="18dp"
+        android:text=""
+        android:textColor="@color/colorBlack"
+        android:textSize="24sp"/>
+
     <ListView
         android:id="@+id/lista_projetos_busca"
         android:layout_width="wrap_content"
@@ -35,5 +46,24 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/botao_pesquisar"
         android:scrollbars="vertical"/>
+
+    <TextView
+        android:id="@+id/texto_pesquisa_parametro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="O que deseja procurar?"
+        android:textSize="16sp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp"/>
+
+    <Spinner
+        android:id="@+id/pesquisa_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/parametros_pesquisa"
+        android:layout_above="@+id/parametro_busca"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="18dp"
+        android:layout_toEndOf="@+id/texto_pesquisa_parametro" />
 
 </RelativeLayout>

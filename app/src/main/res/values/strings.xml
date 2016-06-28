@@ -51,4 +51,9 @@
         <item>Robótica</item>
         <item>Automação</item>
     </string-array>
+
+    <string-array name="parametros_pesquisa">
+        <item>Componente</item>
+        <item>Projeto</item>
+    </string-array>
 </resources>

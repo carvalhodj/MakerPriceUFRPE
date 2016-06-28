@@ -298,7 +298,9 @@ public class ProjetoDAO {
                 " WHERE " + DatabaseHelper.COLUMN_NAME + " LIKE ? " +
                 "OR " + DatabaseHelper.COLUMN_DESCRICAO + " LIKE ?";
 
-        String[] argumentos = {"%" + busca + "%", "%" + busca + "%"};
+        String argumento = "%" + busca + "%";
+
+        String[] argumentos = {argumento, argumento};
 
         Cursor cursor = db.rawQuery(comando, argumentos);
 

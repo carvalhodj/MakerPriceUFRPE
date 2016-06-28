@@ -35,4 +35,8 @@ public class ComponenteService {
         return componenteDAO.getComponente(id);
     }
 
+    public List<Componente> buscaComponentes(String busca) {
+        return componenteDAO.buscaComponentes(busca);
+    }
+
 }

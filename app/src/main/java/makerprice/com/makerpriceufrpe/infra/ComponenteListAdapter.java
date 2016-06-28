@@ -20,6 +20,7 @@ import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 
 public class ComponenteListAdapter extends ArrayAdapter<Componente> {
     private Activity activity;
+    private GuiUtil guiUtil = GuiUtil.getGuiUtil();
     private ArrayList<Componente> listaComponente;
     private static LayoutInflater inflater = null;
     private Converter converter = Converter.getInstancia();
@@ -66,11 +67,12 @@ public class ComponenteListAdapter extends ArrayAdapter<Componente> {
                 holder = (ViewHolder) vi.getTag();
             }
 
+
             Map prop = listaComponente.get(position).getComponenteEspc().getPropriedades();
-            Iterator<Map.Entry<String,String>> iterator = prop.entrySet().iterator();
+            Iterator<Map.Entry<String, String>> iterator = prop.entrySet().iterator();
             String dado = "";
             while (iterator.hasNext()) {
-                Map.Entry<String,String> entry = (Map.Entry<String,String>) iterator.next();
+                Map.Entry<String, String> entry = (Map.Entry<String, String>) iterator.next();
                 dado += entry.getValue() + " ";
             }
             holder.nome_componente_listagem.setText(dado);

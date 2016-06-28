@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -347,6 +348,101 @@ public class ComponenteDAO {
         db.close();
 
         return listaComponenteLoja;
+    }
+
+    public List<Componente> buscaComponentes(String busca) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_COMPONENTE +
+                " WHERE " + DatabaseHelper.COLUMN_TIPO + " LIKE ? " +
+                "OR "+ DatabaseHelper.COLUMN_COR + " LIKE ? " +
+                "OR " + DatabaseHelper.COLUMN_CAPACITANCIA + " LIKE ? " +
+                "OR " + DatabaseHelper.COLUMN_RESISTENCIA + " LIKE ?";
+
+        String argumento = "%" + busca + "%";
+
+        String[] argumentos = {argumento, argumento, argumento, argumento};
+
+        Cursor cursor = db.rawQuery(comando, argumentos);
+
+        ArrayList<Componente> listaComponentes = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+
+            String idColumn = DatabaseHelper.COLUMN_ID;
+            int indexColumnId = cursor.getColumnIndex(idColumn);
+            long id = cursor.getLong(indexColumnId);
+
+            String tipoColumn = DatabaseHelper.COLUMN_TIPO;
+            int indexColumnTipo = cursor.getColumnIndex(tipoColumn);
+            String tipo = cursor.getString(indexColumnTipo);
+
+            String corColumn = DatabaseHelper.COLUMN_COR;
+            int indexColumnCor = cursor.getColumnIndex(corColumn);
+            String cor = cursor.getString(indexColumnCor);
+
+            String capacitanciaColumn = DatabaseHelper.COLUMN_CAPACITANCIA;
+            int indexColumnCapacitancia = cursor.getColumnIndex(capacitanciaColumn);
+            String capacitancia = cursor.getString(indexColumnCapacitancia);
+
+            String resistenciaColumn = DatabaseHelper.COLUMN_RESISTENCIA;
+            int indexColumnResistencia = cursor.getColumnIndex(resistenciaColumn);
+            String resistencia = cursor.getString(indexColumnResistencia);
+
+            Map propriedades = new HashMap();
+
+            if (Objects.equals(tipo, "resistor")) {
+
+                propriedades.put("tipo", ComponenteEnum.ComponenteTipo.RESISTOR.getNome());
+
+                if (Objects.equals(resistencia, "330R")) {
+                    propriedades.put("resistencia", ComponenteEnum.Resistencia.R330.getNome());
+                }
+
+                else if (Objects.equals(resistencia, "220R")) {
+                    propriedades.put("resistencia", ComponenteEnum.Resistencia.R220.getNome());
+                }
+
+            } else if (Objects.equals(tipo, "led")) {
+
+                propriedades.put("tipo", ComponenteEnum.ComponenteTipo.LED.getNome());
+
+                if (Objects.equals(cor, "verde")) {
+                    propriedades.put("cor", ComponenteEnum.Cor.VERDE.getNome());
+                }
+
+                else if(Objects.equals(cor, "vermelho")) {
+                    propriedades.put("cor", ComponenteEnum.Cor.VERMELHO.getNome());
+                }
+
+            } else if (Objects.equals(tipo, "capacitor")) {
+
+                propriedades.put("tipo", ComponenteEnum.ComponenteTipo.CAPACITOR.getNome());
+
+                if (Objects.equals(capacitancia, "100uF")) {
+                    propriedades.put("capacitancia", ComponenteEnum.Capacitancia.UF100.getNome());
+                }
+
+                else if (Objects.equals(capacitancia, "1uF")) {
+                    propriedades.put("capacitancia", ComponenteEnum.Capacitancia.UF1.getNome());
+                }
+
+            }
+
+            Componente componente = new Componente();;
+
+            ComponenteEspc compSpec = new ComponenteEspc(propriedades);
+
+            componente.setComponenteEspc(compSpec);
+            componente.setId(id);
+
+            listaComponentes.add(componente);
+
+        }
+        cursor.close();
+        db.close();
+
+        return listaComponentes;
     }
 }
 

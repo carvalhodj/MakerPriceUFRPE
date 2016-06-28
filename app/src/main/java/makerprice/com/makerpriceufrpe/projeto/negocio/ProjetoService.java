@@ -4,6 +4,7 @@ package makerprice.com.makerpriceufrpe.projeto.negocio;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import makerprice.com.makerpriceufrpe.infra.Sessao;
 import makerprice.com.makerpriceufrpe.projeto.dao.ProjetoDAO;
@@ -33,6 +34,10 @@ public class ProjetoService {
 
     public ArrayList<Projeto> getTodosProjetosUnicoCriador(long idCriador){
         return projetoDAO.getTodosProjetosUnicoCriador(idCriador);
+    }
+
+    public List<Projeto> buscaProjetos(String busca) {
+        return projetoDAO.buscaProjetos(busca);
     }
 
 

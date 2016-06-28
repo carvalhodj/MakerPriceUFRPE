@@ -15,11 +15,5 @@
         android:title="Search"
         android:icon="@drawable/ic_search_white_24dp"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/filtro_busca"
-        android:orderInCategory="300"
-        android:title="User"
-        android:icon="@drawable/ic_settings_input_component_white_24dp"
-        app:showAsAction="ifRoom" />
 
 </menu>

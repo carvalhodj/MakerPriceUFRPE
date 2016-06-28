@@ -16,6 +16,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,13 +51,14 @@ public class ProjetoMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_projeto_main);
 
-        Intent intent = getIntent();
-        String item = intent.getStringExtra("selected-item");
+        //Intent intent = getIntent();
+        //String item = intent.getStringExtra("selected-item");
 
         PessoaFisica criador = sessao.getPessoaFisica();
         long idCriador = criador.getID();
 
-        projeto = projetoService.getProjeto(item, idCriador);
+        //projeto = projetoService.getProjeto(item, idCriador);
+        projeto = sessao.getProjeto();
 
         ImageView imageView = (ImageView) findViewById(R.id.projeto_imagem_principal);
         TextView textViewNome = (TextView) findViewById(R.id.nome_projeto_main);
@@ -85,10 +88,14 @@ public class ProjetoMainActivity extends AppCompatActivity {
         });
 
         double precoTotal = 0;
+        DecimalFormat df = new DecimalFormat("0.00");//
+        DecimalFormatSymbols dfSymbols = new DecimalFormatSymbols();//
+        dfSymbols.setDecimalSeparator(',');//
+        df.setDecimalFormatSymbols(dfSymbols);//
         for (ComponenteLoja componenteLoja : listaComponenteLoja) {
             precoTotal += componenteLoja.getPreco();
         }
-        textViewPrecoTotal.setText("R$ " + String.valueOf(precoTotal));
+        textViewPrecoTotal.setText("R$ " + String.valueOf(df.format(precoTotal)));//
 
         String imagemPrincipal = projeto.getImagens().get(0);
         Bitmap imagem = converter.StringToBitMap(imagemPrincipal);

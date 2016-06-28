@@ -51,7 +51,18 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Projeto> listaProjetosTela = projetoService.getTodosProjetosUnicoCriador(idPessoa);
         projetoAdapter = new ProjetoListAdapter(this, 0, listaProjetosTela);
         listView.setAdapter(projetoAdapter);
-        listView.setOnItemClickListener(new ListClickHandler());
+        //listView.setOnItemClickListener(new ListClickHandler());
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Projeto projeto = (Projeto) parent.getAdapter().getItem(position);
+                sessao.setProjeto(projeto);
+
+                Intent intent = new Intent(MainActivity.this, ProjetoMainActivity.class);
+                //intent.putExtra("nome", projeto.getNome());
+                startActivity(intent);
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +90,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        else if (id == R.id.action_search) {
+            Intent intent = new Intent(getApplicationContext(), PesquisaActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -87,12 +103,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
 
-            TextView listText = (TextView) view.findViewById(R.id.nome_projeto_listagem);
-            String text = listText.getText().toString();
+            //TextView listText = (TextView) view.findViewById(R.id.nome_projeto_listagem);
+            //String text = listText.getText().toString();
 
             Intent intent = new Intent(MainActivity.this, ProjetoMainActivity.class);
 
-            intent.putExtra("selected-item", text);
+            //intent.putExtra("selected-item", text);
             startActivity(intent);
         }
     }

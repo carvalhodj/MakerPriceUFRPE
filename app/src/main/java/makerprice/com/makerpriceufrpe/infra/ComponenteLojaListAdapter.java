@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -55,6 +57,10 @@ public class ComponenteLojaListAdapter extends ArrayAdapter<ComponenteLoja> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
+        DecimalFormat df = new DecimalFormat("0.00");//
+        DecimalFormatSymbols dfSymbols = new DecimalFormatSymbols();//
+        dfSymbols.setDecimalSeparator(',');//
+        df.setDecimalFormatSymbols(dfSymbols);//
         final ViewHolder holder;
         try {
             if (convertView == null) {
@@ -79,7 +85,7 @@ public class ComponenteLojaListAdapter extends ArrayAdapter<ComponenteLoja> {
             }
             holder.nome_componente_listagem.setText(nome);
             holder.nome_loja_listagem.setText(componenteLoja.getLoja().getNome());
-            holder.preco_listagem.setText("R$ " + String.valueOf(componenteLoja.getPreco()));
+            holder.preco_listagem.setText("R$ " + String.valueOf(df.format(componenteLoja.getPreco())));//
 
         } catch (Exception e) {
 

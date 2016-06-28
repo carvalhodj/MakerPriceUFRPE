@@ -8,8 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 
 import makerprice.com.makerpriceufrpe.R;
@@ -52,6 +56,10 @@ public class ComponenteTelaListAdapter extends ArrayAdapter<ComponenteLoja> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
+        DecimalFormat df = new DecimalFormat("0.00");//
+        DecimalFormatSymbols dfSymbols = new DecimalFormatSymbols();//
+        dfSymbols.setDecimalSeparator(',');//
+        df.setDecimalFormatSymbols(dfSymbols);//
         final ViewHolder holder;
         try {
             if (convertView == null) {
@@ -67,7 +75,7 @@ public class ComponenteTelaListAdapter extends ArrayAdapter<ComponenteLoja> {
 
             ComponenteLoja componenteLoja = listaComponenteLoja.get(position);
             holder.loja_componente_tela.setText(componenteLoja.getLoja().getNome());
-            holder.preco_componente_tela.setText("R$ " + String.valueOf(componenteLoja.getPreco()));
+            holder.preco_componente_tela.setText("R$ " + String.valueOf(df.format(componenteLoja.getPreco())));//
 
         } catch (Exception e) {
 

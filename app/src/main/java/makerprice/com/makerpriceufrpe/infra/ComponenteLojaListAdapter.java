@@ -18,18 +18,21 @@ import java.util.Map;
 
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteLoja;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteQuantidade;
 
 public class ComponenteLojaListAdapter extends ArrayAdapter<ComponenteLoja> {
     private Activity activity;
     private ArrayList<ComponenteLoja> listaComponenteLoja;
+    private ArrayList<ComponenteQuantidade> listaCompQuantidade;
     private static LayoutInflater inflater = null;
     private Converter converter = Converter.getInstancia();
 
-    public ComponenteLojaListAdapter(Activity activity, int textViewResourceId, ArrayList<ComponenteLoja> _listaComponenteLoja){
+    public ComponenteLojaListAdapter(Activity activity, int textViewResourceId, ArrayList<ComponenteLoja> _listaComponenteLoja, ArrayList<ComponenteQuantidade> listaCompQuantidade){
         super(activity, textViewResourceId, _listaComponenteLoja);
         try {
             this.activity = activity;
             this.listaComponenteLoja = _listaComponenteLoja;
+            this.listaCompQuantidade = listaCompQuantidade;
             inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         } catch (Exception e){
@@ -76,6 +79,8 @@ public class ComponenteLojaListAdapter extends ArrayAdapter<ComponenteLoja> {
             }
 
             ComponenteLoja componenteLoja = listaComponenteLoja.get(position);
+            int quantidade = listaCompQuantidade.get(position).getQuantidade();
+            String quantidadeString = String.valueOf(quantidade);
             Map prop = componenteLoja.getComponente().getComponenteEspc().getPropriedades();
             Iterator<Map.Entry<String,String>> iterator = prop.entrySet().iterator();
             String nome = "";
@@ -83,7 +88,7 @@ public class ComponenteLojaListAdapter extends ArrayAdapter<ComponenteLoja> {
                 Map.Entry<String,String> entry = (Map.Entry<String,String>) iterator.next();
                 nome += entry.getValue() + " ";
             }
-            holder.nome_componente_listagem.setText(nome);
+            holder.nome_componente_listagem.setText(quantidadeString + " x " + nome);
             holder.nome_loja_listagem.setText(componenteLoja.getLoja().getNome());
             holder.preco_listagem.setText("R$ " + String.valueOf(df.format(componenteLoja.getPreco())));//
 

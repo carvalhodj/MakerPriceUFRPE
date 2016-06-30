@@ -82,33 +82,63 @@
 
     <Spinner
         android:id="@+id/componente1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/componente1"
         android:layout_marginTop="18dp"
         android:textSize="16sp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/cadastroProjetoSpinnerAplicacao"/>
+        android:layout_below="@id/cadastroProjetoSpinnerAplicacao"
+        android:layout_toStartOf="@+id/comp1_quantidade" />
+
+    <EditText
+        android:id="@+id/comp1_quantidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Qtde"
+        android:layout_alignTop="@+id/componente1"
+        android:layout_alignEnd="@+id/cadastroProjetoSpinnerAplicacao"
+        android:layout_alignBottom="@+id/componente1" />
 
     <Spinner
         android:id="@+id/componente2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/componente2"
         android:layout_marginTop="18dp"
         android:textSize="16sp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/componente1"/>
+        android:layout_below="@id/componente1"
+        android:layout_toStartOf="@+id/comp2_quantidade"/>
+
+    <EditText
+        android:id="@+id/comp2_quantidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Qtde"
+        android:layout_alignTop="@+id/componente2"
+        android:layout_alignEnd="@+id/cadastroProjetoSpinnerAplicacao"
+        android:layout_alignBottom="@+id/componente2" />
 
     <Spinner
         android:id="@+id/componente3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/componente3"
         android:layout_marginTop="18dp"
         android:textSize="16sp"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/componente2"/>
+        android:layout_below="@id/componente2"
+        android:layout_toStartOf="@+id/comp3_quantidade"/>
+
+    <EditText
+        android:id="@+id/comp3_quantidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Qtde"
+        android:layout_alignTop="@+id/componente3"
+        android:layout_alignEnd="@+id/cadastroProjetoSpinnerAplicacao"
+        android:layout_alignBottom="@+id/componente3" />
 
     <Button
         android:id="@+id/botao_adicionar_foto"

@@ -17,6 +17,7 @@ import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteEnum;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteEspc;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteLoja;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteQuantidade;
 import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.loja.dao.LojaDAO;
 import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
@@ -202,17 +203,20 @@ public class ComponenteDAO {
 
         String idProjetoColumn = DatabaseHelper.COLUMN_PROJETO_ID;
         String idComponenteColumn = DatabaseHelper.COLUMN_COMPONENTE_ID;
+        String quantidadeColumn = DatabaseHelper.COLUMN_QUANTIDADE;
         String tabela = DatabaseHelper.TABLE_COMPONENTE_PROJETO;
 
-        ArrayList<Componente> componentes = projeto.getComponentes();
+        ArrayList<ComponenteQuantidade> componentes = projeto.getComponentes();
         long idProjeto = projeto.getId();
 
-        for (Componente comp : componentes){
+        for (ComponenteQuantidade comp : componentes){
 
-            long idComponente = comp.getId();
+            long idComponente = comp.getComponente().getId();
+            int quantidade = comp.getQuantidade();
 
             values.put(idProjetoColumn, idProjeto);
             values.put(idComponenteColumn, idComponente);
+            values.put(quantidadeColumn, quantidade);
 
             long id = db.insert(tabela, null, values);
 
@@ -222,7 +226,7 @@ public class ComponenteDAO {
 
     }
 
-    public List<Componente> getComponentesUnicoProjeto(long idProjeto){
+    public List<ComponenteQuantidade> getComponentesUnicoProjeto(long idProjeto){
 
         SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -233,8 +237,10 @@ public class ComponenteDAO {
 
         Cursor cursor = db.rawQuery(comando, argumentos);
 
-        List<Componente> componentes = new ArrayList<>();
+        List<ComponenteQuantidade> componentes = new ArrayList<>();
+
         Componente componente;
+        ComponenteQuantidade componenteQuantidade;
 
         while (cursor.moveToNext()) {
 
@@ -242,9 +248,17 @@ public class ComponenteDAO {
             int indexColumnComponenteId = cursor.getColumnIndex(idComponenteColumn);
             long idComponente = cursor.getLong(indexColumnComponenteId);
 
-            componente = getComponente(idComponente);
+            String quantidadeColumn = DatabaseHelper.COLUMN_QUANTIDADE;
+            int indexColumnQuantidade = cursor.getColumnIndex(quantidadeColumn);
+            int quantidade = cursor.getInt(indexColumnQuantidade);
 
-            componentes.add(componente);
+            componenteQuantidade = new ComponenteQuantidade();
+
+            componente = getComponente(idComponente);
+            componenteQuantidade.setComponente(componente);
+            componenteQuantidade.setQuantidade(quantidade);
+
+            componentes.add(componenteQuantidade);
         }
         cursor.close();
         db.close();

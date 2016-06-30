@@ -9,6 +9,7 @@ import java.util.List;
 import makerprice.com.makerpriceufrpe.componente.dao.ComponenteDAO;
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteLoja;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteQuantidade;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 
 public class Comparador {
@@ -17,12 +18,13 @@ public class Comparador {
     public Comparador(Context context) { componenteDAO = new ComponenteDAO(context); }
 
     public List<ComponenteLoja> getPrecoProjeto(Projeto projeto) {
-        ArrayList<Componente> listaComponentesProjeto = projeto.getComponentes();
+        ArrayList<ComponenteQuantidade> listaComponentesProjeto = projeto.getComponentes();
         ArrayList<ComponenteLoja> listaComponenteLoja = new ArrayList<>();
         ComponenteLoja componenteLoja;
 
-        for (Componente comp : listaComponentesProjeto) {
-            componenteLoja = componenteDAO.getMinimo(comp);
+        for (ComponenteQuantidade comp : listaComponentesProjeto) {
+            Componente componente = comp.getComponente();
+            componenteLoja = componenteDAO.getMinimo(componente);
             listaComponenteLoja.add(componenteLoja);
         }
 

@@ -13,6 +13,7 @@ import java.util.List;
 
 import makerprice.com.makerpriceufrpe.componente.dao.ComponenteDAO;
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteQuantidade;
 import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 import makerprice.com.makerpriceufrpe.usuario.dao.PessoaFisicaDAO;
@@ -118,7 +119,7 @@ public class ProjetoDAO {
 
             PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
 
-            ArrayList<Componente> listaComponentes = (ArrayList<Componente>) componenteDAO.getComponentesUnicoProjeto(id);
+            ArrayList<ComponenteQuantidade> listaComponentes = (ArrayList<ComponenteQuantidade>) componenteDAO.getComponentesUnicoProjeto(id);
 
             projeto = new Projeto();
             projeto.setId(id);
@@ -175,7 +176,7 @@ public class ProjetoDAO {
 
             PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
 
-            ArrayList<Componente> listaComponentes = (ArrayList<Componente>) componenteDAO.getComponentesUnicoProjeto(id);
+            ArrayList<ComponenteQuantidade> listaComponentes = (ArrayList<ComponenteQuantidade>) componenteDAO.getComponentesUnicoProjeto(id);
 
 
             Projeto projeto = new Projeto();
@@ -238,7 +239,7 @@ public class ProjetoDAO {
 
             PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
 
-            ArrayList<Componente> listaComponentes = (ArrayList<Componente>) componenteDAO.getComponentesUnicoProjeto(id);
+            ArrayList<ComponenteQuantidade> listaComponentes = (ArrayList<ComponenteQuantidade>) componenteDAO.getComponentesUnicoProjeto(id);
 
             Projeto projeto = new Projeto();
             projeto.setId(id);
@@ -335,7 +336,7 @@ public class ProjetoDAO {
 
             PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
 
-            ArrayList<Componente> listaComponentes = (ArrayList<Componente>) componenteDAO.getComponentesUnicoProjeto(id);
+            ArrayList<ComponenteQuantidade> listaComponentes = (ArrayList<ComponenteQuantidade>) componenteDAO.getComponentesUnicoProjeto(id);
 
             Projeto projeto = new Projeto();
             projeto.setId(id);

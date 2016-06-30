@@ -25,9 +25,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DESCRICAO = "descricao";
     public static final String COLUMN_PLATAFORMA = "plataforma";
     public static final String COLUMN_APLICACAO = "aplicacao";
-    public static final String COLUMN_COMP1 = "componente_1";
-    public static final String COLUMN_COMP2 = "componente_2";
-    public static final String COLUMN_COMP3 = "componente_3";
     public static final String COLUMN_PESSOAFISICA_ID = "criador";
 
 
@@ -51,6 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_COMPONENTE_PROJETO = "componente_projeto";
     public static final String COLUMN_COMPONENTE_ID = "componente_id";
+    public static final String COLUMN_QUANTIDADE = "quantidade";
 
     public static final String TABLE_COMPONENTE_LOJA = "componente_loja";
     public static final String COLUMN_LOJA_ID = "loja_id";
@@ -108,7 +106,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "CREATE TABLE " + TABLE_COMPONENTE_PROJETO + " (" +
                         COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         COLUMN_PROJETO_ID + " INTEGER NOT NULL, " +
-                        COLUMN_COMPONENTE_ID + " INTEGER NOT NULL);");
+                        COLUMN_COMPONENTE_ID + " INTEGER NOT NULL, " +
+                        COLUMN_QUANTIDADE + " INTEGER NOT NULL);");
 
         sqLiteDatabase.execSQL(
                 "CREATE TABLE " + TABLE_COMPONENTE_LOJA + " (" +

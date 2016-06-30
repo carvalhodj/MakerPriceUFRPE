@@ -25,9 +25,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.StringTokenizer;
 
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteQuantidade;
 import makerprice.com.makerpriceufrpe.componente.negocio.ComponenteService;
 import makerprice.com.makerpriceufrpe.infra.ComponenteListAdapter;
 import makerprice.com.makerpriceufrpe.infra.Converter;
@@ -69,6 +71,9 @@ public class CadastroProjetoActivity extends AppCompatActivity {
     public void cadastrar(View v){
         EditText nome = (EditText) findViewById(R.id.cadastroProjetoNome);
         EditText descricao = (EditText) findViewById(R.id.cadastroProjetoDescricao);
+        EditText qtdeComp1 = (EditText) findViewById(R.id.comp1_quantidade);
+        EditText qtdeComp2 = (EditText) findViewById(R.id.comp2_quantidade);
+        EditText qtdeComp3 = (EditText) findViewById(R.id.comp3_quantidade);
         Spinner plataforma = (Spinner) findViewById(R.id.cadastroProjetoSpinnerPlataforma);
         Spinner aplicacao = (Spinner) findViewById(R.id.cadastroProjetoSpinnerAplicacao);
 
@@ -76,6 +81,9 @@ public class CadastroProjetoActivity extends AppCompatActivity {
         String descricaoString = descricao.getText().toString();
         String plataformaString = plataforma.getSelectedItem().toString();
         String aplicacaoString = aplicacao.getSelectedItem().toString();
+        String qtdeComp1String = qtdeComp1.getText().toString();
+        String qtdeComp2String = qtdeComp2.getText().toString();
+        String qtdeComp3String = qtdeComp3.getText().toString();
         Componente comp1 = (Componente) componente1.getSelectedItem();
         Componente comp2 = (Componente) componente2.getSelectedItem();
         Componente comp3 = (Componente) componente3.getSelectedItem();
@@ -94,17 +102,33 @@ public class CadastroProjetoActivity extends AppCompatActivity {
 
         PessoaFisica criador = sessao.getPessoaFisica();
 
-        ArrayList<Componente> listaComponentes = new ArrayList<>();
+        /*ArrayList<Componente> listaComponentes = new ArrayList<>();
         listaComponentes.add(comp1);
         listaComponentes.add(comp2);
-        listaComponentes.add(comp3);
+        listaComponentes.add(comp3);*/
+
+        ArrayList<ComponenteQuantidade> listaComponenteQuantidade = new ArrayList<>();
+        ComponenteQuantidade comp1Quantidade = new ComponenteQuantidade();
+        ComponenteQuantidade comp2Quantidade = new ComponenteQuantidade();
+        ComponenteQuantidade comp3Quantidade = new ComponenteQuantidade();
+        comp1Quantidade.setQuantidade(Integer.valueOf(qtdeComp1String));
+        comp2Quantidade.setQuantidade(Integer.valueOf(qtdeComp2String));
+        comp3Quantidade.setQuantidade(Integer.valueOf(qtdeComp3String));
+
+        comp1Quantidade.setComponente(comp1);
+        comp2Quantidade.setComponente(comp2);
+        comp3Quantidade.setComponente(comp3);
+
+        listaComponenteQuantidade.add(comp1Quantidade);
+        listaComponenteQuantidade.add(comp2Quantidade);
+        listaComponenteQuantidade.add(comp3Quantidade);
 
         projeto.setNome(nomeString);
         projeto.setDescricao(descricaoString);
         projeto.setPlataforma(plataformaString);
         projeto.setAplicacao(aplicacaoString);
         projeto.setCriador(criador);
-        projeto.setComponentes(listaComponentes);
+        projeto.setComponentes(listaComponenteQuantidade);
 
         projetoService.cadastrar(projeto);
         guiUtil.toastLong(getApplicationContext(), "Projeto cadastrado com sucesso");

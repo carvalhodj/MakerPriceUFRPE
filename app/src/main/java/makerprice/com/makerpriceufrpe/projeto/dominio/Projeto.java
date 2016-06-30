@@ -3,12 +3,13 @@ package makerprice.com.makerpriceufrpe.projeto.dominio;
 import java.util.ArrayList;
 
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteQuantidade;
 import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
 
 public class Projeto {
     private String nome, descricao, plataforma, aplicacao;
     private ArrayList<String> imagens = new ArrayList<>();
-    private ArrayList<Componente> componentes = new ArrayList<>();
+    private ArrayList<ComponenteQuantidade> componentes = new ArrayList<>();
     private PessoaFisica criador;
     private long id;
 
@@ -52,7 +53,7 @@ public class Projeto {
         this.imagens = imagens;
     }
 
-    public ArrayList<Componente> getComponentes() { return componentes; }
+    public ArrayList<ComponenteQuantidade> getComponentes() { return componentes; }
 
-    public void setComponentes(ArrayList<Componente> componentes) { this.componentes = componentes; }
+    public void setComponentes(ArrayList<ComponenteQuantidade> componentes) { this.componentes = componentes; }
 }

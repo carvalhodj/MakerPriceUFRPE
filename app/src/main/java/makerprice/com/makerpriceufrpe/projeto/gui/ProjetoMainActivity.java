@@ -24,6 +24,7 @@ import java.util.List;
 import makerprice.com.makerpriceufrpe.R;
 import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteLoja;
+import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteQuantidade;
 import makerprice.com.makerpriceufrpe.componente.gui.ComponenteActivity;
 import makerprice.com.makerpriceufrpe.componente.negocio.Comparador;
 import makerprice.com.makerpriceufrpe.componente.negocio.ComponenteService;
@@ -51,13 +52,9 @@ public class ProjetoMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_projeto_main);
 
-        //Intent intent = getIntent();
-        //String item = intent.getStringExtra("selected-item");
-
         PessoaFisica criador = sessao.getPessoaFisica();
         long idCriador = criador.getID();
 
-        //projeto = projetoService.getProjeto(item, idCriador);
         projeto = sessao.getProjeto();
 
         ImageView imageView = (ImageView) findViewById(R.id.projeto_imagem_principal);
@@ -73,8 +70,9 @@ public class ProjetoMainActivity extends AppCompatActivity {
         textViewPlataforma.setText(projeto.getPlataforma());
         textViewAplicacao.setText(projeto.getAplicacao());
 
+        ArrayList<ComponenteQuantidade> listaComponenteQuantidade = projeto.getComponentes();
         ArrayList<ComponenteLoja> listaComponenteLoja = (ArrayList<ComponenteLoja>) comparador.getPrecoProjeto(projeto);
-        ComponenteLojaListAdapter componenteLojaAdapter = new ComponenteLojaListAdapter(this, 0, listaComponenteLoja);
+        ComponenteLojaListAdapter componenteLojaAdapter = new ComponenteLojaListAdapter(this, 0, listaComponenteLoja, listaComponenteQuantidade);
         listViewComponentes.setAdapter(componenteLojaAdapter);
         listViewComponentes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -91,11 +89,14 @@ public class ProjetoMainActivity extends AppCompatActivity {
         DecimalFormat df = new DecimalFormat("0.00");//
         DecimalFormatSymbols dfSymbols = new DecimalFormatSymbols();//
         dfSymbols.setDecimalSeparator(',');//
-        df.setDecimalFormatSymbols(dfSymbols);//
-        for (ComponenteLoja componenteLoja : listaComponenteLoja) {
-            precoTotal += componenteLoja.getPreco();
+        df.setDecimalFormatSymbols(dfSymbols);
+        int quantidadeComponenteLoja = listaComponenteLoja.size();
+        for (int i = 0 ; i < quantidadeComponenteLoja ; i++) {
+            double preco = listaComponenteLoja.get(i).getPreco();
+            int quantidade = listaComponenteQuantidade.get(i).getQuantidade();
+            precoTotal += preco * quantidade;
         }
-        textViewPrecoTotal.setText("R$ " + String.valueOf(df.format(precoTotal)));//
+        textViewPrecoTotal.setText("R$ " + String.valueOf(df.format(precoTotal)));
 
         String imagemPrincipal = projeto.getImagens().get(0);
         Bitmap imagem = converter.StringToBitMap(imagemPrincipal);

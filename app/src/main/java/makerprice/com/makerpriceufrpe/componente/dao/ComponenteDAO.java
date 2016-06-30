@@ -132,39 +132,6 @@ public class ComponenteDAO {
         return componente;
     }
 
-    /*public List<Componente> getTodosComponentesProjeto(long idProjeto){
-        SQLiteDatabase db = helper.getReadableDatabase();
-
-        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_COMPONENTE_PROJETO +
-                " WHERE " + DatabaseHelper.COLUMN_PROJETO_ID + " LIKE ?";
-
-        String idString = Long.toString(idProjeto);
-
-        String[] argumentos = {idString};
-
-        Cursor cursor = db.rawQuery(comando, argumentos);
-
-        ArrayList<Componente> listaComponentesProjeto = new ArrayList<>();
-
-        String idComponenteColumn = DatabaseHelper.COLUMN_COMPONENTE_ID;
-        int indexColumnComponente = cursor.getColumnIndex(idComponenteColumn);
-
-        while (cursor.moveToNext()) {
-
-            long id = cursor.getLong(indexColumnComponente);
-
-            Componente componente = getComponente(id);
-
-            listaComponentesProjeto.add(componente);
-
-        }
-        cursor.close();
-        db.close();
-
-        return listaComponentesProjeto;
-
-    }*/
-
     public List<Componente> buscaComponentes(String busca) {
         SQLiteDatabase db = helper.getReadableDatabase();
 

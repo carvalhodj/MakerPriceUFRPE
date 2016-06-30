@@ -38,6 +38,9 @@
     <string name="componente3">Componente 3</string>
     <string name="title_cadastro_loja">Cadastro Loja</string>
     <string name="projeto_main_componentes">Componentes</string>
+    <string name="erro_comp_loja_sem_nome">Não especificado</string>
+    <string name="hint_quantidade_componente">Qtde</string>
+    <string name="adicionar_foto">Adicionar foto</string>
 
 
     <string-array name="cadastro_projeto_plataformas">

@@ -102,11 +102,6 @@ public class CadastroProjetoActivity extends AppCompatActivity {
 
         PessoaFisica criador = sessao.getPessoaFisica();
 
-        /*ArrayList<Componente> listaComponentes = new ArrayList<>();
-        listaComponentes.add(comp1);
-        listaComponentes.add(comp2);
-        listaComponentes.add(comp3);*/
-
         ArrayList<ComponenteQuantidade> listaComponenteQuantidade = new ArrayList<>();
         ComponenteQuantidade comp1Quantidade = new ComponenteQuantidade();
         ComponenteQuantidade comp2Quantidade = new ComponenteQuantidade();

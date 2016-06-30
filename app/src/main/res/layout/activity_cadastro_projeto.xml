@@ -35,7 +35,7 @@
         android:isScrollContainer="true"
         android:hint="@string/cadastro_projeto_descricao"
         android:ems="10"
-        android:gravity="top|left"
+        android:gravity="top|start"
         android:layout_marginTop="18dp"
         android:textSize="16sp"
         android:inputType="textMultiLine"
@@ -95,7 +95,8 @@
         android:id="@+id/comp1_quantidade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Qtde"
+        android:inputType="number"
+        android:hint="@string/hint_quantidade_componente"
         android:layout_alignTop="@+id/componente1"
         android:layout_alignEnd="@+id/cadastroProjetoSpinnerAplicacao"
         android:layout_alignBottom="@+id/componente1" />
@@ -115,7 +116,8 @@
         android:id="@+id/comp2_quantidade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Qtde"
+        android:hint="@string/hint_quantidade_componente"
+        android:inputType="number"
         android:layout_alignTop="@+id/componente2"
         android:layout_alignEnd="@+id/cadastroProjetoSpinnerAplicacao"
         android:layout_alignBottom="@+id/componente2" />
@@ -135,7 +137,8 @@
         android:id="@+id/comp3_quantidade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Qtde"
+        android:hint="@string/hint_quantidade_componente"
+        android:inputType="number"
         android:layout_alignTop="@+id/componente3"
         android:layout_alignEnd="@+id/cadastroProjetoSpinnerAplicacao"
         android:layout_alignBottom="@+id/componente3" />
@@ -144,7 +147,7 @@
         android:id="@+id/botao_adicionar_foto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adicionar foto"
+        android:text="@string/adicionar_foto"
         android:onClick="adicionarFoto"
         android:layout_below="@+id/componente3"
         android:layout_alignParentStart="true" />

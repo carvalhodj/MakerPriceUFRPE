@@ -99,37 +99,7 @@ public class ProjetoDAO {
 
         if (cursor.moveToNext()) {
 
-            String idColumn = DatabaseHelper.COLUMN_ID;
-            int indexColumnId = cursor.getColumnIndex(idColumn);
-            long id = cursor.getLong(indexColumnId);
-
-            String descricaoColumn= DatabaseHelper.COLUMN_DESCRICAO;
-            int indexColumnDescricao= cursor.getColumnIndex(descricaoColumn);
-            String descricao = cursor.getString(indexColumnDescricao);
-
-            String plataformaColumn= DatabaseHelper.COLUMN_PLATAFORMA;
-            int indexColumnPlataforma= cursor.getColumnIndex(plataformaColumn);
-            String plataforma = cursor.getString(indexColumnPlataforma);
-
-            String aplicacaoColumn= DatabaseHelper.COLUMN_APLICACAO;
-            int indexColumnAplicacao= cursor.getColumnIndex(aplicacaoColumn);
-            String aplicacao = cursor.getString(indexColumnAplicacao);
-
-            ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id);
-
-            PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
-
-            ArrayList<ComponenteQuantidade> listaComponentes = (ArrayList<ComponenteQuantidade>) componenteDAO.getComponentesUnicoProjeto(id);
-
-            projeto = new Projeto();
-            projeto.setId(id);
-            projeto.setNome(nomeProjeto);
-            projeto.setDescricao(descricao);
-            projeto.setPlataforma(plataforma);
-            projeto.setAplicacao(aplicacao);
-            projeto.setCriador(criador);
-            projeto.setImagens(listaImagensProjeto);
-            projeto.setComponentes(listaComponentes);
+            projeto = criaProjeto(cursor);
         }
         cursor.close();
         db.close();
@@ -148,46 +118,7 @@ public class ProjetoDAO {
 
         while (cursor.moveToNext()) {
 
-            String idColumn = DatabaseHelper.COLUMN_ID;
-            int indexColumnId = cursor.getColumnIndex(idColumn);
-            long id = cursor.getLong(indexColumnId);
-
-            String nomeColumn= DatabaseHelper.COLUMN_NAME;
-            int indexColumnNome= cursor.getColumnIndex(nomeColumn);
-            String nome = cursor.getString(indexColumnNome);
-
-            String descricaoColumn= DatabaseHelper.COLUMN_DESCRICAO;
-            int indexColumnDescricao= cursor.getColumnIndex(descricaoColumn);
-            String descricao = cursor.getString(indexColumnDescricao);
-
-            String plataformaColumn= DatabaseHelper.COLUMN_PLATAFORMA;
-            int indexColumnPlataforma= cursor.getColumnIndex(plataformaColumn);
-            String plataforma = cursor.getString(indexColumnPlataforma);
-
-            String aplicacaoColumn= DatabaseHelper.COLUMN_APLICACAO;
-            int indexColumnAplicacao= cursor.getColumnIndex(aplicacaoColumn);
-            String aplicacao = cursor.getString(indexColumnAplicacao);
-
-            String idCriadorColumn = DatabaseHelper.COLUMN_PESSOAFISICA_ID;
-            int indexColumnCriadorId = cursor.getColumnIndex(idCriadorColumn);
-            long idCriador = cursor.getLong(indexColumnCriadorId);
-
-            ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id);
-
-            PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
-
-            ArrayList<ComponenteQuantidade> listaComponentes = (ArrayList<ComponenteQuantidade>) componenteDAO.getComponentesUnicoProjeto(id);
-
-
-            Projeto projeto = new Projeto();
-            projeto.setId(id);
-            projeto.setNome(nome);
-            projeto.setDescricao(descricao);
-            projeto.setPlataforma(plataforma);
-            projeto.setAplicacao(aplicacao);
-            projeto.setCriador(criador);
-            projeto.setImagens(listaImagensProjeto);
-            projeto.setComponentes(listaComponentes);
+            Projeto projeto = criaProjeto(cursor);;
 
             listaProjetos.add(projeto);
 
@@ -214,42 +145,7 @@ public class ProjetoDAO {
 
         while (cursor.moveToNext()) {
 
-            String idColumn = DatabaseHelper.COLUMN_ID;
-            int indexColumnId = cursor.getColumnIndex(idColumn);
-            long id = cursor.getLong(indexColumnId);
-
-            String nomeColumn= DatabaseHelper.COLUMN_NAME;
-            int indexColumnNome= cursor.getColumnIndex(nomeColumn);
-            String nome = cursor.getString(indexColumnNome);
-
-            String descricaoColumn= DatabaseHelper.COLUMN_DESCRICAO;
-            int indexColumnDescricao= cursor.getColumnIndex(descricaoColumn);
-            String descricao = cursor.getString(indexColumnDescricao);
-
-            String plataformaColumn= DatabaseHelper.COLUMN_PLATAFORMA;
-            int indexColumnPlataforma= cursor.getColumnIndex(plataformaColumn);
-            String plataforma = cursor.getString(indexColumnPlataforma);
-
-            String aplicacaoColumn= DatabaseHelper.COLUMN_APLICACAO;
-            int indexColumnAplicacao= cursor.getColumnIndex(aplicacaoColumn);
-            String aplicacao = cursor.getString(indexColumnAplicacao);
-
-
-            ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id);
-
-            PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
-
-            ArrayList<ComponenteQuantidade> listaComponentes = (ArrayList<ComponenteQuantidade>) componenteDAO.getComponentesUnicoProjeto(id);
-
-            Projeto projeto = new Projeto();
-            projeto.setId(id);
-            projeto.setNome(nome);
-            projeto.setDescricao(descricao);
-            projeto.setPlataforma(plataforma);
-            projeto.setAplicacao(aplicacao);
-            projeto.setCriador(criador);
-            projeto.setImagens(listaImagensProjeto);
-            projeto.setComponentes(listaComponentes);
+            Projeto projeto = criaProjeto(cursor);;
 
             listaProjetos.add(projeto);
 
@@ -308,45 +204,8 @@ public class ProjetoDAO {
         ArrayList<Projeto> listaProjetos = new ArrayList<>();
 
         while (cursor.moveToNext()) {
-            String idColumn = DatabaseHelper.COLUMN_ID;
-            int indexColumnId = cursor.getColumnIndex(idColumn);
-            long id = cursor.getLong(indexColumnId);
 
-            String nomeColumn= DatabaseHelper.COLUMN_NAME;
-            int indexColumnNome= cursor.getColumnIndex(nomeColumn);
-            String nome = cursor.getString(indexColumnNome);
-
-            String descricaoColumn= DatabaseHelper.COLUMN_DESCRICAO;
-            int indexColumnDescricao= cursor.getColumnIndex(descricaoColumn);
-            String descricao = cursor.getString(indexColumnDescricao);
-
-            String plataformaColumn= DatabaseHelper.COLUMN_PLATAFORMA;
-            int indexColumnPlataforma= cursor.getColumnIndex(plataformaColumn);
-            String plataforma = cursor.getString(indexColumnPlataforma);
-
-            String aplicacaoColumn= DatabaseHelper.COLUMN_APLICACAO;
-            int indexColumnAplicacao= cursor.getColumnIndex(aplicacaoColumn);
-            String aplicacao = cursor.getString(indexColumnAplicacao);
-
-            String idCriadorColumn = DatabaseHelper.COLUMN_PESSOAFISICA_ID;
-            int indexColumnCriadorId = cursor.getColumnIndex(idCriadorColumn);
-            long idCriador = cursor.getLong(indexColumnCriadorId);
-
-            ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id);
-
-            PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
-
-            ArrayList<ComponenteQuantidade> listaComponentes = (ArrayList<ComponenteQuantidade>) componenteDAO.getComponentesUnicoProjeto(id);
-
-            Projeto projeto = new Projeto();
-            projeto.setId(id);
-            projeto.setNome(nome);
-            projeto.setDescricao(descricao);
-            projeto.setPlataforma(plataforma);
-            projeto.setAplicacao(aplicacao);
-            projeto.setCriador(criador);
-            projeto.setImagens(listaImagensProjeto);
-            projeto.setComponentes(listaComponentes);
+            Projeto projeto = criaProjeto(cursor);
 
             listaProjetos.add(projeto);
         }
@@ -354,6 +213,51 @@ public class ProjetoDAO {
         db.close();
 
         return listaProjetos;
+    }
+
+    public Projeto criaProjeto(Cursor cursor){
+
+        String idColumn = DatabaseHelper.COLUMN_ID;
+        int indexColumnId = cursor.getColumnIndex(idColumn);
+        long id = cursor.getLong(indexColumnId);
+
+        String nomeColumn= DatabaseHelper.COLUMN_NAME;
+        int indexColumnNome= cursor.getColumnIndex(nomeColumn);
+        String nome = cursor.getString(indexColumnNome);
+
+        String descricaoColumn= DatabaseHelper.COLUMN_DESCRICAO;
+        int indexColumnDescricao= cursor.getColumnIndex(descricaoColumn);
+        String descricao = cursor.getString(indexColumnDescricao);
+
+        String plataformaColumn= DatabaseHelper.COLUMN_PLATAFORMA;
+        int indexColumnPlataforma= cursor.getColumnIndex(plataformaColumn);
+        String plataforma = cursor.getString(indexColumnPlataforma);
+
+        String aplicacaoColumn= DatabaseHelper.COLUMN_APLICACAO;
+        int indexColumnAplicacao= cursor.getColumnIndex(aplicacaoColumn);
+        String aplicacao = cursor.getString(indexColumnAplicacao);
+
+        String idCriadorColumn = DatabaseHelper.COLUMN_PESSOAFISICA_ID;
+        int indexColumnCriadorId = cursor.getColumnIndex(idCriadorColumn);
+        long idCriador = cursor.getLong(indexColumnCriadorId);
+
+        ArrayList<String> listaImagensProjeto = getImagensUnicoProjeto(id);
+
+        PessoaFisica criador = pessoaFisicaDAO.getPessoaFisica(idCriador);
+
+        ArrayList<ComponenteQuantidade> listaComponentes = (ArrayList<ComponenteQuantidade>) componenteDAO.getComponentesUnicoProjeto(id);
+
+        Projeto projeto = new Projeto();
+        projeto.setId(id);
+        projeto.setNome(nome);
+        projeto.setDescricao(descricao);
+        projeto.setPlataforma(plataforma);
+        projeto.setAplicacao(aplicacao);
+        projeto.setCriador(criador);
+        projeto.setImagens(listaImagensProjeto);
+        projeto.setComponentes(listaComponentes);
+
+        return projeto;
     }
 
 

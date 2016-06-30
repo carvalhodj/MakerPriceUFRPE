@@ -30,15 +30,7 @@ public class UsuarioDAO {
         Usuario usuario = null;
 
         if (cursor.moveToNext()) {
-
-            String idColumn= DatabaseHelper.COLUMN_ID;
-            int indexColumnID= cursor.getColumnIndex(idColumn);
-            long id = cursor.getLong(indexColumnID);
-
-            usuario = new Usuario();
-            usuario.setID(id);
-            usuario.setEmail(email);
-            usuario.setPass(senha);
+            usuario = criaUsuario(cursor);
         }
         cursor.close();
         db.close();
@@ -60,18 +52,7 @@ public class UsuarioDAO {
 
         if (cursor.moveToNext()) {
 
-            String idColumn= DatabaseHelper.COLUMN_ID;
-            int indexColumnID= cursor.getColumnIndex(idColumn);
-            long id = cursor.getLong(indexColumnID);
-
-            String senhaColumn= DatabaseHelper.COLUMN_PASS;
-            int indexColumnSenha= cursor.getColumnIndex(senhaColumn);
-            String senha = cursor.getString(indexColumnSenha);
-
-            usuario = new Usuario();
-            usuario.setID(id);
-            usuario.setEmail(email);
-            usuario.setPass(senha);
+            usuario = criaUsuario(cursor);
         }
         cursor.close();
         db.close();
@@ -94,18 +75,7 @@ public class UsuarioDAO {
 
         if (cursor.moveToNext()) {
 
-            String emailColumn= DatabaseHelper.COLUMN_EMAIL;
-            int indexColumnEmail= cursor.getColumnIndex(emailColumn);
-            String email = cursor.getString(indexColumnEmail);
-
-            String senhaColumn= DatabaseHelper.COLUMN_PASS;
-            int indexColumnSenha= cursor.getColumnIndex(senhaColumn);
-            String senha = cursor.getString(indexColumnSenha);
-
-            usuario = new Usuario();
-            usuario.setID(id);
-            usuario.setEmail(email);
-            usuario.setPass(senha);
+            usuario = criaUsuario(cursor);
         }
         cursor.close();
         db.close();
@@ -137,4 +107,26 @@ public class UsuarioDAO {
 
     }
 
+    public Usuario criaUsuario(Cursor cursor){
+
+        String idColumn= DatabaseHelper.COLUMN_ID;
+        int indexColumnID= cursor.getColumnIndex(idColumn);
+        long id = cursor.getLong(indexColumnID);
+
+        String emailColumn= DatabaseHelper.COLUMN_EMAIL;
+        int indexColumnEmail= cursor.getColumnIndex(emailColumn);
+        String email = cursor.getString(indexColumnEmail);
+
+        String senhaColumn= DatabaseHelper.COLUMN_PASS;
+        int indexColumnSenha= cursor.getColumnIndex(senhaColumn);
+        String senha = cursor.getString(indexColumnSenha);
+
+        Usuario usuario = new Usuario();
+        usuario.setID(id);
+        usuario.setEmail(email);
+        usuario.setPass(senha);
+
+        return usuario;
+
+    }
 }

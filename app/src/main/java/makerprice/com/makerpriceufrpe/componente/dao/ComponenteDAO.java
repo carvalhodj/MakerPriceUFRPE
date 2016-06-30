@@ -54,6 +54,37 @@ public class ComponenteDAO {
 
     }
 
+    public void vincularProjetoComponentes(Projeto projeto){
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        String idProjetoColumn = DatabaseHelper.COLUMN_PROJETO_ID;
+        String idComponenteColumn = DatabaseHelper.COLUMN_COMPONENTE_ID;
+        String quantidadeColumn = DatabaseHelper.COLUMN_QUANTIDADE;
+        String tabela = DatabaseHelper.TABLE_COMPONENTE_PROJETO;
+
+        ArrayList<ComponenteQuantidade> componentes = projeto.getComponentes();
+        long idProjeto = projeto.getId();
+
+        for (ComponenteQuantidade comp : componentes){
+
+            long idComponente = comp.getComponente().getId();
+            int quantidade = comp.getQuantidade();
+
+            values.put(idProjetoColumn, idProjeto);
+            values.put(idComponenteColumn, idComponente);
+            values.put(quantidadeColumn, quantidade);
+
+            long id = db.insert(tabela, null, values);
+
+        }
+
+        db.close();
+
+    }
+
     public List<Componente> getTodosComponentes() {
         SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -95,74 +126,13 @@ public class ComponenteDAO {
 
         if (cursor.moveToNext()) {
 
-            String tipoColumn = DatabaseHelper.COLUMN_TIPO;
-            int indexColumnTipo = cursor.getColumnIndex(tipoColumn);
-            String tipo = cursor.getString(indexColumnTipo);
-
-            String corColumn = DatabaseHelper.COLUMN_COR;
-            int indexColumnCor = cursor.getColumnIndex(corColumn);
-            String cor = cursor.getString(indexColumnCor);
-
-            String capacitanciaColumn = DatabaseHelper.COLUMN_CAPACITANCIA;
-            int indexColumnCapacitancia = cursor.getColumnIndex(capacitanciaColumn);
-            String capacitancia = cursor.getString(indexColumnCapacitancia);
-
-            String resistenciaColumn = DatabaseHelper.COLUMN_RESISTENCIA;
-            int indexColumnResistencia = cursor.getColumnIndex(resistenciaColumn);
-            String resistencia = cursor.getString(indexColumnResistencia);
-
-            Map propriedades = new HashMap();
-
-            if (Objects.equals(tipo, "resistor")) {
-
-                propriedades.put("tipo", ComponenteEnum.ComponenteTipo.RESISTOR.getNome());
-
-                if (Objects.equals(resistencia, "330R")) {
-                    propriedades.put("resistencia", ComponenteEnum.Resistencia.R330.getNome());
-                }
-
-                else if (Objects.equals(resistencia, "220R")) {
-                    propriedades.put("resistencia", ComponenteEnum.Resistencia.R220.getNome());
-                }
-
-            } else if (Objects.equals(tipo, "led")) {
-
-                propriedades.put("tipo", ComponenteEnum.ComponenteTipo.LED.getNome());
-
-                if (Objects.equals(cor, "verde")) {
-                    propriedades.put("cor", ComponenteEnum.Cor.VERDE.getNome());
-                }
-
-                else if(Objects.equals(cor, "vermelho")) {
-                    propriedades.put("cor", ComponenteEnum.Cor.VERMELHO.getNome());
-                }
-
-            } else if (Objects.equals(tipo, "capacitor")) {
-
-                propriedades.put("tipo", ComponenteEnum.ComponenteTipo.CAPACITOR.getNome());
-
-                if (Objects.equals(capacitancia, "100uF")) {
-                    propriedades.put("capacitancia", ComponenteEnum.Capacitancia.UF100.getNome());
-                }
-
-                else if (Objects.equals(capacitancia, "1uF")) {
-                    propriedades.put("capacitancia", ComponenteEnum.Capacitancia.UF1.getNome());
-                }
-
-            }
-
-            ComponenteEspc compSpec = new ComponenteEspc(propriedades);
-
-            componente = new Componente();
-            componente.setComponenteEspc(compSpec);
-            componente.setId(idComponente);
-
+            componente = criaComponente(cursor);
         }
 
         return componente;
     }
 
-    public List<Componente> getTodosComponentesProjeto(long idProjeto){
+    /*public List<Componente> getTodosComponentesProjeto(long idProjeto){
         SQLiteDatabase db = helper.getReadableDatabase();
 
         String comando = "SELECT * FROM " + DatabaseHelper.TABLE_COMPONENTE_PROJETO +
@@ -193,37 +163,36 @@ public class ComponenteDAO {
 
         return listaComponentesProjeto;
 
-    }
+    }*/
 
-    public void vincularProjetoComponentes(Projeto projeto){
+    public List<Componente> buscaComponentes(String busca) {
+        SQLiteDatabase db = helper.getReadableDatabase();
 
-        SQLiteDatabase db = helper.getWritableDatabase();
+        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_COMPONENTE +
+                " WHERE " + DatabaseHelper.COLUMN_TIPO + " LIKE ? " +
+                "OR "+ DatabaseHelper.COLUMN_COR + " LIKE ? " +
+                "OR " + DatabaseHelper.COLUMN_CAPACITANCIA + " LIKE ? " +
+                "OR " + DatabaseHelper.COLUMN_RESISTENCIA + " LIKE ?";
 
-        ContentValues values = new ContentValues();
+        String argumento = "%" + busca + "%";
 
-        String idProjetoColumn = DatabaseHelper.COLUMN_PROJETO_ID;
-        String idComponenteColumn = DatabaseHelper.COLUMN_COMPONENTE_ID;
-        String quantidadeColumn = DatabaseHelper.COLUMN_QUANTIDADE;
-        String tabela = DatabaseHelper.TABLE_COMPONENTE_PROJETO;
+        String[] argumentos = {argumento, argumento, argumento, argumento};
 
-        ArrayList<ComponenteQuantidade> componentes = projeto.getComponentes();
-        long idProjeto = projeto.getId();
+        Cursor cursor = db.rawQuery(comando, argumentos);
 
-        for (ComponenteQuantidade comp : componentes){
+        ArrayList<Componente> listaComponentes = new ArrayList<>();
 
-            long idComponente = comp.getComponente().getId();
-            int quantidade = comp.getQuantidade();
+        while (cursor.moveToNext()) {
 
-            values.put(idProjetoColumn, idProjeto);
-            values.put(idComponenteColumn, idComponente);
-            values.put(quantidadeColumn, quantidade);
+            Componente componente = criaComponente(cursor);
 
-            long id = db.insert(tabela, null, values);
+            listaComponentes.add(componente);
 
         }
-
+        cursor.close();
         db.close();
 
+        return listaComponentes;
     }
 
     public List<ComponenteQuantidade> getComponentesUnicoProjeto(long idProjeto){
@@ -279,33 +248,11 @@ public class ComponenteDAO {
 
         Cursor cursor = db.rawQuery(comando, argumentos);
 
-        Loja loja = null;
-
         ComponenteLoja componenteLoja = null;
 
         if (cursor.moveToNext()) {
 
-            String idColumn = DatabaseHelper.COLUMN_ID;
-            int indexColumnId = cursor.getColumnIndex(idColumn);
-            long id = cursor.getLong(indexColumnId);
-
-            String idLojaColumn = DatabaseHelper.COLUMN_LOJA_ID;
-            int indexColumnLojaId = cursor.getColumnIndex(idLojaColumn);
-            long idLoja = cursor.getLong(indexColumnLojaId);
-
-            String precoColumn = DatabaseHelper.COLUMN_PRECO;
-            int indexColumnPreco = cursor.getColumnIndex(precoColumn);
-            double preco = cursor.getDouble(indexColumnPreco);
-
-            loja = lojaDAO.getLoja(idLoja);
-
-            componenteLoja = new ComponenteLoja();
-            componenteLoja.setId(id);
-            componenteLoja.setComponente(componente);
-            componenteLoja.setLoja(loja);
-            componenteLoja.setPreco(preco);
-
-
+            componenteLoja = criaComponenteLoja(cursor);
         }
         cursor.close();
         db.close();
@@ -326,7 +273,6 @@ public class ComponenteDAO {
 
         Cursor cursor = db.rawQuery(comando, argumentos);
 
-        Loja loja = null;
 
         ComponenteLoja componenteLoja = null;
 
@@ -334,29 +280,9 @@ public class ComponenteDAO {
 
         while (cursor.moveToNext()) {
 
-            String idColumn = DatabaseHelper.COLUMN_ID;
-            int indexColumnId = cursor.getColumnIndex(idColumn);
-            long id = cursor.getLong(indexColumnId);
-
-            String idLojaColumn = DatabaseHelper.COLUMN_LOJA_ID;
-            int indexColumnLojaId = cursor.getColumnIndex(idLojaColumn);
-            long idLoja = cursor.getLong(indexColumnLojaId);
-
-            String precoColumn = DatabaseHelper.COLUMN_PRECO;
-            int indexColumnPreco = cursor.getColumnIndex(precoColumn);
-            double preco = cursor.getDouble(indexColumnPreco);
-
-            loja = lojaDAO.getLoja(idLoja);
-
-            componenteLoja = new ComponenteLoja();
-            componenteLoja.setId(id);
-            componenteLoja.setComponente(componente);
-            componenteLoja.setLoja(loja);
-            componenteLoja.setPreco(preco);
+            componenteLoja = criaComponenteLoja(cursor);
 
             listaComponenteLoja.add(componenteLoja);
-
-
         }
         cursor.close();
         db.close();
@@ -364,100 +290,111 @@ public class ComponenteDAO {
         return listaComponenteLoja;
     }
 
-    public List<Componente> buscaComponentes(String busca) {
-        SQLiteDatabase db = helper.getReadableDatabase();
+    public Componente criaComponente(Cursor cursor){
 
-        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_COMPONENTE +
-                " WHERE " + DatabaseHelper.COLUMN_TIPO + " LIKE ? " +
-                "OR "+ DatabaseHelper.COLUMN_COR + " LIKE ? " +
-                "OR " + DatabaseHelper.COLUMN_CAPACITANCIA + " LIKE ? " +
-                "OR " + DatabaseHelper.COLUMN_RESISTENCIA + " LIKE ?";
+        String idColumn= DatabaseHelper.COLUMN_ID;
+        int indexColumnID= cursor.getColumnIndex(idColumn);
+        long idComponente = cursor.getLong(indexColumnID);
 
-        String argumento = "%" + busca + "%";
+        String tipoColumn = DatabaseHelper.COLUMN_TIPO;
+        int indexColumnTipo = cursor.getColumnIndex(tipoColumn);
+        String tipo = cursor.getString(indexColumnTipo);
 
-        String[] argumentos = {argumento, argumento, argumento, argumento};
+        String corColumn = DatabaseHelper.COLUMN_COR;
+        int indexColumnCor = cursor.getColumnIndex(corColumn);
+        String cor = cursor.getString(indexColumnCor);
 
-        Cursor cursor = db.rawQuery(comando, argumentos);
+        String capacitanciaColumn = DatabaseHelper.COLUMN_CAPACITANCIA;
+        int indexColumnCapacitancia = cursor.getColumnIndex(capacitanciaColumn);
+        String capacitancia = cursor.getString(indexColumnCapacitancia);
 
-        ArrayList<Componente> listaComponentes = new ArrayList<>();
+        String resistenciaColumn = DatabaseHelper.COLUMN_RESISTENCIA;
+        int indexColumnResistencia = cursor.getColumnIndex(resistenciaColumn);
+        String resistencia = cursor.getString(indexColumnResistencia);
 
-        while (cursor.moveToNext()) {
+        Map propriedades = new HashMap();
 
-            String idColumn = DatabaseHelper.COLUMN_ID;
-            int indexColumnId = cursor.getColumnIndex(idColumn);
-            long id = cursor.getLong(indexColumnId);
+        if (Objects.equals(tipo, "resistor")) {
 
-            String tipoColumn = DatabaseHelper.COLUMN_TIPO;
-            int indexColumnTipo = cursor.getColumnIndex(tipoColumn);
-            String tipo = cursor.getString(indexColumnTipo);
+            propriedades.put("tipo", ComponenteEnum.ComponenteTipo.RESISTOR.getNome());
 
-            String corColumn = DatabaseHelper.COLUMN_COR;
-            int indexColumnCor = cursor.getColumnIndex(corColumn);
-            String cor = cursor.getString(indexColumnCor);
-
-            String capacitanciaColumn = DatabaseHelper.COLUMN_CAPACITANCIA;
-            int indexColumnCapacitancia = cursor.getColumnIndex(capacitanciaColumn);
-            String capacitancia = cursor.getString(indexColumnCapacitancia);
-
-            String resistenciaColumn = DatabaseHelper.COLUMN_RESISTENCIA;
-            int indexColumnResistencia = cursor.getColumnIndex(resistenciaColumn);
-            String resistencia = cursor.getString(indexColumnResistencia);
-
-            Map propriedades = new HashMap();
-
-            if (Objects.equals(tipo, "resistor")) {
-
-                propriedades.put("tipo", ComponenteEnum.ComponenteTipo.RESISTOR.getNome());
-
-                if (Objects.equals(resistencia, "330R")) {
-                    propriedades.put("resistencia", ComponenteEnum.Resistencia.R330.getNome());
-                }
-
-                else if (Objects.equals(resistencia, "220R")) {
-                    propriedades.put("resistencia", ComponenteEnum.Resistencia.R220.getNome());
-                }
-
-            } else if (Objects.equals(tipo, "led")) {
-
-                propriedades.put("tipo", ComponenteEnum.ComponenteTipo.LED.getNome());
-
-                if (Objects.equals(cor, "verde")) {
-                    propriedades.put("cor", ComponenteEnum.Cor.VERDE.getNome());
-                }
-
-                else if(Objects.equals(cor, "vermelho")) {
-                    propriedades.put("cor", ComponenteEnum.Cor.VERMELHO.getNome());
-                }
-
-            } else if (Objects.equals(tipo, "capacitor")) {
-
-                propriedades.put("tipo", ComponenteEnum.ComponenteTipo.CAPACITOR.getNome());
-
-                if (Objects.equals(capacitancia, "100uF")) {
-                    propriedades.put("capacitancia", ComponenteEnum.Capacitancia.UF100.getNome());
-                }
-
-                else if (Objects.equals(capacitancia, "1uF")) {
-                    propriedades.put("capacitancia", ComponenteEnum.Capacitancia.UF1.getNome());
-                }
-
+            if (Objects.equals(resistencia, "330R")) {
+                propriedades.put("resistencia", ComponenteEnum.Resistencia.R330.getNome());
             }
 
-            Componente componente = new Componente();;
+            else if (Objects.equals(resistencia, "220R")) {
+                propriedades.put("resistencia", ComponenteEnum.Resistencia.R220.getNome());
+            }
 
-            ComponenteEspc compSpec = new ComponenteEspc(propriedades);
+        } else if (Objects.equals(tipo, "led")) {
 
-            componente.setComponenteEspc(compSpec);
-            componente.setId(id);
+            propriedades.put("tipo", ComponenteEnum.ComponenteTipo.LED.getNome());
 
-            listaComponentes.add(componente);
+            if (Objects.equals(cor, "verde")) {
+                propriedades.put("cor", ComponenteEnum.Cor.VERDE.getNome());
+            }
+
+            else if(Objects.equals(cor, "vermelho")) {
+                propriedades.put("cor", ComponenteEnum.Cor.VERMELHO.getNome());
+            }
+
+        } else if (Objects.equals(tipo, "capacitor")) {
+
+            propriedades.put("tipo", ComponenteEnum.ComponenteTipo.CAPACITOR.getNome());
+
+            if (Objects.equals(capacitancia, "100uF")) {
+                propriedades.put("capacitancia", ComponenteEnum.Capacitancia.UF100.getNome());
+            }
+
+            else if (Objects.equals(capacitancia, "1uF")) {
+                propriedades.put("capacitancia", ComponenteEnum.Capacitancia.UF1.getNome());
+            }
 
         }
-        cursor.close();
-        db.close();
 
-        return listaComponentes;
+        ComponenteEspc compSpec = new ComponenteEspc(propriedades);
+
+        Componente componente = new Componente();
+        componente.setComponenteEspc(compSpec);
+        componente.setId(idComponente);
+
+        return componente;
+
     }
+
+    public ComponenteLoja criaComponenteLoja(Cursor cursor){
+
+        String idColumn = DatabaseHelper.COLUMN_ID;
+        int indexColumnId = cursor.getColumnIndex(idColumn);
+        long id = cursor.getLong(indexColumnId);
+
+        String idLojaColumn = DatabaseHelper.COLUMN_LOJA_ID;
+        int indexColumnLojaId = cursor.getColumnIndex(idLojaColumn);
+        long idLoja = cursor.getLong(indexColumnLojaId);
+
+        String idComponenteColumn = DatabaseHelper.COLUMN_COMPONENTE_ID;
+        int indexColumnComponenteId = cursor.getColumnIndex(idComponenteColumn);
+        long idComponente = cursor.getLong(indexColumnComponenteId);
+
+        String precoColumn = DatabaseHelper.COLUMN_PRECO;
+        int indexColumnPreco = cursor.getColumnIndex(precoColumn);
+        double preco = cursor.getDouble(indexColumnPreco);
+
+        Loja loja = lojaDAO.getLoja(idLoja);
+
+        Componente componente = getComponente(idComponente);
+
+        ComponenteLoja componenteLoja = new ComponenteLoja();
+        componenteLoja.setId(id);
+        componenteLoja.setComponente(componente);
+        componenteLoja.setLoja(loja);
+        componenteLoja.setPreco(preco);
+
+        return componenteLoja;
+
+    }
+
+
 }
 
 

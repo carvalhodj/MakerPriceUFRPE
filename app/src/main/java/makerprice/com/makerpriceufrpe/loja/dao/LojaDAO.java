@@ -36,25 +36,7 @@ public class LojaDAO {
 
         if (cursor.moveToNext()) {
 
-            String nomeColumn= DatabaseHelper.COLUMN_NAME;
-            int indexColumnNome= cursor.getColumnIndex(nomeColumn);
-            String nome = cursor.getString(indexColumnNome);
-
-            String usuarioIDColumn= DatabaseHelper.COLUMN_USUARIO_ID;
-            int indexColumnLojaID= cursor.getColumnIndex(usuarioIDColumn);
-            long idUsuario = cursor.getLong(indexColumnLojaID);
-
-            String cnpjColumn= DatabaseHelper.COLUMN_CNPJ;
-            int indexColumnCnpj= cursor.getColumnIndex(cnpjColumn);
-            String cnpj = cursor.getString(indexColumnCnpj);
-
-            Usuario usuario = usuarioDAO.getUsuario(idUsuario);
-
-            loja = new Loja();
-            loja.setId(id);
-            loja.setNome(nome);
-            loja.setCnpj(cnpj);
-            loja.setUsuario(usuario);
+            loja = criaLoja(cursor);
         }
         cursor.close();
         db.close();
@@ -77,24 +59,9 @@ public class LojaDAO {
         Loja loja = null;
 
         if (cursor.moveToNext()) {
-            String idColumn=DatabaseHelper.COLUMN_ID;
-            int indexColumnId=cursor.getColumnIndex(idColumn);
-            int idLoja=cursor.getInt(indexColumnId);
 
-            String nomeColumn= DatabaseHelper.COLUMN_NAME;
-            int indexColumnNome= cursor.getColumnIndex(nomeColumn);
-            String nome = cursor.getString(indexColumnNome);
+            loja = criaLoja(cursor);
 
-            String cnpjColumn= DatabaseHelper.COLUMN_CNPJ;
-            int indexColumnCnpj= cursor.getColumnIndex(cnpjColumn);
-            String cnpj = cursor.getString(indexColumnCnpj);
-
-
-            loja = new Loja();
-            loja.setId(idLoja);
-            loja.setNome(nome);
-            loja.setCnpj(cnpj);
-            loja.setUsuario(usuario);
         }
         cursor.close();
         db.close();
@@ -129,6 +96,36 @@ public class LojaDAO {
         long id=db.insert(tabela,null,values);
         db.close();
         return id;
+
+    }
+
+    public Loja criaLoja(Cursor cursor){
+
+        String idColumn= DatabaseHelper.COLUMN_ID;
+        int indexColumnID= cursor.getColumnIndex(idColumn);
+        long id = cursor.getLong(indexColumnID);
+
+        String nomeColumn= DatabaseHelper.COLUMN_NAME;
+        int indexColumnNome= cursor.getColumnIndex(nomeColumn);
+        String nome = cursor.getString(indexColumnNome);
+
+        String usuarioIDColumn= DatabaseHelper.COLUMN_USUARIO_ID;
+        int indexColumnLojaID= cursor.getColumnIndex(usuarioIDColumn);
+        long idUsuario = cursor.getLong(indexColumnLojaID);
+
+        String cnpjColumn= DatabaseHelper.COLUMN_CNPJ;
+        int indexColumnCnpj= cursor.getColumnIndex(cnpjColumn);
+        String cnpj = cursor.getString(indexColumnCnpj);
+
+        Usuario usuario = usuarioDAO.getUsuario(idUsuario);
+
+        Loja loja = new Loja();
+        loja.setId(id);
+        loja.setNome(nome);
+        loja.setCnpj(cnpj);
+        loja.setUsuario(usuario);
+
+        return loja;
 
     }
 

@@ -35,20 +35,8 @@ public class PessoaFisicaDAO {
 
         if (cursor.moveToNext()) {
 
-            String nomeColumn= DatabaseHelper.COLUMN_NAME;
-            int indexColumnNome= cursor.getColumnIndex(nomeColumn);
-            String nome = cursor.getString(indexColumnNome);
+            pessoaFisica = criaPessoaFisica(cursor);
 
-            String usuarioIDColumn= DatabaseHelper.COLUMN_USUARIO_ID;
-            int indexColumnUsuarioID= cursor.getColumnIndex(usuarioIDColumn);
-            long idUsuario = cursor.getLong(indexColumnUsuarioID);
-
-            Usuario usuario = usuarioDAO.getUsuario(idUsuario);
-
-            pessoaFisica = new PessoaFisica();
-            pessoaFisica.setID(id);
-            pessoaFisica.setNome(nome);
-            pessoaFisica.setUsuario(usuario);
         }
         cursor.close();
         db.close();
@@ -72,18 +60,7 @@ public class PessoaFisicaDAO {
 
         if (cursor.moveToNext()) {
 
-            String idColumn= DatabaseHelper.COLUMN_ID;
-            int indexColumnID= cursor.getColumnIndex(idColumn);
-            long id = cursor.getLong(indexColumnID);
-
-            String nomeColumn= DatabaseHelper.COLUMN_NAME;
-            int indexColumnNome= cursor.getColumnIndex(nomeColumn);
-            String nome = cursor.getString(indexColumnNome);
-
-            pessoaFisica = new PessoaFisica();
-            pessoaFisica.setID(id);
-            pessoaFisica.setNome(nome);
-            pessoaFisica.setUsuario(usuario);
+            pessoaFisica = criaPessoaFisica(cursor);
         }
         cursor.close();
         db.close();
@@ -112,6 +89,32 @@ public class PessoaFisicaDAO {
 
         db.close();
         return id;
+
+    }
+
+    public PessoaFisica criaPessoaFisica(Cursor cursor){
+
+        String idColumn= DatabaseHelper.COLUMN_ID;
+        int indexColumnID= cursor.getColumnIndex(idColumn);
+        long id = cursor.getLong(indexColumnID);
+
+        String nomeColumn= DatabaseHelper.COLUMN_NAME;
+        int indexColumnNome= cursor.getColumnIndex(nomeColumn);
+        String nome = cursor.getString(indexColumnNome);
+
+        String usuarioIDColumn= DatabaseHelper.COLUMN_USUARIO_ID;
+        int indexColumnUsuarioID= cursor.getColumnIndex(usuarioIDColumn);
+        long idUsuario = cursor.getLong(indexColumnUsuarioID);
+
+        Usuario usuario = usuarioDAO.getUsuario(idUsuario);
+
+        PessoaFisica pessoaFisica = new PessoaFisica();
+
+        pessoaFisica.setID(id);
+        pessoaFisica.setNome(nome);
+        pessoaFisica.setUsuario(usuario);
+
+        return pessoaFisica;
 
     }
 }

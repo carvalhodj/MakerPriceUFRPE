@@ -13,7 +13,7 @@ import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteQuantidade;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 
 /**
- * Classe que buscar e retornar os obejtos ComponenteLoja com menor preço de um projeto e uma lista
+ * Classe que busca e retorna os objetos ComponenteLoja com menor preço de um projeto e uma lista
  * de ComponenteLoja de um determinado componente.
  */
 
@@ -28,7 +28,7 @@ public class Comparador {
     public Comparador(Context context) { componenteDAO = new ComponenteDAO(context); }
 
     /**
-     * Metodo responsavel por uscar e retornar um lista de obejtos ComponenteLoja com menor preço da
+     * Metodo responsavel por buscar e retornar um lista de objetos ComponenteLoja com menor preço da
      * lista de objetos da classe componente que compõem um projeto.
      * @param projeto Objeto Projeto que tera seus componentes com menor preço encontrado.
      * @return Retorna uma lista de objeto ComponenteLoja com menor preço.

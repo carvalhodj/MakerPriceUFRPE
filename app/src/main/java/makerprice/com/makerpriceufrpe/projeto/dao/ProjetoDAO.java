@@ -1,12 +1,10 @@
 package makerprice.com.makerpriceufrpe.projeto.dao;
 
 
-import android.content.ClipboardManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +17,10 @@ import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 import makerprice.com.makerpriceufrpe.usuario.dao.PessoaFisicaDAO;
 import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
 
+/**
+ * Essa classe contém os métodos de cadastro e consultas de projetos
+ * no banco de dados do app.
+ */
 public class ProjetoDAO {
     private DatabaseHelper helper;
     private PessoaFisicaDAO pessoaFisicaDAO;
@@ -30,6 +32,12 @@ public class ProjetoDAO {
         componenteDAO = new ComponenteDAO(context);
     }
 
+    /**
+     * Método para cadastrar um projeto no banco de dados
+     *
+     * @param projeto Objeto do tipo Projeto
+     * @return Retorna o id do projeto cadastrado
+     */
     public long inserir(Projeto projeto){
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -84,51 +92,12 @@ public class ProjetoDAO {
         return id;
     }
 
-    public Projeto getProjeto(String nomeProjeto, long idCriador){
-        SQLiteDatabase db = helper.getReadableDatabase();
-
-        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_PROJETO +
-                " WHERE " + DatabaseHelper.COLUMN_NAME + " LIKE ? " +
-                "AND " + DatabaseHelper.COLUMN_PESSOAFISICA_ID + " LIKE ?";
-
-        String[] argumentos = {nomeProjeto, String.valueOf(idCriador)};
-
-        Cursor cursor = db.rawQuery(comando, argumentos);
-
-        Projeto projeto = null;
-
-        if (cursor.moveToNext()) {
-
-            projeto = criaProjeto(cursor);
-        }
-        cursor.close();
-        db.close();
-
-        return projeto;
-    }
-
-    public ArrayList<Projeto> getTodosProjetos(){
-        SQLiteDatabase db = helper.getReadableDatabase();
-
-        String comando = "SELECT * FROM " + DatabaseHelper.TABLE_PROJETO;
-
-        Cursor cursor = db.rawQuery(comando, null);
-
-        ArrayList<Projeto> listaProjetos = new ArrayList<>();
-
-        while (cursor.moveToNext()) {
-
-            Projeto projeto = criaProjeto(cursor);;
-
-            listaProjetos.add(projeto);
-
-        }
-        cursor.close();
-        db.close();
-
-        return listaProjetos;
-    }
-
+    /**
+     * Método para buscar no banco os projetos do usuário ativo na sessão
+     *
+     * @param idCriador id do usuário ativo na sessão
+     * @return Retorna uma lista de projetos do usuário
+     */
     public ArrayList<Projeto> getTodosProjetosUnicoCriador(long idCriador){
         SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -156,6 +125,12 @@ public class ProjetoDAO {
         return listaProjetos;
     }
 
+    /**
+     * Método para buscar no banco de dados as imagens de um determinado projeto
+     *
+     * @param id id do projeto que se deseja buscar as imagens
+     * @return Retorna uma lista com as imagens em formato String
+     */
     public ArrayList<String> getImagensUnicoProjeto (long id){
         SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -188,6 +163,13 @@ public class ProjetoDAO {
 
     }
 
+    /**
+     * Método que recebe um termo informado pelo usuário e retorna os projetos encontrados
+     * cujos nomes estão de acordo com o termo, seja total ou parcialmente
+     *
+     * @param busca termo a ser pesquisado no banco de dados
+     * @return Retorna uma lista com os projetos encontrados
+     */
     public List<Projeto> buscaProjetos(String busca) {
         SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -215,6 +197,12 @@ public class ProjetoDAO {
         return listaProjetos;
     }
 
+    /**
+     * Método para criar um objeto do tipo Projeto
+     *
+     * @param cursor cursor que percorre as colunas da tabela no banco de dados
+     * @return Retorna um objeto do tipo Projeto
+     */
     public Projeto criaProjeto(Cursor cursor){
 
         String idColumn = DatabaseHelper.COLUMN_ID;

@@ -4,6 +4,10 @@ package makerprice.com.makerpriceufrpe.componente.dominio;
 import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
 
 
+/**
+ * Essa classe tem como objetivo relacionar o componente com as lojas que o oferece,
+ * contendo também o preço pelo qual está sendo ofertado.
+ */
 public class ComponenteLoja {
     private Loja loja;
     private Componente componente;

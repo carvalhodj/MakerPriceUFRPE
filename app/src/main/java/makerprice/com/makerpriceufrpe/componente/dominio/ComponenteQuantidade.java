@@ -1,6 +1,9 @@
 package makerprice.com.makerpriceufrpe.componente.dominio;
 
-
+/**
+ * Essa classe tem como função relacionar os componentes de um projeto
+ * com as respectivas quantidades utilizadas no mesmo.
+ */
 public class ComponenteQuantidade {
     private long id;
     private Componente componente;

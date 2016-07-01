@@ -9,6 +9,9 @@ import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
 import makerprice.com.makerpriceufrpe.usuario.dao.UsuarioDAO;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
+/**
+ * Classe de Serviço para comunicação com a classe LojaDAO e validação.
+ */
 
 public class LojaService {
     private Sessao sessao = Sessao.getInstancia();
@@ -16,10 +19,21 @@ public class LojaService {
     private UsuarioDAO usuarioDAO;
     private Criptografia criptografia=new Criptografia();
 
+    /**
+     * Construtor
+     * @param context
+     */
+
     public LojaService(Context context){
         lojaDAO= new LojaDAO(context);
         usuarioDAO=new UsuarioDAO(context);
     }
+
+    /**
+     * Metodo que valida a existencia de uma Loja previamente cadastrada na tabela TABLE_LOJA, ao passar um objeto da classe Usuario, e o seta na sessão.
+     * @param usuario Objeto Usuario a ser verificado.
+     * @see LojaDAO
+     */
 
     public void login(Usuario usuario){
         sessao.reset();
@@ -29,6 +43,15 @@ public class LojaService {
         sessao.setLoja(loja);
 
     }
+
+    /**
+     *  Metodo que valida uma Loja a ser cadastrado e requisita a inserção a classe LojaDAO.
+     * @param loja Objeto da classe Loja a ser cadastrado.
+     * @throws Exception Retorna uma exceção caso já exista um Usuario com mesmo e-mail ja cadastrado.
+     * @see UsuarioDAO
+     * @see Criptografia
+     * @see LojaDAO
+     */
 
     public void cadastrar(Loja loja) throws Exception {
 

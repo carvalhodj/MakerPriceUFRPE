@@ -6,6 +6,11 @@ import makerprice.com.makerpriceufrpe.componente.dominio.Componente;
 import makerprice.com.makerpriceufrpe.componente.dominio.ComponenteQuantidade;
 import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
 
+/***
+ * Teste
+ *
+ */
+
 public class Projeto {
     private String nome, descricao, plataforma, aplicacao;
     private ArrayList<String> imagens = new ArrayList<>();

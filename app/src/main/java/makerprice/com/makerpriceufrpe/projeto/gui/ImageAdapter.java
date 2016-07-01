@@ -23,9 +23,7 @@ public class ImageAdapter extends PagerAdapter {
     private ArrayList<Bitmap> imagesGal = new ArrayList<>();
 
     private int[] GalImages = new int[] {
-            R.drawable.one,
-            R.drawable.two,
-            R.drawable.three
+
     };
 
     ImageAdapter(Context context){

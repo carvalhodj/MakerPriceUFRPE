@@ -23,14 +23,29 @@ import makerprice.com.makerpriceufrpe.loja.dao.LojaDAO;
 import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
 import makerprice.com.makerpriceufrpe.projeto.dominio.Projeto;
 
+/**
+ * Classe de persistencia para classe Componente.
+ */
+
 public class ComponenteDAO {
     private DatabaseHelper helper;
     private LojaDAO lojaDAO;
+
+    /**
+     * Construtor
+     * @param context
+     */
 
     public ComponenteDAO(Context context) {
         helper = new DatabaseHelper(context);
         lojaDAO = new LojaDAO(context);
     }
+
+    /**
+     * Metodo que insere um Objeto do tipo Componente na tabela TABLE_COMPONENTE.
+     * @param componente Objeto da classe componente a ser inserido no banco de dados.
+     * @return Retorna o id do componente inserido.
+     */
 
     public long inserir(Componente componente){
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -53,6 +68,13 @@ public class ComponenteDAO {
         return id;
 
     }
+
+    /**
+     * Metodo que relaciona um obejto da classe Projeto cadastrado aos objetos da classe Componente que
+     * o compõem relacionando-os pelo id.
+     * @param projeto Objeto da classe projeto com uma lista de componente que o compõem.
+     *
+     */
 
     public void vincularProjetoComponentes(Projeto projeto){
 
@@ -85,6 +107,12 @@ public class ComponenteDAO {
 
     }
 
+    /**
+     * Metodo que retorna uma lista de todos os componentes cadastrado no banco de dados.
+     *
+     * @return Retorna uma lista de obejtos Componente.
+     */
+
     public List<Componente> getTodosComponentes() {
         SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -110,6 +138,12 @@ public class ComponenteDAO {
         return listaComponentes;
     }
 
+    /**
+     * Metodo que busca e retorna um obejto da classe Componente por meio do id.
+     * @param idComponente Id do componente a ser buscado.
+     * @return Retorna um obejto da classe Componente caso exista no banco de dados caso contrario retorna null.
+     */
+
     public Componente getComponente(long idComponente) {
         SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -131,6 +165,13 @@ public class ComponenteDAO {
 
         return componente;
     }
+
+    /**
+     * Metodo que busca e retorna uma lista de objetos da classe Componente caso uma string passada
+     * como parametro seja encontrada em qualquer atributo do componente.
+     * @param busca String a ser encontrada.
+     * @return Retorna uma Lista de obejtos da classe Componente.
+     */
 
     public List<Componente> buscaComponentes(String busca) {
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -161,6 +202,14 @@ public class ComponenteDAO {
 
         return listaComponentes;
     }
+
+    /**
+     * Metodo que busca e retorna uma lista de todos os objetos da classe Componente relacionado a um objeto da classe Projeto.
+     *
+     * @param idProjeto Id do projeto requerido.
+     * @return Retorna uma lista dos objetos da classe Componente associado a um objeto da classe Projeto.
+     *
+     */
 
     public List<ComponenteQuantidade> getComponentesUnicoProjeto(long idProjeto){
 
@@ -202,6 +251,13 @@ public class ComponenteDAO {
         return componentes;
     }
 
+    /**
+     * Metodo que busca o componente com o menor no banco de dados.
+     * @param componente Componente a ser encontrado.
+     * @return Retorna uma obejto da classe ComponenteLoja.
+     * @see ComponenteLoja
+     */
+
     public ComponenteLoja getMinimo(Componente componente) {
         long idComponente = componente.getId();
 
@@ -226,6 +282,13 @@ public class ComponenteDAO {
 
         return componenteLoja;
     }
+
+    /**
+     * Metodo que busca e retorna todos os objetoas da classe ComponenteLoja de um determinado objeto da classe Componente.
+     * @param componente Objeto Compoenente a ser buscado.
+     * @return Retorna uma lista de objetos da classe ComponenteLoja.
+     * @see ComponenteLoja
+     */
 
     public List<ComponenteLoja> getComponenteLojas(Componente componente) {
         long idComponente = componente.getId();
@@ -256,6 +319,13 @@ public class ComponenteDAO {
 
         return listaComponenteLoja;
     }
+
+    /**
+     * Cria um objeto da classe Componente a partir de um cursor.
+     *
+     * @param cursor Cursor que vai percorrer as colunas da tabela.
+     * @return Retorna um objeto da classe Componente.
+     */
 
     public Componente criaComponente(Cursor cursor){
 
@@ -328,6 +398,14 @@ public class ComponenteDAO {
         return componente;
 
     }
+
+    /**
+     * Cria um objeto da classe ComponenteLoja a partir de um cursor
+     *
+     * @param cursor Cursor que vai percorrer as colunas da tabela
+     * @return Retorna um obejto da classe CompoeneteLoja.
+     * @see LojaDAO
+     */
 
     public ComponenteLoja criaComponenteLoja(Cursor cursor){
 

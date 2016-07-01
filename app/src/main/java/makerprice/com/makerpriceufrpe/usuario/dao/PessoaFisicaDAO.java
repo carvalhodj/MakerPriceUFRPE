@@ -9,15 +9,33 @@ import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.usuario.dominio.PessoaFisica;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
+/**
+ * Classe de persistencia de dados da classe PessoaFisica.
+ */
+
 public class PessoaFisicaDAO {
     private DatabaseHelper helper;
     private UsuarioDAO usuarioDAO;
     //
 
+    /**
+     * Construtor
+     *
+     * @param context
+     */
+
     public PessoaFisicaDAO(Context context) {
         helper = new DatabaseHelper(context);
         usuarioDAO = new UsuarioDAO(context);
     }
+
+    /**
+     * Metodo que busca uma Pessoa Fisica na tabela TABLE_PESSOA_FISICA do banco de dados
+     *
+     * @param id Id da PessoaFisica a ser encontrada.
+     * @return Retorna um objeto da classe PessoaFisica.
+     * @see UsuarioDAO
+     */
 
     public PessoaFisica getPessoaFisica(long id){
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -44,6 +62,13 @@ public class PessoaFisicaDAO {
         return pessoaFisica;
     }
 
+    /**
+     * Busca e retorna um objeto da classe PessoaFisica na tabela TABLE_PESSOA_FISICA passando um objeto da classe Usuario.
+     *
+     * @param usuario Objeto Usuario a ser buscado.
+     * @return Retorna um objeto da classe PessoaFisica caso exista, caso contrario retorna null.
+     */
+
     public PessoaFisica getPessoaFisica(Usuario usuario){
         SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -68,6 +93,14 @@ public class PessoaFisicaDAO {
         return pessoaFisica;
     }
 
+    /**
+     *
+     * Insere um obejto da classe PessoaFisica na tabela TABLE_PESSOA_FISICA do banco de dados.
+     *
+     * @param pessoaFisica Objeto da classe PessoaFisica a ser inserido.
+     * @return Retorna o id da PessoaFisica Inserida.
+     */
+
     public long inserir(PessoaFisica pessoaFisica){
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -91,6 +124,13 @@ public class PessoaFisicaDAO {
         return id;
 
     }
+
+    /**
+     * Cria um objeto PessoaFisica a partir de um cursor
+     *
+     * @param cursor Cursor que vai percorrer as colunas da tabela
+     * @return Retorna um obejto PessoaFisica
+     */
 
     public PessoaFisica criaPessoaFisica(Cursor cursor){
 

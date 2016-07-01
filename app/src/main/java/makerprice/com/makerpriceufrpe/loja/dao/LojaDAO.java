@@ -10,15 +10,31 @@ import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
 import makerprice.com.makerpriceufrpe.usuario.dao.UsuarioDAO;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
+/**
+ *  Classe de persistencia para classe Loja
+ */
+
 public class LojaDAO {
 
     private DatabaseHelper helper;
     private UsuarioDAO usuarioDAO;
 
+    /**
+     * Construtor
+     * @param context
+     */
+
     public LojaDAO(Context context) {
         helper = new DatabaseHelper(context);
         usuarioDAO = new UsuarioDAO(context);
     }
+
+    /**
+     * Metodo que busca e retorna uma Loja na tabela TABLE_LOJA pelo deu Id.
+     *
+     * @param id Id da loja a ser buscada.
+     * @return Retorna um objeto da classe Loja.
+     */
 
     public Loja getLoja(long id) {
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -43,6 +59,14 @@ public class LojaDAO {
 
         return loja;
     }
+
+    /**
+     *
+     * Metodo que busca e retorna uma Loja na tabela TABLE_LOJA passando um Usuario associado.
+     *
+     * @param usuario Usuario associado a Loja.
+     * @return Retorna um obejto da classe Loja.
+     */
 
     public Loja getLoja(Usuario usuario){
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -72,6 +96,13 @@ public class LojaDAO {
 
     }
 
+    /**
+     * Metodo que insere uma objeto da classe Loja na tabela TABLE_LOJA do banco de dados.
+     *
+     * @param loja Objeto da classe Loja a ser inserido.
+     * @return Id do objeto Loja inserido.
+     */
+
     public long inserir(Loja loja){
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -98,6 +129,12 @@ public class LojaDAO {
         return id;
 
     }
+
+    /**
+     * Metodo que cria e retorna um objeto da classe Loja a partir de um objeto cursor.
+     * @param cursor Curso que aponta para a tabela TABLE_LOJA.
+     * @return Retorna um objeto da classe Loja.
+     */
 
     public Loja criaLoja(Cursor cursor){
 

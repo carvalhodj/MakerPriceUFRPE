@@ -3,6 +3,7 @@ package makerprice.com.makerpriceufrpe.componente.dominio;
 
 import makerprice.com.makerpriceufrpe.loja.dominio.Loja;
 
+
 public class ComponenteLoja {
     private Loja loja;
     private Componente componente;

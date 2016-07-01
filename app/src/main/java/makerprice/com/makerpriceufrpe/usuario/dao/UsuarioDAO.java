@@ -9,12 +9,33 @@ import android.database.sqlite.SQLiteDatabase;
 import makerprice.com.makerpriceufrpe.infra.DatabaseHelper;
 import makerprice.com.makerpriceufrpe.usuario.dominio.Usuario;
 
+/***
+ * Classe de Persistencia para Usuario
+ *
+ * @author Equipe MakerPrice
+ *
+ */
+
 public class UsuarioDAO {
     private DatabaseHelper helper;
+
+    /**
+     * Construtor
+     *
+     * @param context Contexto do Usuario
+     */
 
     public UsuarioDAO(Context context) {
         helper = new DatabaseHelper(context);
     }
+
+    /**
+     * Busca um Usuario na tabela TABLE_USER do banco de dados
+     *
+     * @param email Email do Usuario a ser buscado no Banco de dados.
+     * @param senha Senha do Usurio a ser buscada no Banco de dados.
+     * @return Retorna um objeto da Classe Usuario caso exista um Usuario cadastrado ou Null caso não exista.
+     */
 
     public Usuario getUsuario(String email, String senha) {
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -38,6 +59,13 @@ public class UsuarioDAO {
         return usuario;
     }
 
+    /**
+     * Busca um Usuario na tabela TABLE_USER do banco de dados
+     *
+     * @param email Email do Usuario a ser buscado no Banco de dados.
+     * @return Retorna um objeto da Classe Usuario caso exista um Usuario cadastrado ou Null caso não exista.
+     */
+
     public Usuario getUsuario(String email){
         SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -59,6 +87,13 @@ public class UsuarioDAO {
 
         return usuario;
     }
+
+    /**
+     * Busca o Usuario na tabela TABLE_USER no Banco de dados atravez de seu ID
+     *
+     * @param id Id do Usuario a ser buscado
+     * @return Retorna um objeto da Classe Usuario caso exista um Usuario cadastrado ou Null caso não exista.
+     */
 
     public Usuario getUsuario(long id){
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -84,6 +119,13 @@ public class UsuarioDAO {
 
     }
 
+    /**
+     * Insere um novo Usuario na tabela TABLE_USER do Banco de dados caso não exista um Usuario com e-mail  identico cadastrado.
+     *
+     * @param usuario Passa uma objeto do tipo Usuario.
+     * @return ??
+     */
+
     public long inserir(Usuario usuario){
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -106,6 +148,13 @@ public class UsuarioDAO {
         return id;
 
     }
+
+    /**
+     * Cria um objeto Usuario a partir de um cursor
+     *
+     * @param cursor Cursor que vai percorrer as colunas da tabela
+     * @return Retorna um Usuario
+     */
 
     public Usuario criaUsuario(Cursor cursor){
 
